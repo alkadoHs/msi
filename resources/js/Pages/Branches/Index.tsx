@@ -20,8 +20,8 @@ const Index = ({ branches }: { branches: Branches }) => {
             <Head title="Company Branches" />
 
             <section className="my-6">
-                <div className="mx-auto max-w-full sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm  p-6 text-gray-900 dark:text-gray-100 sm:rounded-lg dark:bg-gray-800">
+                <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm  p-0 text-gray-900 dark:text-gray-100 sm:rounded-lg dark:bg-gray-800">
                         <div className="w-full  border border-gray-200 rounded-xl dark:border-gray-700">
                             <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
                                 <div>
