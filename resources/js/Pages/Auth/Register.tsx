@@ -8,6 +8,7 @@ export default function Register() {
         last_name: "",
         email: "",
         phone: "",
+        address: "Your address",
         gender: "",
         password: "",
         password_confirmation: "",
