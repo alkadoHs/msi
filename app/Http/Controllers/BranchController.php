@@ -15,9 +15,9 @@ class BranchController extends Controller
      */
     public function index(): Response
     {
-        $branches = Branch::with('company')->get();
+        $branches = Branch::with('company')->paginate(10);
         return inertia('Branches/Index', [
-            'branches'=> $branches
+            'branches'=> Inertia::defer(fn () => $branches)
         ]);
     }
 

@@ -1,6 +1,6 @@
 import SidebarItem from "@/components/sidebar-item";
 import { Link, usePage } from "@inertiajs/react";
-import { ShoppingCart, Users } from "lucide-react";
+import { GitBranchPlus, ShoppingCart, Users } from "lucide-react";
 import React from "react";
 
 const SidebarItems = () => {
@@ -25,7 +25,7 @@ const SidebarItems = () => {
                     <li>
                         <Link
                             className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:bg-gray-700 dark:text-white"
-                            href={route('dashboard')}
+                            href={route("dashboard")}
                         >
                             <svg
                                 className="size-4"
@@ -46,9 +46,22 @@ const SidebarItems = () => {
                         </Link>
                     </li>
 
-                    <SidebarItem label="Users" icon={<Users className="size-4" />} href={route('users.index')} />
+                    <SidebarItem
+                        label="Users"
+                        icon={<Users className="size-4" />}
+                        href={route("users.index")}
+                    />
 
-                    <SidebarItem label="Products" icon={<ShoppingCart className="size-4" />} />
+                    <SidebarItem
+                        label="Products"
+                        icon={<ShoppingCart className="size-4" />}
+                    />
+
+                    <SidebarItem
+                        label="Branches"
+                        icon={<GitBranchPlus className="size-4" />}
+                        href={route('branches.index')}
+                    />
 
                     <li className="hs-accordion" id="users-accordion">
                         <button
