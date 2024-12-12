@@ -24,6 +24,7 @@ class CheckCompany
             'verification.notice',
             'verification.verify',
             'verification.send',
+            'logout',
         ];
 
         if (Auth::check()) {
