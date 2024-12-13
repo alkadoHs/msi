@@ -1,21 +1,20 @@
 import FormModal from "@/components/form/form-modal";
 import KdTextInput from "@/components/form/kd-text-input";
+import { Branch } from "@/types";
 import { useForm } from "@inertiajs/react";
 import { FormEvent } from "react";
 import { toast } from "sonner";
 
-const CreateBranchAction = () => {
-    const { data, setData, errors, post, reset, processing } = useForm({
-        name: "",
-        phones: "",
+const UpdateBranchAction = ({ branch }: { branch: Branch }) => {
+    const { data, setData, errors, patch, processing } = useForm({
+        ...branch
     });
     const submit = (e: FormEvent) => {
         e.preventDefault();
 
-        post(route("branches.store"), {
+        patch(route("branches.update", branch.id), {
             onSuccess: () => {
-                toast.success("Branch created successfully.");
-                reset();
+                toast.success("Branch updated successfully.");
             },
         });
     };
@@ -25,8 +24,9 @@ const CreateBranchAction = () => {
             processing={processing}
             errors={Object.values(errors)}
             modalTitle="Create new branch"
-            buttonLabel="Add branch"
-            id="create-branch-modal"
+            buttonLabel=""
+            id="edit-branch-modal"
+            action='update'
         >
             <div className="p-4 overflow-y-auto scroll-bar grid grid-cols-1 gap-4">
                 <KdTextInput
@@ -45,4 +45,4 @@ const CreateBranchAction = () => {
     );
 };
 
-export default CreateBranchAction;
+export default UpdateBranchAction;

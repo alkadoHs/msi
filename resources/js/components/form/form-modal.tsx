@@ -1,6 +1,7 @@
 import React, { FormEvent, ReactNode } from "react";
 import Spinner from "../Spinner";
 import FormErrors from "../validations/form-errors";
+import { Edit } from "lucide-react";
 
 interface Props {
     buttonLabel: string;
@@ -10,6 +11,7 @@ interface Props {
     modalTitle: string;
     processing: boolean;
     children: ReactNode;
+    action?: "create" | "update";
 }
 
 const FormModal = ({
@@ -20,6 +22,7 @@ const FormModal = ({
     modalTitle,
     processing,
     children,
+    action = "create",
 }: Props) => {
     return (
         <>
@@ -31,7 +34,7 @@ const FormModal = ({
                 aria-controls={id}
                 data-hs-overlay={`#${id}`}
             >
-                <svg
+                {action == 'create' ? (<svg
                     className="shrink-0 size-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -45,7 +48,7 @@ const FormModal = ({
                 >
                     <path d="M5 12h14" />
                     <path d="M12 5v14" />
-                </svg>
+                </svg>): <Edit className="size-4" />}
                 {buttonLabel}
             </button>
 
