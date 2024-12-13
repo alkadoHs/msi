@@ -9,6 +9,7 @@ import TableSkeleton from "@/components/skeletons/TableSkeleton";
 import CreateUser from "../Users/actions/create-user";
 import TableWrapper from "@/components/table-wrapper";
 import CreateBranchAction from "./actions/create-branch";
+import Pagination from "@/components/pagination";
 
 const Index = ({ branches }: { branches: Branches }) => {
     return (
@@ -48,10 +49,13 @@ const Index = ({ branches }: { branches: Branches }) => {
                     </div>
 
                     <Deferred data={"branches"} fallback={<TableSkeleton />}>
-                        <DataTable
-                            columns={branchColumns}
-                            data={branches?.data}
-                        />
+                        <>
+                            <DataTable
+                                columns={branchColumns}
+                                data={branches?.data}
+                            />
+                            <Pagination data={branches} />
+                        </>
                     </Deferred>
                 </TableWrapper>
             </section>
