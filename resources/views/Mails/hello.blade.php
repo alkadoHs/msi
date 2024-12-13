@@ -7,6 +7,13 @@
 </head>
 <body>
     <h2>Hello {{ auth()->user()?->name }}</h2>
-    <p>Your secret passsword is <b>9876545</b> </p>
+    <p>Karibu kwe mfumo wa mauzodata, mimi ni Alkado. Founder na CEO wa mauzodata software</p>
+    <p>Kuna mifumo mingi ya mauzo leo. Lakini mifumo hiyo imekuwa migumu sana kwa
+         wafanyabiashara wengi kutumia, na ndiyo maaana nimeamua kutengeneza mfumo huu. Ni rahisi kutumia
+         na unafanya mengini badala yako.
+        </p>
+        <p>Jiskie huru kuangalia features mbalimbali za mfumo huu.</p>
+        <br>
+        <p>Cheers!</p>
 </body>
 </html>
