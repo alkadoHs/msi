@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePaymentMethodRequest;
 use App\Http\Requests\UpdatePaymentMethodRequest;
 use App\Models\PaymentMethod;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class PaymentMethodController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
-        //
+        return Inertia::render('PaymentMethods/Index', [
+            'paymentMethods' => Inertia::defer(fn () => PaymentMethod::with('company')->get()),
+        ]);
     }
 
     /**
@@ -29,15 +33,23 @@ class PaymentMethodController extends Controller
      */
     public function store(StorePaymentMethodRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $validated['company_id'] = auth()->user()->company_id;
+
+        PaymentMethod::create($validated);
+
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PaymentMethod $paymentMethod)
+    public function show(PaymentMethod $paymentMethod): Response
     {
-        //
+        return Inertia::render('PaymentMethods/Show', [
+            'paymentMethod' => $paymentMethod->load('company'),
+        ]);
     }
 
     /**
@@ -53,7 +65,11 @@ class PaymentMethodController extends Controller
      */
     public function update(UpdatePaymentMethodRequest $request, PaymentMethod $paymentMethod)
     {
-        //
+        $validated = $request->validated();
+
+        $paymentMethod->update($validated);
+
+        return redirect()->back();
     }
 
     /**
