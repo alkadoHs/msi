@@ -15,7 +15,7 @@ export default function Registration({ children }: PropsWithChildren) {
                 </h3>
             </div>
 
-            <div className="w-full overflow-hidden bg-transparent py-4 ">
+            <div className="w-full overflow-y-auto bg-transparent py-4 ">
                 {children}
             </div>
         </div>
