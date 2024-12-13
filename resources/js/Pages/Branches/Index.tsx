@@ -7,6 +7,8 @@ import React from "react";
 import { branchColumns } from "./columns";
 import TableSkeleton from "@/components/skeletons/TableSkeleton";
 import CreateUser from "../Users/actions/create-user";
+import TableWrapper from "@/components/table-wrapper";
+import CreateBranchAction from "./actions/create-branch";
 
 const Index = ({ branches }: { branches: Branches }) => {
     return (
@@ -20,45 +22,38 @@ const Index = ({ branches }: { branches: Branches }) => {
             <Head title="Company Branches" />
 
             <section className="my-6">
-                <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm  p-0 text-gray-900 dark:text-gray-100 sm:rounded-lg dark:bg-gray-800">
-                        <div className="w-full  border border-gray-200 rounded-xl dark:border-gray-700">
-                            <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
-                                <div>
-                                    <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
-                                        Branches
-                                    </h2>
-                                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                                        All of the company branches
-                                    </p>
-                                </div>
+                <TableWrapper>
+                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
+                        <div>
+                            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+                                Branches
+                            </h2>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                All of the company branches
+                            </p>
+                        </div>
 
-                                <div>
-                                    <div className="inline-flex gap-x-2">
-                                        {/* <a
+                        <div>
+                            <div className="inline-flex gap-x-2">
+                                {/* <a
                                             className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                                             href="#"
                                         >
                                             View all
                                         </a> */}
 
-                                        <CreateUser branches={branches?.data} />
-                                    </div>
-                                </div>
+                                <CreateBranchAction />
                             </div>
-
-                            <Deferred
-                                data={"branches"}
-                                fallback={<TableSkeleton />}
-                            >
-                                <DataTable
-                                    columns={branchColumns}
-                                    data={branches?.data}
-                                />
-                            </Deferred>
                         </div>
                     </div>
-                </div>
+
+                    <Deferred data={"branches"} fallback={<TableSkeleton />}>
+                        <DataTable
+                            columns={branchColumns}
+                            data={branches?.data}
+                        />
+                    </Deferred>
+                </TableWrapper>
             </section>
         </Authenticated>
     );
