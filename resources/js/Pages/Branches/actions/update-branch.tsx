@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 const UpdateBranchAction = ({ branch }: { branch: Branch }) => {
     const { data, setData, errors, patch, processing } = useForm({
-        ...branch
+        ...branch,
     });
     const submit = (e: FormEvent) => {
         e.preventDefault();
@@ -25,8 +25,8 @@ const UpdateBranchAction = ({ branch }: { branch: Branch }) => {
             errors={Object.values(errors)}
             modalTitle="Create new branch"
             buttonLabel=""
-            id="edit-branch-modal"
-            action='update'
+            id={`edit-branch${branch.id}-modal`}
+            action="update"
         >
             <div className="p-4 overflow-y-auto scroll-bar grid grid-cols-1 gap-4">
                 <KdTextInput
