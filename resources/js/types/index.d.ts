@@ -1,5 +1,4 @@
-import { Config } from 'ziggy-js';
-
+import { Config } from "ziggy-js";
 
 export interface Branch {
     id: number;
@@ -35,10 +34,11 @@ export interface User {
 }
 
 export type PageProps<
-    T extends Record<string, unknown> = Record<string, unknown>,
+    T extends Record<string, unknown> = Record<string, unknown>
 > = T & {
     auth: {
         user: User;
     };
     ziggy: Config & { location: string };
+    prev_url?: string;
 };

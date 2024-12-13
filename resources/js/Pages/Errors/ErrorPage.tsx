@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { router, usePage } from "@inertiajs/react";
+import { ArrowLeftCircle } from "lucide-react";
 
 export default function ErrorPage({ status }: { status: number }) {
     const title = {
@@ -15,13 +18,17 @@ export default function ErrorPage({ status }: { status: number }) {
     }[status];
 
     return (
-        <div className="h-dvh flex flex-col items-center content-center justify-center text-center">
+        <div className="h-dvh flex flex-col gap-4 items-center content-center justify-center text-center">
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                 {title}
             </h1>
             <p className="text-xl text-muted-foreground">
                 {description}
             </p>
+            <Button onClick={() => router.visit(route("dashboard"))}>
+                <ArrowLeftCircle className="size-4 mr-1" />
+                Go Back
+            </Button>
         </div>
     );
 }
