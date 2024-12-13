@@ -54,3 +54,7 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified'])
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
+Route::resource('paymentMethods', \App\Http\Controllers\PaymentMethodController::class)
+    ->middleware(['auth', 'verified'])
+    ->only(['index', 'create', 'store', 'update', 'destroy']);
+

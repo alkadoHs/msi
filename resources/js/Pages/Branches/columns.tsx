@@ -1,6 +1,7 @@
 import { Branch } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import UpdateBranchAction from "./actions/update-branch";
+import dayjs from "dayjs";
 
 export const branchColumns: ColumnDef<Branch>[] = [
     {
@@ -17,6 +18,14 @@ export const branchColumns: ColumnDef<Branch>[] = [
     {
         accessorKey: "phones",
         header: "Phone numbers",
+    },
+    {
+        accessorKey: "created_at",
+        header: "Created",
+        cell: ({ row }) => {
+            const date = dayjs(row.getValue("created_at")).fromNow();
+            return <span className="text-muted-foreground">{date}</span>;
+        },
     },
     {
         accessorKey: "actions",

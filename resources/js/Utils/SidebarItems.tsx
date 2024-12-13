@@ -1,6 +1,11 @@
 import SidebarItem from "@/components/sidebar-item";
 import { Link, usePage } from "@inertiajs/react";
-import { GitBranchPlus, ShoppingCart, Users } from "lucide-react";
+import {
+    ChartBarDecreasing,
+    GitBranchPlus,
+    ShoppingCart,
+    Users,
+} from "lucide-react";
 import React from "react";
 
 const SidebarItems = () => {
@@ -60,10 +65,16 @@ const SidebarItems = () => {
                     <SidebarItem
                         label="Branches"
                         icon={<GitBranchPlus className="size-4" />}
-                        href={route('branches.index')}
+                        href={route("branches.index")}
                     />
 
-                    <li className="hs-accordion" id="users-accordion">
+                    <SidebarItem
+                        label="Payment Methods"
+                        icon={<ChartBarDecreasing className="size-4" />}
+                        href={route("paymentMethods.index")}
+                    />
+
+                    {/* <li className="hs-accordion" id="users-accordion">
                         <button
                             type="button"
                             className="hs-accordion-toggle hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hs-accordion-active:text-white dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700 dark:focus:text-gray-300"
@@ -280,9 +291,9 @@ const SidebarItems = () => {
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> */}
 
-                    <li className="hs-accordion" id="account-accordion">
+                    {/* <li className="hs-accordion" id="account-accordion">
                         <button
                             type="button"
                             className="hs-accordion-toggle hs-accordion-active:text-blue-600 hs-accordion-active:hover:bg-transparent w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:hs-accordion-active:text-white dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700 dark:focus:text-gray-300"
@@ -313,7 +324,7 @@ const SidebarItems = () => {
                                 <path d="m14.3 16.6 1-.4" />
                                 <path d="m20.7 13.8 1-.4" />
                             </svg>
-                            Account
+                            Accounts
                             <svg
                                 className="hs-accordion-active:block ms-auto hidden size-4 text-gray-600 group-hover:text-gray-500 dark:text-gray-400"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -466,7 +477,7 @@ const SidebarItems = () => {
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> */}
 
                     <li>
                         <a

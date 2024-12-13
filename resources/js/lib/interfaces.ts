@@ -53,3 +53,27 @@ export interface Branches {
     to: number;
     total: number;
 }
+
+export interface PaymentMethod {
+    id: number;
+    name: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PaymentMethods {
+    data: PaymentMethod[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}
