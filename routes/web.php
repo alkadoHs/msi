@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -57,4 +58,8 @@ Route::resource('users', UserController::class)
 Route::resource('paymentMethods', \App\Http\Controllers\PaymentMethodController::class)
     ->middleware(['auth', 'verified'])
     ->only(['index', 'create', 'store', 'update', 'destroy']);
+
+Route::get('accounts', [AccountController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('accounts.index');
 

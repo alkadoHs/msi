@@ -26,7 +26,7 @@ const SidebarItems = () => {
                 className="hs-accordion-group p-6 w-full flex flex-col flex-wrap"
                 data-hs-accordion-always-open
             >
-                <ul className="space-y-1.5">
+                <ul className="space-y-1">
                     <li>
                         <Link
                             className="flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:bg-gray-700 dark:text-white"
