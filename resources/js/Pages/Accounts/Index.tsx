@@ -1,4 +1,4 @@
-import CostBreakdownCard from "@/components/DataCard";
+import CostBreakdownCard from "@/components/AccountCard";
 import AccountSkeleton from "@/components/skeletons/AccountSkeleton";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Accounts } from "@/lib/interfaces";

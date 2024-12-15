@@ -17,7 +17,7 @@ export default function Authenticated({
             <div className="overflow-auto w-full h-dvh scroll-bar bg-gray-100 dark:bg-gray-900">
                 <NavigationBar />
                 {header && (
-                    <header className="bg-white shadow dark:bg-gray-800 sticky top-16 z-30">
+                    <header className="bg-white shadow dark:bg-gray-800 sticky top-16 z-10">
                         <div className="mx-auto max-w-full px-4 py-4 sm:px-6 lg:px-8">
                             {header}
                         </div>
