@@ -2,7 +2,15 @@ import { router } from "@inertiajs/react";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
-const DeleteAction = ({ item, url, label }: { item: any; url: string, label?: string }) => {
+const DeleteAction = ({
+    item,
+    url,
+    label,
+}: {
+    item: any;
+    url: string;
+    label?: string;
+}) => {
     return (
         <>
             <div className="text-center">
@@ -74,10 +82,18 @@ const DeleteAction = ({ item, url, label }: { item: any; url: string, label?: st
                                 Delete {label ? label : " item"}?
                             </h3>
                             <p className="text-gray-500 text-sm dark:text-gray-500 text-balance">
-                                Are you sure you would like to delete {label ? label : "this item"}?
+                                Are you sure you would like to delete{" "}
+                                {label ? label : "this item"}?
                             </p>
 
                             <div className="mt-6 grid gap-y-2">
+                                <button
+                                    type="button"
+                                    className="py-2.5 px-4 w-full inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
+                                    data-hs-overlay={`#hs-delete-item-${item.id}`}
+                                >
+                                    No, keep
+                                </button>
                                 <button
                                     type="button"
                                     onClick={() => {
@@ -87,19 +103,12 @@ const DeleteAction = ({ item, url, label }: { item: any; url: string, label?: st
                                                     "Item deleted successfully"
                                                 );
                                             },
-                                            preserveState: false
+                                            preserveState: false,
                                         });
                                     }}
-                                    className="py-2.5 px-4 w-full inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                                >
-                                    Delete
-                                </button>
-                                <button
-                                    type="button"
                                     className="py-2.5 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
-                                    data-hs-overlay={`#hs-delete-item-${item.id}`}
                                 >
-                                    No, keep
+                                    Yes, Delete
                                 </button>
                             </div>
                         </div>
