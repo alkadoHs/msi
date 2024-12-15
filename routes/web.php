@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Mail\WelcomeMail;
@@ -62,4 +63,8 @@ Route::resource('paymentMethods', \App\Http\Controllers\PaymentMethodController:
 Route::get('accounts', [AccountController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('accounts.index');
+
+Route::resource('products', ProductController::class)
+    ->middleware(['auth', 'verified'])
+    ->only(['index', 'store', 'update', 'destroy']);
 

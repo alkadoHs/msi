@@ -32,4 +32,9 @@ class Branch extends Model
     {
         return $this->hasMany(Account::class);
     }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 }
