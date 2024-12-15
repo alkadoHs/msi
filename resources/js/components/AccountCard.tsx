@@ -1,5 +1,6 @@
 import { Account } from "@/lib/interfaces";
 import { numberFormat } from "@/lib/utils";
+import { Link } from "@inertiajs/react";
 import React, { useState } from "react";
 
 interface Props {
@@ -59,9 +60,9 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
                         >
                             <div className="flex items-center">
                                 <span className="bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">
-                                    L
+                                    {account.payment_method.name[0]}
                                 </span>
-                                <span>{account.payment_method.name}</span>
+                                <span>{account.payment_method?.name}</span>
                             </div>
                             <span> {account.amount?.toLocaleString()}</span>
                         </li>
@@ -71,12 +72,12 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
 
             {/* View All Costs */}
             <div className="text-center mt-4">
-                <a
+                <Link
                     href="#"
                     className="text-green-400 text-sm font-medium hover:underline"
                 >
                     View all transactions &rarr;
-                </a>
+                </Link>
             </div>
         </div>
     );
