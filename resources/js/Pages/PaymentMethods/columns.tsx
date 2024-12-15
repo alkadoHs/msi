@@ -2,6 +2,7 @@ import { PaymentMethod } from "@/lib/interfaces";
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import EditPaymentMethodAction from "./actions/edit-payment-method";
+import DeleteAction from "@/components/actions/DeleteAction";
 
 export const paymentMethodColumns: ColumnDef<PaymentMethod>[] = [
     {
@@ -34,6 +35,11 @@ export const paymentMethodColumns: ColumnDef<PaymentMethod>[] = [
             return (
                 <div className="flex gap-x-2">
                     <EditPaymentMethodAction paymentMethod={row.original} />
+                    <DeleteAction
+                        item={row.original}
+                        url="paymentMethods.destroy"
+                        label="Payment Method"
+                    />
                 </div>
             );
         },
