@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Branch;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,7 +18,7 @@ class AccountController extends Controller
     {
         return Inertia::render('Accounts/Index', [
             'accounts' => Inertia::defer(function () {
-                return Account::with('branch', 'paymentMethod')->get();
+                return Branch::with('accounts.paymentMethod')->withSum('accounts', 'amount')->get();
             }),
         ]);
     }

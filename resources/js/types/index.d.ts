@@ -1,9 +1,11 @@
-import { Config } from "ziggy-js";
+import { Account } from "@/lib/interfaces";
 
 export interface Branch {
     id: number;
     name: string;
     phones: string;
+    accounts: Account[];
+    accounts_sum_amount: number;
     created_at: string;
     updated_at: string;
 }

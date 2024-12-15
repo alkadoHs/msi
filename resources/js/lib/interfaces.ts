@@ -77,3 +77,59 @@ export interface PaymentMethods {
     to: number;
     total: number;
 }
+
+export interface Account {
+    id: number;
+    payment_method_id: number;
+    payment_method: PaymentMethod;
+    amount: number;
+    abbreviation: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Accounts {
+    data: Account[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}
+
+export interface Transaction {
+    id: number;
+    account_id: number;
+    type: string;
+    user_id: number;
+    user: User;
+    account: Account;
+    amount: number;
+    balance: number;
+    description: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Transactions {
+    data: Transaction[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}

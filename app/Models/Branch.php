@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\CompanyScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[ScopedBy(CompanyScope::class)]
 class Branch extends Model
 {
     protected $fillable = [
@@ -23,5 +26,10 @@ class Branch extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class);
     }
 }

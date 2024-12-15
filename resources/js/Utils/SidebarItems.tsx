@@ -5,6 +5,7 @@ import {
     GitBranchPlus,
     ShoppingCart,
     Users,
+    WalletMinimal,
 } from "lucide-react";
 import React from "react";
 
@@ -72,6 +73,12 @@ const SidebarItems = () => {
                         label="Payment Methods"
                         icon={<ChartBarDecreasing className="size-4" />}
                         href={route("paymentMethods.index")}
+                    />
+
+                    <SidebarItem
+                        label="Accounts"
+                        icon={<WalletMinimal className="size-4" />}
+                        href={route("accounts.index")}
                     />
 
                     {/* <li className="hs-accordion" id="users-accordion">
