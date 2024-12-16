@@ -28,7 +28,7 @@ const FormModal = ({
         <>
             <button
                 type="button"
-                className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-none focus:bg-cyan-700 disabled:opacity-50 disabled:pointer-events-none"
+                className="py-2 text-nowrap shrink-0 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-cyan-600 text-white hover:bg-cyan-700 focus:outline-none focus:bg-cyan-700 disabled:opacity-50 disabled:pointer-events-none"
                 aria-haspopup="dialog"
                 aria-expanded="false"
                 aria-controls={id}

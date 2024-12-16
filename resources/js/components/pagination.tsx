@@ -9,7 +9,7 @@ const Pagination = ({ data }: { data: Paginations }) => {
                     <span className="font-semibold text-gray-800 dark:text-gray-200">
                         {data?.total}
                     </span>{" "}
-                    results
+                    total items
                 </p>
             </div>
             <div>

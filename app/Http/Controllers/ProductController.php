@@ -16,8 +16,11 @@ class ProductController extends Controller
      */
     public function index(): Response
     {
+        $search = request()->search ?? null;
+        
         return Inertia::render('Products/Index', [
-            'products' => Inertia::defer(fn () => Product::latest()->paginate(25)),
+            'products' => Inertia::defer(fn () =>
+                                     Product::where('name', 'LIKE', "%{$search}%")->latest()->paginate(25)),
         ]);
     }
 
@@ -35,6 +38,8 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request): RedirectResponse
     {
         $validated = $request->validated();
+
+        $validated['branch_id'] = auth()->user()->branch_id;
 
         Product::create($validated);
 

@@ -133,3 +133,36 @@ export interface Transactions {
     to: number;
     total: number;
 }
+
+export interface Product {
+    id: number;
+    name: string;
+    unit: string;
+    branch_id: number;
+    branch: Branch;
+    buy_price: number;
+    sell_price: number;
+    stock: number;
+    stock_alert: number;
+    expire_date: string;
+    whole_price: number;
+    whole_stock: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Products {
+    data: Product[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}

@@ -5,6 +5,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\RemoveCommaFromInput;
 use App\Mail\WelcomeMail;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Mail;
@@ -65,6 +66,6 @@ Route::get('accounts', [AccountController::class, 'index'])
     ->name('accounts.index');
 
 Route::resource('products', ProductController::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['index', 'store', 'update', 'destroy']);
 

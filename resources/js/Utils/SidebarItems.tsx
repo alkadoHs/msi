@@ -53,6 +53,12 @@ const SidebarItems = () => {
                     </li>
 
                     <SidebarItem
+                        label="Accounts"
+                        icon={<WalletMinimal className="size-4" />}
+                        href={route("accounts.index")}
+                    />
+
+                    <SidebarItem
                         label="Users"
                         icon={<Users className="size-4" />}
                         href={route("users.index")}
@@ -60,6 +66,7 @@ const SidebarItems = () => {
 
                     <SidebarItem
                         label="Products"
+                        href={route("products.index")}
                         icon={<ShoppingCart className="size-4" />}
                     />
 
@@ -75,11 +82,6 @@ const SidebarItems = () => {
                         href={route("paymentMethods.index")}
                     />
 
-                    <SidebarItem
-                        label="Accounts"
-                        icon={<WalletMinimal className="size-4" />}
-                        href={route("accounts.index")}
-                    />
 
                     {/* <li className="hs-accordion" id="users-accordion">
                         <button
