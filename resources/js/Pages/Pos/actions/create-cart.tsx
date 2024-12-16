@@ -8,6 +8,7 @@ import { Product } from "@/lib/interfaces";
 import FormRepeater from "@/components/ui/form-repeater";
 import KdSelectInput from "@/components/form/kd-select-input";
 import KdNumericInput from "@/components/form/kd-numeric-input";
+import KdSearchSelect from "@/components/form/kd-search-select";
 
 interface Item {
     product_id?: number;
@@ -81,7 +82,7 @@ const CreateCart = ({ products }: { products: Product[] }) => {
                                     ) => (
                                         <div className="grid grid-cols-1 lg:grid-cols-2  gap-4">
                                             <div>
-                                                <KdSelectInput
+                                                <KdSearchSelect
                                                     label="Product"
                                                     id={index}
                                                     data={products}
