@@ -1,3 +1,4 @@
+import { numberFormat } from "@/lib/utils";
 import React, { ChangeEvent } from "react";
 
 interface Props {
@@ -7,10 +8,7 @@ interface Props {
     onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
     placeholder?: string;
     autoFocus?: boolean;
-    data: {
-        id: string | any;
-        name: string;
-    }[];
+    data: any[];
     id?: string | number;
 }
 
@@ -51,7 +49,7 @@ const KdSearchSelect = ({
                 <option value="">Select</option>
                 {data?.map((item) => (
                     <option key={item.id} value={item.id}>
-                        {item.name}
+                        {item.name} {item?.stock ? (<span className="text-muted-foreground">({numberFormat(item.stock)})</span>): null}
                     </option>
                 ))}
             </select>
