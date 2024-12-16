@@ -94,7 +94,7 @@ const CreateCart = ({
                                         setData("customer_id", e.target.value)
                                     }
                                 />
-                                <Button size={"icon"}>
+                                <Button type="button" size={"icon"}>
                                     <PlusCircle />
                                 </Button>
                             </div>
