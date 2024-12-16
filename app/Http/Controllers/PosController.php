@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentMethod;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -16,7 +17,10 @@ class PosController extends Controller
         return Inertia::render('Pos/Index', [
             'products' => Inertia::defer(fn () => 
                                 Product::where('name', 'LIKE', "%$search%")->latest()->limit(1000)->get(),
-                        )
+        ),
+        'paymentMethods' => Inertia::defer(fn () => PaymentMethod::get()),
+        'orderDate' => now()->format('Y-m-d'),
+        'invoice_no' => Inertia::defer(fn () => random_int(0000000, 1000000))
         ]);
     }
 }
