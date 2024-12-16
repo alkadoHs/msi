@@ -62,6 +62,7 @@ const FormModal = ({
                 <div className="hs-overlay-animation-target hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-2xl sm:w-full m-3 sm:mx-auto">
                     <form
                         onSubmit={onSubmit}
+                        autoComplete="off"
                         className="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-gray-700/70"
                     >
                         <div className="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">

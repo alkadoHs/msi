@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -69,3 +70,7 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['index', 'store', 'update', 'destroy']);
 
+
+Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(function () {
+    Route::get('index', [PosController::class, 'index'])->name('pos.index');
+});

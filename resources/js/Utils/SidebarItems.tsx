@@ -3,11 +3,11 @@ import { Link, usePage } from "@inertiajs/react";
 import {
     ChartBarDecreasing,
     GitBranchPlus,
+    ShoppingBag,
     ShoppingCart,
     Users,
     WalletMinimal,
 } from "lucide-react";
-import React from "react";
 
 const SidebarItems = () => {
     const user = usePage().props.auth.user;
@@ -59,18 +59,6 @@ const SidebarItems = () => {
                     />
 
                     <SidebarItem
-                        label="Users"
-                        icon={<Users className="size-4" />}
-                        href={route("users.index")}
-                    />
-
-                    <SidebarItem
-                        label="Products"
-                        href={route("products.index")}
-                        icon={<ShoppingCart className="size-4" />}
-                    />
-
-                    <SidebarItem
                         label="Branches"
                         icon={<GitBranchPlus className="size-4" />}
                         href={route("branches.index")}
@@ -81,7 +69,22 @@ const SidebarItems = () => {
                         icon={<ChartBarDecreasing className="size-4" />}
                         href={route("paymentMethods.index")}
                     />
+                    <SidebarItem
+                        label="Users"
+                        icon={<Users className="size-4" />}
+                        href={route("users.index")}
+                    />
 
+                    <SidebarItem
+                        label="Products"
+                        href={route("products.index")}
+                        icon={<ShoppingCart className="size-4" />}
+                    />
+                    <SidebarItem
+                        label="Point of sale"
+                        href={route("pos.index")}
+                        icon={<ShoppingBag className="size-4" />}
+                    />
 
                     {/* <li className="hs-accordion" id="users-accordion">
                         <button

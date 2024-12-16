@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { NumericFormat } from 'react-number-format';
+import { NumericFormat } from "react-number-format";
 
 interface Props {
     label: string;
@@ -8,6 +8,7 @@ interface Props {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     placeholder?: string;
     autoFocus?: boolean;
+    id?: string | number;
 }
 const KdNumericInput = ({
     label,
@@ -15,17 +16,18 @@ const KdNumericInput = ({
     onChange,
     placeholder,
     autoFocus = false,
+    id = "-ID",
 }: Props) => {
     return (
         <div className="max-w-sm">
             <label
-                htmlFor={label}
+                htmlFor={label + id}
                 className="block text-sm font-medium mb-2 dark:text-white"
             >
                 {label}
             </label>
             <NumericFormat
-                id={label}
+                id={label + id}
                 value={value}
                 thousandSeparator
                 decimalScale={2}
@@ -33,6 +35,7 @@ const KdNumericInput = ({
                 className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-cyan-500 focus:ring-cyan-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600"
                 placeholder={placeholder}
                 autoFocus={autoFocus}
+                autoComplete="off"
             />
         </div>
     );

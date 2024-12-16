@@ -14,7 +14,7 @@ const Sidebar = () => {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <span className="rounded-full size-10 cursor-pointer flex items-center justify-center bg-white dark:bg-gray-950 border">
+                <span className="md:hidden rounded-full text-gray-50 size-10 cursor-pointer flex items-center justify-center bg-gray-950 border">
                     <Menu className="size-6" />
                 </span>
             </SheetTrigger>
