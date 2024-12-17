@@ -10,12 +10,14 @@ import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
 import KdTextInput from "@/components/form/kd-text-input";
 import { PlusCircle } from "lucide-react";
+import NumberFlow from "@number-flow/react";
 
 interface Item {
     product_id?: number;
     qty: number;
     buy_price: number;
     sell_price: number;
+    total: number;
 }
 
 const initialItem: Item = {
@@ -23,6 +25,7 @@ const initialItem: Item = {
     qty: 1,
     buy_price: 0,
     sell_price: 0,
+    total: 0,
 };
 
 const CreateCart = ({
@@ -175,6 +178,9 @@ const CreateCart = ({
                                                                         selectedProduct.buy_price,
                                                                     sell_price:
                                                                         selectedProduct.sell_price,
+                                                                    total:
+                                                                        selectedProduct.sell_price *
+                                                                        item.qty,
                                                                 }
                                                             );
                                                         }
@@ -190,9 +196,20 @@ const CreateCart = ({
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 index,
-                                                                "qty",
-                                                                e.target
-                                                                    .value as any
+                                                                undefined,
+                                                                {
+                                                                    qty: parseFloat(
+                                                                        e.target
+                                                                            .value
+                                                                    ),
+                                                                    total:
+                                                                        item.sell_price *
+                                                                        parseFloat(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        ),
+                                                                }
                                                             )
                                                         }
                                                     />
@@ -212,6 +229,21 @@ const CreateCart = ({
                                                         }
                                                     />
                                                 </div>
+                                                <div className="w-full">
+                                                    <KdNumericInput
+                                                        label="Total"
+                                                        id={index}
+                                                        value={item.total.toString()}
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                index,
+                                                                "total",
+                                                                e.target
+                                                                    .value as any
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     )}
@@ -222,15 +254,16 @@ const CreateCart = ({
 
                     <div className="">
                         <div className="flex justify-between items-center gap-2 pt-4">
-                            <h2>
-                                Total:{" "}
-                                {numberFormat(
-                                    items.reduce(
+                            <h2 className="text-lg font-bold">
+                                Total {" "}
+                                <NumberFlow
+                                    value={items.reduce(
                                         (acc, item) =>
-                                            acc + item.buy_price * item.qty,
+                                            acc + item.sell_price * item.qty,
                                         0
-                                    )
-                                )}
+                                    )}
+                                    className="text-lg text-green-500 font-bold"
+                                />
                             </h2>
                             <div className="flex items-center gap-2">
                                 <Button variant={"outline"} asChild>

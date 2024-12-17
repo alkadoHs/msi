@@ -72,7 +72,6 @@ export default function FormRepeater<T>({
             <Button
                 type="button"
                 onClick={handleAddItem}
-                variant={'secondary'}
             >
               <PlusCircle className="size-4 mr-1" />
                 Add Item
