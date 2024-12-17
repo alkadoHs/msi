@@ -1,6 +1,5 @@
 import { FormEventHandler, useState } from "react";
-import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, router, useForm } from "@inertiajs/react";
+import { Link, router, useForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { numberFormat } from "@/lib/utils";
@@ -9,7 +8,6 @@ import FormRepeater from "@/components/ui/form-repeater";
 import KdSelectInput from "@/components/form/kd-select-input";
 import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
-import TableWrapper from "@/components/table-wrapper";
 import KdTextInput from "@/components/form/kd-text-input";
 import { PlusCircle } from "lucide-react";
 

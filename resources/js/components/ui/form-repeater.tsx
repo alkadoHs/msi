@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "./button";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 
 interface FormRepeaterProps<T> {
@@ -23,7 +24,7 @@ export default function FormRepeater<T>({
     onChange,
 }: FormRepeaterProps<T>) {
     const [items, setItems] = useState<T[]>([initialValues]);
-    // const [parent] = useAutoAnimate()
+    const [parent] = useAutoAnimate()
 
     const handleChange = (
         index: number,
@@ -55,7 +56,7 @@ export default function FormRepeater<T>({
     }, [items, onChange]);
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4" ref={parent}>
             {items.map((item, index) => (
                 <div key={index} className="rounded p-2 bg-white dark:bg-gray-800">  
                     {renderFields(item, index, handleChange)}
