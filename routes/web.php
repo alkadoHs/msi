@@ -70,6 +70,10 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['index', 'store', 'update', 'destroy']);
 
+Route::resource('customers', \App\Http\Controllers\CustomerController::class)
+    ->middleware(['auth', 'verified'])
+    ->only(['index', 'store', 'update', 'destroy']);
+
 
 Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(function () {
     Route::get('index', [PosController::class, 'index'])->name('pos.index');

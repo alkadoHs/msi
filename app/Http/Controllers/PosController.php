@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Valorin\Random\Random;
 
 class PosController extends Controller
 {
@@ -20,7 +21,7 @@ class PosController extends Controller
         ),
         'paymentMethods' => Inertia::defer(fn () => PaymentMethod::get()),
         'orderDate' => now()->format('Y-m-d'),
-        'invoice_no' => Inertia::defer(fn () => random_int(0000000, 1000000))
+        'invoice_no' => Inertia::defer(fn () =>  Random::number(0000000, 100000000))
         ]);
     }
 }
