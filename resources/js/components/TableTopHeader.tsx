@@ -1,14 +1,15 @@
 import { router } from "@inertiajs/react";
 import { ChangeEvent } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
 interface Props {
     url: string;
 }
 
 const TableTopHeader = ({ url }: Props) => {
-    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleSearch = useDebouncedCallback((e: ChangeEvent<HTMLInputElement>) => {
         if (e && e?.target.value) {
-            router.get(url, {
+            router.visit(url, {
                 data: { search: e.target.value },
                 preserveScroll: true,
                 preserveState: true,
@@ -16,7 +17,7 @@ const TableTopHeader = ({ url }: Props) => {
         } else {
             router.visit(url);
         }
-    };
+    }, 1000);
     return (
         <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-gray-700">
             <div className="sm:col-span-1">
