@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Enums\OrderStatusesEnum;
 use App\Models\Account;
 use App\Models\Customer;
 use App\Models\Order;
@@ -85,13 +86,25 @@ class PosController extends Controller
                     return redirect()->back()->with('error', "$product->name has only $product->qty left but you tried to sell " . $item['qty']);
                 }
 
-                $order->orderItems()->create([
-                    'product_id' => $item['product_id'],
-                    'qty' => $item['qty'],
-                    'price' => $item['price'],
-                    'buy_price' => $item['buy_price'],
-                ]);
-
+                switch ($order->status) {
+                    case OrderStatusesEnum::PENDING->value:
+                        $order->orderItems()->create([
+                            'product_id' => $item['product_id'],
+                            'qty' => 0,
+                            'pending_qty' => $item['qty'],
+                            'price' => $item['price'],
+                            'buy_price' => $item['buy_price'],
+                        ]);
+                        break;
+                    default:
+                        $order->orderItems()->create([
+                            'product_id' => $item['product_id'],
+                            'qty' => $item['qty'],
+                            'price' => $item['price'],
+                            'buy_price' => $item['buy_price'],
+                        ]);
+                        break;
+                }
                 $product->decrement('stock', $item['qty']);
             }
 
