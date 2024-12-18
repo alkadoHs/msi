@@ -47,4 +47,9 @@ class Branch extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function creditOrderPayments(): HasMany
+    {
+        return $this->hasMany(CreditOrderPayment::class);
+    }
 }
