@@ -3,20 +3,31 @@ import { Link, router, useForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { numberFormat } from "@/lib/utils";
-import { PaymentMethod, Product } from "@/lib/interfaces";
+import { Customer, PaymentMethod, Product } from "@/lib/interfaces";
 import FormRepeater from "@/components/ui/form-repeater";
 import KdSelectInput from "@/components/form/kd-select-input";
 import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
 import KdTextInput from "@/components/form/kd-text-input";
-import { PlusCircle } from "lucide-react";
+import {
+    ChevronDownCircle,
+    Delete,
+    PlusCircle,
+} from "lucide-react";
 import NumberFlow from "@number-flow/react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface Item {
     product_id?: number;
     qty: number;
     buy_price: number;
-    sell_price: number;
+    price: number;
     total: number;
 }
 
@@ -24,7 +35,7 @@ const initialItem: Item = {
     product_id: undefined,
     qty: 1,
     buy_price: 0,
-    sell_price: 0,
+    price: 0,
     total: 0,
 };
 
@@ -33,21 +44,26 @@ const CreateCart = ({
     paymentMethods,
     orderDate,
     invoiceNo,
+    customers,
 }: {
     products: Product[];
     paymentMethods: PaymentMethod[];
     orderDate: string;
     invoiceNo: string;
+    customers: Customer[];
 }) => {
     const [items, setItems] = useState<Item[]>([initialItem]);
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const { data, setData, errors, post, processing, reset } = useForm({
         customer_id: "",
-        branch_id: "",
         payment_method_id: "",
         order_date: orderDate,
         invoice_no: invoiceNo,
         status: "paid",
+        customer_name: "",
+        customer_contact: "",
+        customer_address: "",
     });
 
     const statuses = [
@@ -60,14 +76,23 @@ const CreateCart = ({
         e.preventDefault();
 
         router.post(
-            route("products.store"),
+            route("pos.sell"),
             {
                 customer_id: data.customer_id,
-                branch_id: data.branch_id,
                 payment_method_id: data.payment_method_id,
-                items: items as any,
+                order_date: data.order_date,
+                invoice_no: data.invoice_no,
+                status: data.status,
+                customer_name: data.customer_name,
+                customer_contact: data.customer_contact,
+                customer_address: data.customer_address,
+                order_items: items as any,
             },
             {
+                preserveScroll: true,
+                preserveState: true,
+                onStart: () => setIsProcessing(true),
+                onFinish: () => setIsProcessing(false),
                 onSuccess: () => {
                     toast.success("Purchase order CreateCartd successfully");
                     reset();
@@ -89,24 +114,98 @@ const CreateCart = ({
                             <div className="w-full flex items-end">
                                 <KdSearchSelect
                                     label="Customer"
-                                    data={products}
+                                    data={customers}
                                     value={data.customer_id}
                                     onChange={(e) =>
                                         setData("customer_id", e.target.value)
                                     }
                                 />
-                                <Button type="button" size={"icon"}>
-                                    <PlusCircle />
-                                </Button>
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <Button size={"icon"}>
+                                            <PlusCircle className="size-6 mr-1" />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-80">
+                                        <div className="grid gap-4">
+                                            <div className="space-y-2">
+                                                <h4 className="font-medium leading-none">
+                                                    Customer details
+                                                </h4>
+                                            </div>
+                                            <div className="grid gap-2">
+                                                <div className="grid grid-cols-3 items-center gap-4">
+                                                    <Label htmlFor="width">
+                                                        Name
+                                                    </Label>
+                                                    <Input
+                                                        id="width"
+                                                        type="text"
+                                                        className="col-span-2 h-8"
+                                                        value={
+                                                            data.customer_name
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "customer_name",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="grid grid-cols-3 items-center gap-4">
+                                                    <Label htmlFor="contact">
+                                                        Contact
+                                                    </Label>
+                                                    <Input
+                                                        id="contact"
+                                                        type="text"
+                                                        className="col-span-2 h-8"
+                                                        value={
+                                                            data.customer_contact
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "customer_contact",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="grid grid-cols-3 items-center gap-4">
+                                                    <Label htmlFor="height">
+                                                        Address
+                                                    </Label>
+                                                    <Input
+                                                        id="height"
+                                                        type="text"
+                                                        className="col-span-2 h-8"
+                                                        value={
+                                                            data.customer_address
+                                                        }
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "customer_address",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </PopoverContent>
+                                </Popover>
                             </div>
-                            <KdSelectInput
-                                label="Status"
-                                data={statuses}
-                                value={data.status}
-                                onChange={(e) =>
-                                    setData("status", e.target.value)
-                                }
-                            />
+                            <div className="w-full">
+                                <KdSelectInput
+                                    label="Status"
+                                    data={statuses}
+                                    value={data.status}
+                                    onChange={(e) =>
+                                        setData("status", e.target.value)
+                                    }
+                                />
+                            </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
                             <KdSelectInput
@@ -126,7 +225,7 @@ const CreateCart = ({
                                 readonly
                             />
                             <KdTextInput
-                                type="date"
+                                type="datetime-local"
                                 label="Order Date"
                                 value={data.order_date}
                                 onChange={(e) =>
@@ -176,8 +275,7 @@ const CreateCart = ({
                                                                         selectedProduct.id,
                                                                     buy_price:
                                                                         selectedProduct.buy_price,
-                                                                    sell_price:
-                                                                        selectedProduct.sell_price,
+                                                                    price: selectedProduct.sell_price,
                                                                     total:
                                                                         selectedProduct.sell_price *
                                                                         item.qty,
@@ -203,7 +301,7 @@ const CreateCart = ({
                                                                             .value
                                                                     ),
                                                                     total:
-                                                                        item.sell_price *
+                                                                        item.price *
                                                                         parseFloat(
                                                                             e
                                                                                 .target
@@ -218,11 +316,11 @@ const CreateCart = ({
                                                     <KdNumericInput
                                                         label="Price"
                                                         id={index}
-                                                        value={item.sell_price.toString()}
+                                                        value={item.price.toString()}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 index,
-                                                                "sell_price",
+                                                                "price",
                                                                 e.target
                                                                     .value as any
                                                             )
@@ -255,24 +353,22 @@ const CreateCart = ({
                     <div className="">
                         <div className="flex justify-between items-center gap-2 pt-4">
                             <h2 className="text-lg font-bold">
-                                Total {" "}
+                                Total{" "}
                                 <NumberFlow
                                     value={items.reduce(
                                         (acc, item) =>
-                                            acc + item.sell_price * item.qty,
+                                            acc + item.price * item.qty,
                                         0
                                     )}
                                     className="text-lg text-green-500 font-bold"
                                 />
                             </h2>
                             <div className="flex items-center gap-2">
-                                <Button variant={"outline"} asChild>
-                                    <Link href={route("products.index")}>
-                                        Cancel
-                                    </Link>
-                                </Button>
-                                <Button type="submit" disabled={processing}>
-                                    {processing ? "Saving..." : "CreateCart"}
+                                {/* <Button type="button" variant={'destructive'} size={'icon'} onClick={() => setItems([])}>
+                                    <Trash2 className="size-6" />
+                                </Button> */}
+                                <Button type="submit" disabled={isProcessing}>
+                                    {isProcessing ? "Processing..." : "Sell produts"}
                                 </Button>
                             </div>
                         </div>

@@ -2,7 +2,7 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Deferred, Head } from "@inertiajs/react";
 import React from "react";
 import CreateCart from "./actions/create-cart";
-import { PaymentMethod, Product } from "@/lib/interfaces";
+import { Customer, PaymentMethod, Product } from "@/lib/interfaces";
 import Spinner from "@/components/Spinner";
 
 export default function Index({
@@ -10,11 +10,13 @@ export default function Index({
     paymentMethods,
     orderDate,
     invoice_no,
+    customers
 }: {
     products: Product[];
     paymentMethods: PaymentMethod[];
     orderDate: string;
     invoice_no: string;
+    customers: Customer[];
 }) {
     return (
         <Authenticated
@@ -28,11 +30,12 @@ export default function Index({
 
             <section className="p-4 sm:px-6 lg:px-8">
                 <Deferred
-                    data={["products", "paymentMethods", 'invoice_no']}
+                    data={["products", "paymentMethods", 'invoice_no', 'customers']}
                     fallback={<Spinner />}
                 >
                     <CreateCart
                         products={products}
+                        customers={customers}
                         paymentMethods={paymentMethods}
                         orderDate={orderDate}
                         invoiceNo={invoice_no}

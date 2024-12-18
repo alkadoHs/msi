@@ -166,3 +166,85 @@ export interface Products {
     to: number;
     total: number;
 }
+
+
+export interface Customer {
+    id: number;
+    name: string;
+    contact: string;
+    address: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Customers {
+    data: Customer[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}
+
+
+export interface Order {
+    id: number;
+    customer_id: number;
+    customer: Customer;
+    payment_method_id: number;
+    payment_method: PaymentMethod;
+    order_date: string;
+    invoice_no: string;
+    status: string;
+    order_items: OrderItem[];
+    order_items_sum_total: number;
+    order_items_sum_discount: number;
+    order_items_sum_profit: number;
+    order_items_sum_pending_qty: number;
+    order_items_sum_qty: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Orders {
+    data: Order[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+}
+
+export interface OrderItem {
+    id: number;
+    order_id: number;
+    product_id: number;
+    product: Product;
+    qty: number;
+    pending_qty: number;
+    buy_price: number;
+    price: number;
+    total: number;
+    profit: number;
+    buyy_total: number;
+    discount: number;
+    profit_percentage: number;
+    balance_pending_qty: number;
+    balance_pending_total: number;
+    created_at: string;
+    updated_at: string;
+}

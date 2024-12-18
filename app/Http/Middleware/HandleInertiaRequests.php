@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'prev_url' =>  url()->previous(),
+            'customer' => fn () => session()->get('customer'),
         ];
     }
 }

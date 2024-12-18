@@ -13,7 +13,7 @@ const NavigationBar = () => {
 
     const user = usePage().props.auth.user;
     return (
-        <nav className="border-b z-30 sticky dark top-0 border-gray-700 bg-gray-700">
+        <nav className="border-b z-30 sticky dark top-0 print:hidden border-gray-700 bg-gray-700">
             <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex h-14 justify-between">
                     <div className="flex">

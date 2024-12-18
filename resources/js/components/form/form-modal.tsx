@@ -1,7 +1,7 @@
 import React, { FormEvent, ReactNode } from "react";
 import Spinner from "../Spinner";
 import FormErrors from "../validations/form-errors";
-import { Edit } from "lucide-react";
+import { Edit, PlusCircle } from "lucide-react";
 
 interface Props {
     buttonLabel: string;
@@ -34,21 +34,7 @@ const FormModal = ({
                 aria-controls={id}
                 data-hs-overlay={`#${id}`}
             >
-                {action == 'create' ? (<svg
-                    className="shrink-0 size-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                >
-                    <path d="M5 12h14" />
-                    <path d="M12 5v14" />
-                </svg>): <Edit className="size-4" />}
+                {action == 'create' ? (<PlusCircle />): <Edit className="size-4" />}
                 {buttonLabel}
             </button>
 

@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class AccountTransaction extends Model
 {
     protected $fillable = [
-        'account_id', 'user_id', 'type', 'description', 'amount', 'balance'
+        'account_id',
+        'user_id',
+        'type',
+        'description', 
+        'amount', 
+        'balance'
     ];
 
 

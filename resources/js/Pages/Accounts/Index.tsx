@@ -1,11 +1,10 @@
 import CostBreakdownCard from "@/components/AccountCard";
 import AccountSkeleton from "@/components/skeletons/AccountSkeleton";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Accounts } from "@/lib/interfaces";
 import { Branch } from "@/types";
 import { Deferred, Head } from "@inertiajs/react";
 
-export default function Index({ accounts }: { accounts: Branch[] }) {
+export default function Index({ accounts, totalBalance }: { accounts: Branch[], totalBalance: number }) {
     return (
         <Authenticated
             header={
@@ -25,6 +24,7 @@ export default function Index({ accounts }: { accounts: Branch[] }) {
                                 branch={account.name}
                                 total={account.accounts_sum_amount}
                                 accounts={account.accounts}
+                                totalBalance={totalBalance}
                             />
                         ))}
                     </div>

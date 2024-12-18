@@ -46,7 +46,7 @@ class UserController extends Controller
             'password' => ['required', 'confirmed', 'min:4', 'max:20'],
         ]);
 
-        $validated['comPpany_id'] = auth()->user()->company_id;
+        $validated['company_id'] = auth()->user()->company_id;
 
         $user = User::create([
             ...$validated,

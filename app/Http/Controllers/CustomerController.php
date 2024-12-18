@@ -41,7 +41,11 @@ class CustomerController extends Controller
 
         $validated['branch_id'] = auth()->user()->branch_id;
 
-        Customer::create($validated);
+        $customer = Customer::create($validated);
+
+        if (request()->from) {
+            session()->put('customer', $customer);
+        }
 
         return back();
     }

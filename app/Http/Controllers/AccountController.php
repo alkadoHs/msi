@@ -20,6 +20,9 @@ class AccountController extends Controller
             'accounts' => Inertia::defer(function () {
                 return Branch::with('accounts.paymentMethod')->withSum('accounts', 'amount')->get();
             }),
+            'totalBalance' => Inertia::defer(function () {
+                return Account::sum('amount');
+            })
         ]);
     }
 

@@ -7,9 +7,10 @@ interface Props {
     branch: string;
     total: number;
     accounts: Account[];
+    totalBalance: number;
 }
 
-const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
+const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts, totalBalance }) => {
     const [sliderValue, setSliderValue] = useState(total);
 
 
@@ -22,7 +23,7 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
         <div className="bg-gray-800 text-white p-6 rounded-lg max-w-sm shadow-lg">
             {/* Total Costs */}
             <div className="mb-6">
-                <h2 className="text-lg font-semibold mb-1">{branch.toUpperCase()}</h2>
+                <h2 className="text-lg font-semibold mb-1 text-cyan-600">{branch.toUpperCase()}</h2>
                 <p className="text-4xl font-bold">
                     <span className="text-sm">TZS</span> {numberFormat(sliderValue)}
                 </p>
@@ -33,14 +34,14 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
                 <input
                     type="range"
                     min="0"
-                    max={total}
+                    max={totalBalance}
                     value={sliderValue}
                     onChange={handleSliderChange}
                     className="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-green-500"
                 />
                 <div className="flex justify-between text-sm text-gray-400 mt-1">
                     <span>0.00 TZS</span>
-                    <span>{total?.toLocaleString()} TZS</span>
+                    <span>{totalBalance > 0 ? numberFormat(totalBalance): totalBalance?.toLocaleString()} TZS</span>
                 </div>
             </div>
 
@@ -64,7 +65,7 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts }) => {
                                 </span>
                                 <span>{account.payment_method?.name}</span>
                             </div>
-                            <span> {account.amount?.toLocaleString()}</span>
+                            <span> {account.amount > 0 ? numberFormat(account.amount): account.amount?.toLocaleString()}</span>
                         </li>
                     ))}
                 </ul>

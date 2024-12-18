@@ -77,4 +77,7 @@ Route::resource('customers', \App\Http\Controllers\CustomerController::class)
 
 Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(function () {
     Route::get('index', [PosController::class, 'index'])->name('pos.index');
+    Route::post('sell', [PosController::class, 'sell'])->name('pos.sell');
+
+    Route::get('invoices/{order}', [PosController::class, 'invoice'])->name('pos.invoice');
 });
