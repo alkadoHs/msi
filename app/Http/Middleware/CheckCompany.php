@@ -36,7 +36,7 @@ class CheckCompany
                 }
             } else {
                 // Redirect if the user has a company_id and tries to access creation routes
-                if (in_array($request->route()->getName(),  Arr::take($companyCreationRoutes, 4))) {
+                if (in_array($request->route()->getName(),  Arr::take($companyCreationRoutes, 1))) {
                     return redirect()->route('dashboard'); // Change 'dashboard' to a suitable route
                 }
             }
