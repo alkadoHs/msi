@@ -88,6 +88,12 @@ const SidebarItems = () => {
                     />
 
                     <SidebarItem
+                        label="All Orders"
+                        href={route("orders.index")}
+                        icon={<AlignCenterHorizontal className="size-4" />}
+                    />
+
+                    <SidebarItem
                         label="Credit Orders"
                         href={route("orders.creditOrders")}
                         icon={<AlignCenterHorizontal className="size-4" />}

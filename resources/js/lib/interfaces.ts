@@ -198,6 +198,8 @@ export interface Order {
     id: number;
     customer_id: number;
     customer: Customer;
+    user_id: number;
+    user: User;
     payment_method_id: number;
     payment_method: PaymentMethod;
     order_date: string;
