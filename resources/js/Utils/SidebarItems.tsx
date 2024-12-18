@@ -1,6 +1,7 @@
 import SidebarItem from "@/components/sidebar-item";
 import { Link, usePage } from "@inertiajs/react";
 import {
+    AlignCenterHorizontal,
     ChartBarDecreasing,
     GitBranchPlus,
     ShoppingBag,
@@ -84,6 +85,12 @@ const SidebarItems = () => {
                         label="Point of sale"
                         href={route("pos.index")}
                         icon={<ShoppingBag className="size-4" />}
+                    />
+
+                    <SidebarItem
+                        label="Credit Orders"
+                        href={route("orders.creditOrders")}
+                        icon={<AlignCenterHorizontal className="size-4" />}
                     />
 
                     {/* <li className="hs-accordion" id="users-accordion">

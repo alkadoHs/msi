@@ -20,8 +20,8 @@ export default function Authenticated({
                 {header && (
                     <header className="shadow print:hidden dark bg-gray-800 sticky top-14 z-10">
                         <div className="mx-auto max-w-full flex items-center gap-2 px-4 py-2 sm:px-6 lg:px-8">
-                            <Link className="size-6 text-cyan-500" href={prevUrl as string} title="Go back">
-                                <ArrowLeftCircle className="size-5 mr-1" />
+                            <Link className="size-7 text-cyan-500" href={prevUrl as string} title="Go back">
+                                <ArrowLeftCircle className="size-6 mr-1" />
                             </Link>
                             {header}
                         </div>

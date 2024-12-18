@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('credit_order_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->constrained('branches')->cascadeOnDelete();
-            $table->foreignId('order_id')->constrained('credit_orders')->cascadeOnDelete();
-            $table->foreignId('payment_method_id')->constrained('payment_methods')->restrictOnDelete();
-            $table->decimal('amount', 10, 2);
+            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('payment_method_id')->constrained()->restrictOnDelete();
+            $table->integer('amount')->default(0);
             $table->timestamps();
         });
     }

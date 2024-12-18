@@ -15,12 +15,6 @@ class OrderItem extends Model
         'price',
         'buy_price',
         'discount',
-        'total',
-        'buy_total',
-        'profit',
-        'profit_percentage',
-        'balance_pending_qty',
-        'balance_pending_total',
         'created_at',
     ];
 

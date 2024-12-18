@@ -113,7 +113,7 @@ class PosController extends Controller
                 'payment_method_id' => $request->payment_method_id,
               ]);
 
-              $account->increment('amount', $order->orderItems()->sum('total'));
+              $account->increment('amount', $request->status == 'paid' ? $order->orderItems()->sum('total'): 0);
     
               $account->accountTransactions()->create([
                 'user_id' => auth()->id(),

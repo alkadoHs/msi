@@ -1,15 +1,15 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CreditOrderPaymentController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
-use App\Mail\WelcomeMail;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -80,4 +80,17 @@ Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::clas
     Route::post('sell', [PosController::class, 'sell'])->name('pos.sell');
 
     Route::get('invoices/{order}', [PosController::class, 'invoice'])->name('pos.invoice');
+});
+
+
+// ordders Routes
+Route::controller(OrderController::class)->prefix('orders')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', 'index')->name('orders.index');
+    Route::get('credit-orders', 'creditOrders')->name('orders.creditOrders');
+});
+
+
+Route::middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(function () {
+    Route::post('credit-orders/{creditOrder}', [CreditOrderPaymentController::class, 'store'])
+        ->name('credit-orders.store');
 });

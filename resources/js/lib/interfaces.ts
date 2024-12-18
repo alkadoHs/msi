@@ -209,6 +209,8 @@ export interface Order {
     order_items_sum_profit: number;
     order_items_sum_pending_qty: number;
     order_items_sum_qty: number;
+    order_items_sum_total_pending_qty: number;
+    credit_order_payments_sum_amount: number;
     created_at: string;
     updated_at: string;
 }
