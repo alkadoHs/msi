@@ -24,7 +24,7 @@ return [
         'background_color' => '#6777ef',
         'display' => 'fullscreen',
         'description' => 'A software for managing businesses such as shops, supermarkets, and more.',
-        'theme_color' => '#6777ef',
+        'theme_color' => '#111827',
         'icons' => [
             [
                 'src' => 'logo.png',

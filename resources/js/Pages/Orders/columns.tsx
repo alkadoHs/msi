@@ -24,7 +24,7 @@ export const orderColumns: ColumnDef<Order>[] = [
         accessorKey: "customer_name",
         header: "Customer",
         cell: ({ row }) => (
-            <div className="font-medium">{row.original.customer?.name}</div>
+            <div className="font-medium bg-gray">{row.original.customer?.name}</div>
         ),
     },
     {
