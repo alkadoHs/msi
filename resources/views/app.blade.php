@@ -11,6 +11,7 @@
          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
+        @PwaHead
         @routes
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/Pages/{$page['component']}.tsx"])
@@ -19,5 +20,7 @@
     </head>
     <body class="font-sans antialiased bg-reg-pattern overflow-hidden">
         @inertia
+
+        @RegisterServiceWorkerScript
     </body>
 </html>

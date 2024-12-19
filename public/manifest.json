@@ -1,0 +1,16 @@
+{
+    "name": "Mauzodata",
+    "short_name": "MSI",
+    "background_color": "#6777ef",
+    "display": "fullscreen",
+    "description": "A software for managing businesses such as shops, supermarkets, and more.",
+    "theme_color": "#6777ef",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
