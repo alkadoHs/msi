@@ -19,9 +19,9 @@ return [
     */
 
     'manifest' => [
-        'name' => 'Mauzodata',
-        'short_name' => 'MSI',
-        'background_color' => '#6777ef',
+        'name' => 'Mauzodata Sales Innovations',
+        'short_name' => 'Mauzodata',
+        'background_color' => '#374151',
         'display' => 'fullscreen',
         'description' => 'A software for managing businesses such as shops, supermarkets, and more.',
         'theme_color' => '#111827',
