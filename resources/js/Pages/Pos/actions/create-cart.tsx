@@ -2,7 +2,7 @@ import { FormEventHandler, useState } from "react";
 import { Link, router, useForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { numberFormat } from "@/lib/utils";
+import { nowDateTime, numberFormat } from "@/lib/utils";
 import { Customer, PaymentMethod, Product } from "@/lib/interfaces";
 import FormRepeater from "@/components/ui/form-repeater";
 import KdSelectInput from "@/components/form/kd-select-input";
@@ -58,7 +58,7 @@ const CreateCart = ({
     const { data, setData, errors, post, processing, reset } = useForm({
         customer_id: "",
         payment_method_id: "",
-        order_date: orderDate,
+        order_date: nowDateTime(),
         invoice_no: invoiceNo,
         status: "paid",
         customer_name: "",

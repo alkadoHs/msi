@@ -10,7 +10,6 @@ use App\Models\PaymentMethod;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -28,7 +27,7 @@ class PosController extends Controller
                          ),
             'paymentMethods' => Inertia::defer(fn () => PaymentMethod::get()),
             'customers' => Inertia::defer(fn () => Customer::get(['id', 'name'])),
-            'orderDate' => now('EAT')->format('Y-m-d H:m'),
+            'orderDate' => now()->format('Y-m-d H:m'),
             'invoice_no' => Inertia::defer(fn () =>  Random::number(0000000, 100000000))
         ]);
     }
@@ -105,7 +104,7 @@ class PosController extends Controller
                         ]);
                         break;
                 }
-                $product->decrement('stock', $item['qty']);
+                // $product->decrement('stock', $item['qty']); // moved to OrderItemObserver
             }
 
             $account = Account::firstOrCreate([

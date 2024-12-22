@@ -5,11 +5,15 @@ import dayjs from "dayjs";
 
 export const branchColumns: ColumnDef<Branch>[] = [
     {
-        accessorKey: 'id',
-        header: 'S/N',
+        accessorKey: "id",
+        header: "#",
         cell: ({ row }) => {
-            return row.index < 10? `0${row.index+1}.`: `${row.index+1}.`
-        }
+            return (
+                <span className="bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">
+                    {row.original.name[0]}
+                </span>
+            );
+        },
     },
     {
         accessorKey: "name",

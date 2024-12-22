@@ -94,6 +94,12 @@ const SidebarItems = () => {
                     />
 
                     <SidebarItem
+                        label="Pending Orders"
+                        href={route("orders.pendingOrders")}
+                        icon={<AlignCenterHorizontal className="size-4" />}
+                    />
+
+                    <SidebarItem
                         label="Credit Orders"
                         href={route("orders.creditOrders")}
                         icon={<AlignCenterHorizontal className="size-4" />}

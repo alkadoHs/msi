@@ -202,6 +202,8 @@ export interface Order {
     user: User;
     payment_method_id: number;
     payment_method: PaymentMethod;
+    branch_id: number;
+    branch: Branch;
     order_date: string;
     invoice_no: string;
     status: string;

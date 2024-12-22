@@ -7,6 +7,7 @@ enum OrderStatusesEnum: string
     case PENDING = 'pending';
     case PAID = 'paid';
     case CREDIT = 'credit';
+    case CANCELLED = 'cancelled';
 
     public function label(): string
     {
@@ -14,6 +15,7 @@ enum OrderStatusesEnum: string
             self::PENDING => 'Pending',
             self::PAID => 'Paid',
             self::CREDIT => 'Credit',
+            self::CANCELLED => 'Cancelled',
         };
     }
 }

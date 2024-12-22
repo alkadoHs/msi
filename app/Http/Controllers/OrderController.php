@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Enums\OrderStatusesEnum;
-use App\Models\Branch;
 use App\Models\Order;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -59,6 +58,77 @@ class OrderController extends Controller
                        ),
             'paymentMethods' => Inertia::defer(fn () => \App\Models\PaymentMethod::get())
         ]);
+    }
+
+
+    public function pendingOrders(): Response
+    {
+        $search = request()->search ?? null;
+        $branch_id = request()->branch_id ?? null;
+
+        return Inertia::render('PendingOrders/Index', [
+            'orders' => Inertia::defer(fn () =>
+                                    Order::with(['branch', 'user', 'paymentMethod', 'customer', 'orderItems.product'])
+                                             ->withSum('orderItems', 'total_pending_qty')
+                                             ->where('status', OrderStatusesEnum::PENDING)
+                                             ->where(function ($query) use ($search) {
+                                                 $query->where('invoice_no', 'LIKE', "%$search%")
+                                                       ->orWhereHas('customer', function ($query) use ($search) {
+                                                           $query->where('name', 'LIKE', "%$search%");
+                                                       });
+                                             })
+                                             ->when($branch_id, fn ($query) => $query->where('branch_id', $branch_id))
+                                             ->latest()
+                                             ->paginate(20)
+                       ),
+        ]);
+    }
+
+
+    public function editPendingOrder(Order $order): Response
+    {
+        return Inertia::render('PendingOrders/Edit', [
+            'order' => Order::where('status', 'pending')->with(['branch', 'user', 'paymentMethod', 'customer', 'orderItems.product'])->first(),
+            'paymentMethods' => Inertia::defer(fn () => \App\Models\PaymentMethod::get())
+        ]);
+    }
+
+
+    public function confirmAllPendingItems(Order $order): RedirectResponse
+    {
+        $order->orderItems()->each(function ($item) {
+            $item->increment('qty', $item->pending_qty);
+        });
+
+       $order->update([
+           'status' => OrderStatusesEnum::PAID
+       ]);
+
+        return redirect()->back();
+    }
+
+
+    public function confirmPendingOrder(Order $order): RedirectResponse
+    {
+        $order->update([
+            'status' => OrderStatusesEnum::PAID
+        ]);
+
+        return redirect()->route('orders.pendingOrders');
+    }
+
+
+    public function cancelPendingOrder(Order $order): RedirectResponse
+    {
+        $order->orderItems()->each(function ($item) {
+            $item->product->increment('stock', $item->pending_qty);
+        });
+
+        $order->update([
+            'status' => OrderStatusesEnum::CANCELLED
+        ]);
+
+        return redirect()->route('orders.pendingOrders');
     }
 
 }

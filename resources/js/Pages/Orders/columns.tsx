@@ -1,13 +1,23 @@
 import DangerBadge from "@/components/badges/danger-badge";
 import ErrorBadge from "@/components/badges/ErrorBadge";
+import PendingBadge from "@/components/badges/PendingBadge";
 import SuccessBadge from "@/components/badges/success-badge";
 import { Order } from "@/lib/interfaces";
-import { dateFormatFilter, numberFormat } from "@/lib/utils";
+import { dateFormatFilter, dateTimeFormat, numberFormat } from "@/lib/utils";
 import { Link } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
-import dayjs from "dayjs";
 
 export const orderColumns: ColumnDef<Order>[] = [
+    // order date
+    {
+        accessorKey: "order_date",
+        header: "Order Date",
+        cell: ({ row }) => (
+            <div className="text-muted-foreground text-sm">
+                {dateTimeFormat(row.original.created_at)}
+            </div>
+        ),
+    },
     {
         accessorKey: "invoice_no",
         header: "Invoice No",
@@ -34,11 +44,15 @@ export const orderColumns: ColumnDef<Order>[] = [
             const order = row.original;
             if (order.status === 'pending') {
                 return (
-                    <DangerBadge label={order.status} />
+                    <PendingBadge label={order.status} />
                 );
             } else if (order.status === 'paid') {
                 return (
                     <SuccessBadge label={order.status} />
+                );
+            } else if (order.status === 'credit') {
+                return (
+                    <DangerBadge label={order.status} />
                 );
             } else {
                 return (
@@ -70,20 +84,19 @@ export const orderColumns: ColumnDef<Order>[] = [
         accessorKey: "payment_method",
         header: "Account",
         cell: ({ row }) => (
-            <div className="text-muted-foreground">
+            <div className="text-muted-foreground text-sm">
                 {row.original.payment_method?.name}
             </div>
         )
     },
-    // order date
     {
-        accessorKey: "order_date",
-        header: "Order Date",
+        accessorKey: "branch.name",
+        header: "Branch",
         cell: ({ row }) => (
-            <div className="text-muted-foreground">
-                {dateFormatFilter(row.original.order_date)}
+            <div className="">
+                {row.original.branch?.name}
             </div>
-        ),
+        )
     },
     {
         accessorKey: 'actions',

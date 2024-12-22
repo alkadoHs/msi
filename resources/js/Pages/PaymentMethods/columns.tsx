@@ -10,8 +10,8 @@ export const paymentMethodColumns: ColumnDef<PaymentMethod>[] = [
         header: "#",
         cell: ({ row }) => {
             return (
-                <span>
-                    {row.index < 10 ? `0${row.index + 1}` : row.index + 1}
+                <span className="bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">
+                    {row.original.name[0]}
                 </span>
             );
         },

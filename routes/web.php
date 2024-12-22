@@ -87,6 +87,11 @@ Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::clas
 Route::controller(OrderController::class)->prefix('orders')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', 'index')->name('orders.index');
     Route::get('credit-orders', 'creditOrders')->name('orders.creditOrders');
+    Route::get('pending-orders', 'pendingOrders')->name('orders.pendingOrders');
+    Route::get('pending-orders/{order}', 'editPendingOrder')->name('orders.pendingOrders.edit');
+    Route::patch('pending-orders/{order}/confirm-all', 'confirmAllPendingItems')->name('orders.pendingOrders.confirm-all');
+    Route::patch('pending-orders/{order}/confirm', 'confirmPendingOrder')->name('orders.pendingOrders.confirm');
+    Route::patch('pending-orders/{order}/cancel', 'cancelPendingOrder')->name('orders.pendingOrders.cancel');
 });
 
 
@@ -94,3 +99,7 @@ Route::middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(func
     Route::post('credit-orders/{creditOrder}', [CreditOrderPaymentController::class, 'store'])
         ->name('credit-orders.store');
 });
+
+Route::resource('orderItems', \App\Http\Controllers\OrderItemController::class)
+    ->middleware(['auth', 'verified'])
+    ->only(['update', 'destroy']);
