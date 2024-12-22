@@ -5,8 +5,10 @@ import {
     ChartBarDecreasing,
     GitBranchPlus,
     LayoutList,
+    NotebookText,
     ShoppingBag,
     ShoppingCart,
+    SquareUserRound,
     Users,
     WalletMinimal,
 } from "lucide-react";
@@ -97,7 +99,7 @@ const SidebarItems = () => {
                     <SidebarItem
                         label="Pending Orders"
                         href={route("orders.pendingOrders")}
-                        icon={<AlignCenterHorizontal className="size-4" />}
+                        icon={<NotebookText className="size-4" />}
                     />
 
                     <SidebarItem
@@ -106,10 +108,16 @@ const SidebarItems = () => {
                         icon={<AlignCenterHorizontal className="size-4" />}
                     />
 
-<SidebarItem
+                    <SidebarItem
                         label="Expenses"
                         href={route("expenses.index")}
                         icon={<LayoutList className="size-4" />}
+                    />
+
+                    <SidebarItem
+                        label="Suppliers"
+                        href={route("suppliers.index")}
+                        icon={<SquareUserRound className="size-4" />}
                     />
 
                     {/* <li className="hs-accordion" id="users-accordion">

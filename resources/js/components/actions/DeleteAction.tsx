@@ -16,7 +16,7 @@ const DeleteAction = ({
             <div className="text-center">
                 <button
                     type="button"
-                    className="flex shrink-0 justify-center items-center gap-2 size-[38px] text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
+                    className="flex shrink-0 justify-center items-center gap-2 size-[32px] text-sm font-medium rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:bg-red-700 disabled:opacity-50 disabled:pointer-events-none"
                     aria-haspopup="dialog"
                     aria-expanded="false"
                     aria-controls={`hs-delete-item-${item.id}`}

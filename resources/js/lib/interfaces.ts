@@ -273,7 +273,7 @@ export interface Expense {
 
 
 export interface Expenses {
-    data: expense[];
+    data: Expense[];
     links: PaginationLink[];
     current_page: number;
     last_page: number;
@@ -285,4 +285,13 @@ export interface Expenses {
     to: number;
     total: number;
     per_page: number;
+}
+
+export interface Supplier {
+    id: number;
+    name: string;
+    contact: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
 }

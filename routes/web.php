@@ -107,3 +107,7 @@ Route::resource('orderItems', \App\Http\Controllers\OrderItemController::class)
 Route::resource('expenses', \App\Http\Controllers\ExpenseController::class)
     ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['index', 'store', 'update', 'destroy']);
+
+Route::resource('suppliers', \App\Http\Controllers\SupplierController::class)
+    ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
+    ->only(['index', 'store', 'update', 'destroy']);
