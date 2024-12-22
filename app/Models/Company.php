@@ -44,4 +44,9 @@ class Company extends Model
     {
         return $this->hasMany(Supplier::class);
     }
+
+    public function purchaseOrders(): HasMany
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
 }
