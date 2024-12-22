@@ -21,10 +21,10 @@ return [
     'manifest' => [
         'name' => 'Mauzodata Sales Innovations',
         'short_name' => 'Mauzodata',
-        'background_color' => '#374151',
+        'background_color' => '#111827',
         'display' => 'fullscreen',
         'description' => 'A software for managing businesses such as shops, supermarkets, and more.',
-        'theme_color' => '#111827',
+        'theme_color' => '#0e7490',
         'icons' => [
             [
                 'src' => 'logo.png',
