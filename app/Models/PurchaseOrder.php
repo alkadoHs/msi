@@ -11,6 +11,7 @@ class PurchaseOrder extends Model
         'company_id',
         'branch_id',
         'payment_method_id',
+        'reference',
     ];
 
     public function supplier()

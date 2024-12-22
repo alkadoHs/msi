@@ -18,6 +18,8 @@ return new class extends Migration
             $table->decimal('stock');
             $table->integer('buy_price');
             $table->integer('sell_price');
+            $table->integer('total_buy_price')->virtualAs('stock * buy_price');
+            $table->integer('total_sell_price')->virtualAs('stock * sell_price');
             $table->timestamps();
         });
     }

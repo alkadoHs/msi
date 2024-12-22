@@ -10,8 +10,6 @@ import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
 import KdTextInput from "@/components/form/kd-text-input";
 import {
-    ChevronDownCircle,
-    Delete,
     PlusCircle,
 } from "lucide-react";
 import NumberFlow from "@number-flow/react";

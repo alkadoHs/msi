@@ -285,6 +285,7 @@ export interface Expenses {
     to: number;
     total: number;
     per_page: number;
+    path: string;
 }
 
 export interface Supplier {
@@ -294,4 +295,54 @@ export interface Supplier {
     description: string;
     created_at: string;
     updated_at: string;
+}
+
+export interface Suppliers {
+    data: Supplier[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
+    path: string;
+}
+
+
+export interface PurchaseOrder {
+    id: number;
+    supplier_id: number;
+    supplier: Supplier;
+    user_id: number;
+    user: User;
+    payment_method_id: number;
+    payment_method: PaymentMethod;
+    branch_id: number;
+    branch: Branch;
+    reference: string;
+    items_sum_total_buy_price: number;
+    items_sum_total_sell_price: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PurchaseOrders {
+    data: PurchaseOrder[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
+    path: string;
 }

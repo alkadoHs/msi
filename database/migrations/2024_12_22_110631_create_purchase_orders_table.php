@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained()->cascadeOnDelete();
             $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
             $table->foreignId('payment_method_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('reference')->unique();
             $table->timestamps();
         });
     }
