@@ -39,7 +39,12 @@ class PurchaseOrderController extends Controller
             'paymentMethods' => Inertia::defer(function () {
                 return auth()->user()->company->paymentMethods;
             }),
-            'reference' => Inertia::defer(fn () => Random::letters(6)),
+            'reference' => Inertia::defer(fn () => Random::string(
+                6,
+                true,
+                true,
+               true,
+            )),
             'products' => Inertia::defer(function () use($branch_id) {
                 return Product::where('branch_id', $branch_id)->get();
             } ),

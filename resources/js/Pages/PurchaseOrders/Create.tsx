@@ -56,6 +56,7 @@ const Create = ({
         payment_method_id: "",
         purchase_date: nowDateTime(),
         branch_id: "",
+        reference: reference,
     });
 
     const handleSubmit: FormEventHandler = (e) => {
@@ -142,6 +143,14 @@ const Create = ({
                                         );
                                     }}
                                 />
+                                <KdTextInput
+                                    label="Reference ID"
+                                    value={data.reference}
+                                    onChange={(e) =>
+                                        setData("reference", e.target.value)
+                                    }
+                                />
+
                                 <KdTextInput
                                     type="datetime-local"
                                     label="Order Date"
