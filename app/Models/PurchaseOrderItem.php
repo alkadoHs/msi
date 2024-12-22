@@ -9,9 +9,9 @@ class PurchaseOrderItem extends Model
     protected $fillable = [
         'purchase_order_id',
         'product_id',
-        'quantity',
-        'unit_price',
-        'total',
+        'stock',
+        'buy_price',
+        'sell_price',
     ];
 
     public function purchaseOrder()
