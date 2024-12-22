@@ -4,6 +4,7 @@ import {
     AlignCenterHorizontal,
     ChartBarDecreasing,
     GitBranchPlus,
+    LayoutList,
     ShoppingBag,
     ShoppingCart,
     Users,
@@ -103,6 +104,12 @@ const SidebarItems = () => {
                         label="Credit Orders"
                         href={route("orders.creditOrders")}
                         icon={<AlignCenterHorizontal className="size-4" />}
+                    />
+
+<SidebarItem
+                        label="Expenses"
+                        href={route("expenses.index")}
+                        icon={<LayoutList className="size-4" />}
                     />
 
                     {/* <li className="hs-accordion" id="users-accordion">

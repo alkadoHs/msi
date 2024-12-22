@@ -9,6 +9,7 @@ interface Props {
     placeholder?: string;
     autoFocus?: boolean;
     id?: string | number;
+    required?: boolean;
 }
 const KdNumericInput = ({
     label,
@@ -17,6 +18,7 @@ const KdNumericInput = ({
     placeholder,
     autoFocus = false,
     id = "-ID",
+    required = false,
 }: Props) => {
     return (
         <div className="max-w-sm">
@@ -36,6 +38,7 @@ const KdNumericInput = ({
                 placeholder={placeholder}
                 autoFocus={autoFocus}
                 autoComplete="off"
+                required={required}
             />
         </div>
     );

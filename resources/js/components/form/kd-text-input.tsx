@@ -8,6 +8,7 @@ interface Props {
     placeholder?: string;
     autoFocus?: boolean;
     readonly?: boolean;
+    required?: boolean;
 }
 const KdTextInput = ({
     label,
@@ -17,6 +18,7 @@ const KdTextInput = ({
     placeholder,
     autoFocus = false,
     readonly = false,
+    required = false,
 }: Props) => {
     return (
         <div className="max-w-sm">
@@ -36,6 +38,7 @@ const KdTextInput = ({
                 autoFocus={autoFocus}
                 autoComplete="off"
                 readOnly={readonly}
+                required={required}
             />
         </div>
     );

@@ -1,4 +1,5 @@
 import { Branch, User } from "@/types";
+import exp from "constants";
 
 export type PaginationLink = {
     url: string;
@@ -253,4 +254,35 @@ export interface OrderItem {
     balance_pending_total: number;
     created_at: string;
     updated_at: string;
+}
+
+
+export interface Expense {
+    id: number;
+    branch_id: number;
+    branch: Branch;
+    user_id: number;
+    user: User;
+    payment_method_id: number;
+    payment_method: PaymentMethod;
+    item: string;
+    cost: number;
+    created_at: string;
+    updated_at: string;
+}
+
+
+export interface Expenses {
+    data: expense[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
 }

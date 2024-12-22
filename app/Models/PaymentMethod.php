@@ -31,4 +31,9 @@ class PaymentMethod extends Model
     {
         return $this->hasMany(CreditOrderPayment::class);
     }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class);
+    }
 }

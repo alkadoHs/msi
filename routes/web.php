@@ -101,5 +101,9 @@ Route::middleware(['auth', 'verified', RemoveCommaFromInput::class])->group(func
 });
 
 Route::resource('orderItems', \App\Http\Controllers\OrderItemController::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['update', 'destroy']);
+
+Route::resource('expenses', \App\Http\Controllers\ExpenseController::class)
+    ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
+    ->only(['index', 'store', 'update', 'destroy']);

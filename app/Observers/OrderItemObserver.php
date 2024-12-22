@@ -2,6 +2,8 @@
 
 namespace App\Observers;
 
+use App\Enums\Enums\OrderStatusesEnum;
+use App\Models\Account;
 use App\Models\OrderItem;
 
 class OrderItemObserver
@@ -22,6 +24,24 @@ class OrderItemObserver
     {
         // increment the stock of the product
         $orderItem->product->increment('stock', $orderItem->qty);
+
+        // alter account balance
+        $account = Account::firstOrCreate([
+            'branch_id' => auth()->user()->branch_id,
+            'payment_method_id' => $orderItem->order->payment_method_id,
+          ]);
+
+          $amount = $orderItem->order->status === OrderStatusesEnum::PENDING ? 0 : $orderItem->total;
+
+          $account->decrement('amount', $amount);
+
+          $account->accountTransactions()->create([
+            'user_id' => auth()->id(),
+            'type' => 'withdraw',
+            'description' => "Deleted orderItem #{$orderItem->product->name}",
+            'amount' => $amount,
+            'balance' => $account->amount,
+          ]);
     }
 
     /**
