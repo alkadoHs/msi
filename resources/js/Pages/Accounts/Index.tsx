@@ -21,7 +21,7 @@ export default function Index({ accounts, totalBalance }: { accounts: Branch[], 
                         {accounts?.map((account) => (
                             <CostBreakdownCard
                                 key={account.id}
-                                branch={account.name}
+                                branch={account?.name}
                                 total={account.accounts_sum_amount}
                                 accounts={account.accounts}
                                 totalBalance={totalBalance}

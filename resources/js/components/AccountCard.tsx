@@ -61,7 +61,7 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts, totalBala
                         >
                             <div className="flex items-center">
                                 <span className="bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">
-                                    {account.payment_method.name[0]}
+                                    {account.payment_method?.name[0]}
                                 </span>
                                 <span>{account.payment_method?.name}</span>
                             </div>
