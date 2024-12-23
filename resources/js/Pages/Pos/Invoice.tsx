@@ -20,7 +20,7 @@ const Invoice = ({ order }: { order: Order }) => {
         >
             <Head title={`Invoice #${order.invoice_no}`} />
 
-            <section className="max-w-xl mx-auto my-4">
+            <section className="max-w-xl mx-auto my-4 print:max-w-full print:my-0">
                 {/* <!-- Modal --> */}
                 <div className="size-full  overflow-x-hidden overflow-y-auto pointer-events-none">
                     <div className=" ">
@@ -88,6 +88,12 @@ const Invoice = ({ order }: { order: Order }) => {
                                         {company.name}
                                     </h3>
                                     <p className="text-sm text-gray-500 dark:text-gray-500">
+                                         {company.address}
+                                    </p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-500">
+                                     {company.phones}
+                                     </p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-500">
                                         Invoice #{order.invoice_no}
                                     </p>
                                 </div>
@@ -131,9 +137,10 @@ const Invoice = ({ order }: { order: Order }) => {
                                 </div>
                                 {/* <!-- End Grid --> */}
 
-                                <div className="mt-5 sm:mt-10">
+                                <div className="mt-5 space-y-4 ">
+                                    <p>Customer: <b>{order.customer?.name ?? "_____________"}</b></p>
                                     <h4 className="text-xs font-semibold uppercase text-gray-800 dark:text-gray-200">
-                                        Summary
+                                        Items
                                     </h4>
                                     <div className="border-y border-gray-200 dark:border-gray-700">
                                         <DataTable
@@ -144,24 +151,11 @@ const Invoice = ({ order }: { order: Order }) => {
                                 </div>
 
 
-                                <div className="mt-5 sm:mt-10">
-                                    <p className="text-sm text-gray-500 dark:text-gray-500">
-                                        If you have any questions, please
-                                        contact us at{" "}
-                                        <a
-                                            className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                                            href="#"
-                                        >
-                                            example@site.com
-                                        </a>{" "}
-                                        or call at{" "}
-                                        <a
-                                            className="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500"
-                                            href="tel:+1898345492"
-                                        >
-                                            +1 898-34-5492
-                                        </a>
+                                <div className="mt-5 text-center space-y-1 sm:mt-10">
+                                    <p className="text-sm italic text-gray-500 dark:text-gray-500">
+                                       Thank you for choosing us!
                                     </p>
+                                    <p>Issued by: <span>{order.user?.name}</span></p>
                                 </div>
                             </div>
                             {/* <!-- End Body --> */}

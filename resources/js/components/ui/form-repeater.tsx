@@ -71,6 +71,7 @@ export default function FormRepeater<T>({
             ))}
             <Button
                 type="button"
+                variant={'outline'}
                 onClick={handleAddItem}
             >
               <PlusCircle className="size-4 mr-1" />

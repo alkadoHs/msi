@@ -6,6 +6,9 @@ import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
+import { Button } from "@/components/ui/button";
+import { Circle, RotateCcw, ShoppingBagIcon } from "lucide-react";
+import { SwitchBranch } from "@/components/actions/SwitchBranch";
 
 const NavigationBar = () => {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -16,29 +19,35 @@ const NavigationBar = () => {
         <nav className="border-b z-30 sticky top-0 print:hidden bg-white border-gray-200 dark:border-gray-700 dark:bg-gray-800">
             <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
                 <div className="flex h-14 justify-between">
-                    <div className="flex">
+                    <div className="flex place-items-center gap-1">
                         <div className="flex shrink-0 items-center">
                             <Sidebar />
                             <Link href="#" className="hidden md:inline-block">
                                 <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                             </Link>
                         </div>
-                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            <NavLink
-                                href={route("dashboard")}
-                                active={route().current("dashboard")}
-                            >
-                                Dashboard
-                            </NavLink>
+                        <div className="hidden sm:flex text-orange-500">
+                            {user.branch?.name}
                         </div>
                     </div>
                     <div className="ms-6 flex items-center gap-3">
+                        <Button variant={"outline"} size={"icon"} asChild>
+                            <Link href={route('pos.index')} title="Go to cart">
+                                <ShoppingBagIcon className="size-6" />
+                            </Link>
+                        </Button>
+                        <SwitchBranch />
+                        <Button variant={"outline"} size={"icon"} asChild>
+                            <a href="" title="Refresh page">
+                                <RotateCcw className="size-6" />
+                            </a>
+                        </Button>
                         <ModeToggle />
                         <div className="hs-dropdown relative inline-flex">
                             <button
                                 id="hs-dropdown-default-menu"
                                 type="button"
-                                className="hs-dropdown-toggle size-10 flex items-center justify-center text-sm font-medium rounded-full border shadow dark:bg-pink-800 dark:border-pink-700 dark:text-white dark:hover:bg-pink-700 dark:focus:bg-pink-700"
+                                className="hs-dropdown-toggle size-9 flex items-center justify-center text-sm font-medium rounded-full border shadow dark:bg-pink-800 dark:border-pink-700 dark:text-white dark:hover:bg-pink-700 dark:focus:bg-pink-700"
                                 aria-haspopup="menu"
                                 aria-expanded="false"
                                 aria-label="Dropdown"

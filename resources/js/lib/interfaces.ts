@@ -38,7 +38,6 @@ export interface Users {
     total: number;
 }
 
-
 export interface Branches {
     data: Branch[];
     links: PaginationLink[];
@@ -168,7 +167,6 @@ export interface Products {
     total: number;
 }
 
-
 export interface Customer {
     id: number;
     name: string;
@@ -193,7 +191,6 @@ export interface Customers {
     to: number;
     total: number;
 }
-
 
 export interface Order {
     id: number;
@@ -256,7 +253,6 @@ export interface OrderItem {
     updated_at: string;
 }
 
-
 export interface Expense {
     id: number;
     branch_id: number;
@@ -270,7 +266,6 @@ export interface Expense {
     created_at: string;
     updated_at: string;
 }
-
 
 export interface Expenses {
     data: Expense[];
@@ -313,7 +308,6 @@ export interface Suppliers {
     path: string;
 }
 
-
 export interface PurchaseOrder {
     id: number;
     supplier_id: number;
@@ -325,6 +319,7 @@ export interface PurchaseOrder {
     branch_id: number;
     branch: Branch;
     reference: string;
+    items: PurchaseOrderItem[];
     items_sum_total_buy_price: number;
     items_sum_total_sell_price: number;
     created_at: string;
@@ -333,6 +328,36 @@ export interface PurchaseOrder {
 
 export interface PurchaseOrders {
     data: PurchaseOrder[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
+    path: string;
+}
+
+export interface PurchaseOrderItem {
+    id: number;
+    purchase_order_id: number;
+    product_id: number;
+    product: Product;
+    stock: number;
+    buy_price: number;
+    sell_price: number;
+    total_buy_price: number;
+    total_sell_price: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface PurchaseOrderItems {
+    data: PurchaseOrderItem[];
     links: PaginationLink[];
     current_page: number;
     last_page: number;

@@ -15,7 +15,7 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts, totalBala
 
 
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSliderValue(parseInt(e.target.value, 10));
+        // setSliderValue(parseInt(e.target.value, 10));
     };
 
 

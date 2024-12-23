@@ -103,4 +103,10 @@ class UserController extends Controller
 
         return back();
     }
+
+    public function switchBranch(Branch $branch): RedirectResponse
+    {
+        auth()->user()->update(['branch_id' => $branch->id]);
+        return back();
+    }
 }

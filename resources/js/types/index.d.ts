@@ -13,7 +13,10 @@ export interface Branch {
 export interface Company {
     id: number;
     name: string;
+    email: string;
     phones: string;
+    address: string;
+    city: string;
     created_at: string;
     updated_at: string;
 }
@@ -40,6 +43,7 @@ export type PageProps<
 > = T & {
     auth: {
         user: User;
+        branches: Branch[];
     };
     ziggy: Config & { location: string };
     prev_url?: string;

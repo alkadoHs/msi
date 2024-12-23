@@ -58,6 +58,10 @@ Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified'])
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
+Route::post('switch-branch/{branch}', [UserController::class, 'switchBranch'])
+    ->middleware(['auth', 'verified'])
+    ->name('switch-branch');
+
 Route::resource('paymentMethods', \App\Http\Controllers\PaymentMethodController::class)
     ->middleware(['auth', 'verified'])
     ->only(['index', 'create', 'store', 'update', 'destroy']);
@@ -115,4 +119,4 @@ Route::resource('suppliers', \App\Http\Controllers\SupplierController::class)
 
 Route::resource('purchases', \App\Http\Controllers\PurchaseOrderController::class)
     ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
-    ->only(['index', 'create', 'store', 'update', 'destroy']);
+    ->only(['index', 'create', 'show', 'store', 'update', 'destroy']);

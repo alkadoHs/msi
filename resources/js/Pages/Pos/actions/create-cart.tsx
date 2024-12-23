@@ -1,5 +1,5 @@
 import { FormEventHandler, useState } from "react";
-import { Link, router, useForm } from "@inertiajs/react";
+import { Link, router, useForm, usePage } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { nowDateTime, numberFormat } from "@/lib/utils";
@@ -53,7 +53,9 @@ const CreateCart = ({
     const [items, setItems] = useState<Item[]>([initialItem]);
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const { data, setData, errors, post, processing, reset } = useForm({
+    const user = usePage().props.auth.user;
+
+    const { data, setData, reset } = useForm({
         customer_id: "",
         payment_method_id: "",
         order_date: nowDateTime(),
@@ -222,14 +224,14 @@ const CreateCart = ({
                                 }
                                 readonly
                             />
-                            <KdTextInput
+                            {/* <KdTextInput
                                 type="datetime-local"
                                 label="Order Date"
                                 value={data.order_date}
                                 onChange={(e) =>
                                     setData("order_date", e.target.value)
                                 }
-                            />
+                            /> */}
                         </div>
                     </div>
 
@@ -315,6 +317,7 @@ const CreateCart = ({
                                                         label="Price"
                                                         id={index}
                                                         value={item.price.toString()}
+                                                        readonly={user.role !== "admin"}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 index,
@@ -330,6 +333,7 @@ const CreateCart = ({
                                                         label="Total"
                                                         id={index}
                                                         value={item.total.toString()}
+                                                        readonly={true}
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 index,

@@ -2,17 +2,14 @@ import { FormEventHandler, useState } from "react";
 import { Deferred, Head, Link, router, useForm } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { nowDateTime, numberFormat } from "@/lib/utils";
+import { nowDateTime } from "@/lib/utils";
 import { PaymentMethod, Product, Supplier } from "@/lib/interfaces";
 import FormRepeater from "@/components/ui/form-repeater";
 import KdSelectInput from "@/components/form/kd-select-input";
 import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
 import KdTextInput from "@/components/form/kd-text-input";
-import { PlusCircle } from "lucide-react";
 import NumberFlow from "@number-flow/react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import CreateSupplier from "../Suppliers/actions/create-supplier";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Branch } from "@/types";
@@ -51,6 +48,9 @@ const Create = ({
     const [items, setItems] = useState<Item[]>([initialItem]);
     const [isProcessing, setIsProcessing] = useState(false);
 
+    console.log("reference", reference);
+    
+
     const { data, setData, errors, post, processing, reset } = useForm({
         supplier_id: "",
         payment_method_id: "",
@@ -68,7 +68,9 @@ const Create = ({
                 supplier_id: data.supplier_id,
                 payment_method_id: data.payment_method_id,
                 purchase_date: data.purchase_date,
-                order_items: items as any,
+                branch_id: data.branch_id,
+                reference: data.reference,
+                items: items as any,
             },
             {
                 preserveScroll: true,
@@ -80,8 +82,9 @@ const Create = ({
                     reset();
                     setItems([initialItem]);
                 },
-                onError: () => {
+                onError: (errors) => {
                     toast.error("Something went wrong");
+                    console.log(errors);
                 },
             }
         );
@@ -90,7 +93,7 @@ const Create = ({
     return (
         <Authenticated header={<h2 className="page-head">Create purchase </h2>}>
             <Head title="Make purchase" />
-            <section className="space-y-6">
+            <section className="space-y-6 mb-16">
                 <Deferred
                     data={["products", "suppliers", "reference", "branches"]}
                     fallback={<Spinner />}
@@ -295,7 +298,7 @@ const Create = ({
                             </div>
                         </div>
 
-                        <div className="">
+                        <div className=" bg-white dark:bg-gray-800 p-2 rounded">
                             <div className="flex justify-between items-center gap-2 pt-4">
                                 <h2 className="text-lg font-bold">
                                     Total{" "}
@@ -303,7 +306,7 @@ const Create = ({
                                         value={items.reduce(
                                             (acc, item) =>
                                                 acc +
-                                                item.sell_price * item.qty,
+                                                item.buy_price * item.qty,
                                             0
                                         )}
                                         className="text-lg text-green-500 font-bold"
@@ -319,7 +322,7 @@ const Create = ({
                                     >
                                         {isProcessing
                                             ? "Processing..."
-                                            : "Sell produts"}
+                                            : "Create Purchase"}
                                     </Button>
                                 </div>
                             </div>

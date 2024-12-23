@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Product;
 use App\Models\PurchaseOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 use Valorin\Random\Random;
@@ -19,7 +21,8 @@ class PurchaseOrderController extends Controller
             'purchaseOrders' => Inertia::defer(function () use($search) {
                 return PurchaseOrder::with(['supplier', 'paymentMethod', 'branch'])
                                         ->where('reference', 'like', "%{$search}%")
-                                        ->withSum('items', 'buy_price')
+                                        ->withSum('items', 'total_buy_price')
+                                        ->latest()
                                         ->paginate(50);
             }),
         ]);
@@ -39,15 +42,70 @@ class PurchaseOrderController extends Controller
             'paymentMethods' => Inertia::defer(function () {
                 return auth()->user()->company->paymentMethods;
             }),
-            'reference' => Inertia::defer(fn () => Random::string(
-                6,
-                true,
-                true,
-               true,
-            )),
+            'reference' => Random::letters(8),
             'products' => Inertia::defer(function () use($branch_id) {
                 return Product::where('branch_id', $branch_id)->get();
-            } ),
+            }),
         ]);
+    }
+
+
+    public function show(PurchaseOrder $purchase): Response
+    {
+        return Inertia::render('PurchaseOrders/Show', [
+            'purchaseOrder' =>  PurchaseOrder::with(['supplier', 'paymentMethod', 'branch', 'items.product'])
+                                            ->withSum('items', 'total_buy_price')
+                                            ->find($purchase->id),
+        ]);
+    }
+
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'branch_id' => 'required',
+            'supplier_id' => 'required',
+            'payment_method_id' => 'required',
+            'reference' => 'required',
+            'purchase_date' => 'required',
+            'items' => 'required|array|min:1',
+            'items.*.product_id' => 'required',
+            'items.*.qty' => 'required|max:99999999|numeric|min:0',
+            'items.*.buy_price' => 'required|max:999999999|numeric|min:0',
+            'items.*.sell_price' => 'required|max:999999999|numeric|min:0',
+        ]);
+
+        DB::transaction(function () use($request) {
+            $purchaseOrder = PurchaseOrder::create(['company_id' => auth()->user()->company_id, 
+            ...$request->only('branch_id', 'supplier_id', 'payment_method_id', 'reference')]);
+
+            foreach ($request->items as $item) {
+                $purchaseOrder->items()->create([
+                    'product_id' => $item['product_id'],
+                    'stock' => $item['qty'],
+                    'buy_price' => $item['buy_price'],
+                    'sell_price' => $item['sell_price'],
+                ]);
+            }
+
+            // alter account balance
+          $account = Account::firstOrCreate([
+            'branch_id' => auth()->user()->branch_id,
+            'payment_method_id' => $purchaseOrder->payment_method_id,
+          ]);
+
+          $account->decrement('amount', $purchaseOrder->items->sum('total_buy_price'));
+
+          $account->accountTransactions()->create([
+            'user_id' => auth()->id(),
+            'type' => 'withdraw',
+            'description' => "PurchaseOrder #$purchaseOrder->reference",
+            'amount' => $purchaseOrder->items->sum('total_buy_price'),
+            'balance' => $account->amount,
+          ]);
+        }, 5);
+
+        return redirect()->route('purchases.index');
     }
 }
