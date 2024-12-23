@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\BranchCompanyScope;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+#[ScopedBy(BranchCompanyScope::class)]
 class CreditOrderPayment extends Model
 {
     protected $fillable = [

@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('Users/Index', [
-            'users' => Inertia::defer(fn () => User::with(['branch'])->paginate(15)),
+            'users' => Inertia::defer(fn () => auth()->user()->company->users()->with('branch')->paginate(15)),
             'branches' => Inertia::defer(fn () => Branch::get())
         ]);
     }

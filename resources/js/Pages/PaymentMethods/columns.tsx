@@ -3,6 +3,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import EditPaymentMethodAction from "./actions/edit-payment-method";
 import DeleteAction from "@/components/actions/DeleteAction";
+import { numberFormat } from "@/lib/utils";
 
 export const paymentMethodColumns: ColumnDef<PaymentMethod>[] = [
     {
@@ -21,11 +22,10 @@ export const paymentMethodColumns: ColumnDef<PaymentMethod>[] = [
         header: "Name",
     },
     {
-        accessorKey: "created_at",
-        header: "Created",
+        accessorKey: "accounts_sum_amount",
+        header: "Balance",
         cell: ({ row }) => {
-            const date = dayjs(row.getValue("created_at")).fromNow();
-            return <span className="text-muted-foreground">{date}</span>;
+            return <span className="text-green-500">{numberFormat(row.original.accounts_sum_amount)}</span>;
         },
     },
     {

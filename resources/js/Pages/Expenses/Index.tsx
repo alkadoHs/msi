@@ -13,7 +13,7 @@ export default function Index({ expenses, paymentMethods }: { expenses: Expense[
         >
             <Head title="Expenses" />
 
-            <section className="p-4 rounded-md shadow-md">
+            <section className="p-4 rounded-md shadow-md bg-white dark:bg-transparent my-6">
                 <Deferred data={'paymentMethods'} fallback={<Spinner />}>
                     <CreateExpense paymentMethods={paymentMethods} />
                 </Deferred>

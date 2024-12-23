@@ -58,6 +58,7 @@ export interface PaymentMethod {
     id: number;
     name: string;
     description: string;
+    accounts_sum_amount: number;
     created_at: string;
     updated_at: string;
 }

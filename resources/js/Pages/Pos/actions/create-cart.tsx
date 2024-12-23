@@ -9,9 +9,7 @@ import KdSelectInput from "@/components/form/kd-select-input";
 import KdNumericInput from "@/components/form/kd-numeric-input";
 import KdSearchSelect from "@/components/form/kd-search-select";
 import KdTextInput from "@/components/form/kd-text-input";
-import {
-    PlusCircle,
-} from "lucide-react";
+import { PlusCircle, ShoppingCart } from "lucide-react";
 import NumberFlow from "@number-flow/react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,7 +23,10 @@ interface Item {
     product_id?: number;
     qty: number;
     buy_price: number;
+    whole_stock: number;
+    whole_price: number;
     price: number;
+    original_price: number;
     total: number;
 }
 
@@ -34,6 +35,9 @@ const initialItem: Item = {
     qty: 1,
     buy_price: 0,
     price: 0,
+    whole_price: 0,
+    whole_stock: 0,
+    original_price: 0,
     total: 0,
 };
 
@@ -107,7 +111,11 @@ const CreateCart = ({
 
     return (
         <>
-            <section className="space-y-6">
+            <div className="space-y-6">
+                <h1 className="text-medium bg-cyan-700/50 -mb-6 text-white px-2 py-1">
+                    You're selling from ~{" "}
+                    <span className="uppercase">{user.branch?.name}</span>
+                </h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="bg-white w-full dark:bg-gray-800 p-2 rounded grid items-center lg:grid-cols-2 gap-4">
                         <div className="w-full flex items-center gap-4">
@@ -237,9 +245,9 @@ const CreateCart = ({
 
                     <div className="">
                         <div>
-                            <div className="space-y-4">
-                                <h1 className="text-xl font-semibold mb-4">
-                                    Add Items
+                            <div className="space-y-0">
+                                <h1 className="text-medium bg-cyan-700/50 px-2 py-1">
+                                    Order Items
                                 </h1>
                                 <FormRepeater<Item>
                                     initialValues={initialItem}
@@ -275,7 +283,13 @@ const CreateCart = ({
                                                                         selectedProduct.id,
                                                                     buy_price:
                                                                         selectedProduct.buy_price,
+                                                                    whole_stock:
+                                                                        selectedProduct.whole_stock,
+                                                                    whole_price:
+                                                                        selectedProduct.whole_price,
                                                                     price: selectedProduct.sell_price,
+                                                                    original_price:
+                                                                        selectedProduct.sell_price,
                                                                     total:
                                                                         selectedProduct.sell_price *
                                                                         item.qty,
@@ -287,8 +301,9 @@ const CreateCart = ({
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <div className="w-full">
-                                                    <KdNumericInput
+                                                    <KdTextInput
                                                         label="Qty"
+                                                        type="number"
                                                         id={index}
                                                         value={item.qty.toString()}
                                                         onChange={(e) =>
@@ -300,8 +315,34 @@ const CreateCart = ({
                                                                         e.target
                                                                             .value
                                                                     ),
+                                                                    price:
+                                                                        parseFloat(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        ) > 0 &&
+                                                                        parseFloat(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        ) >=
+                                                                            item.whole_stock
+                                                                            ? item.whole_price
+                                                                            : item.original_price,
                                                                     total:
-                                                                        item.price *
+                                                                        (parseFloat(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        ) > 0 &&
+                                                                        parseFloat(
+                                                                            e
+                                                                                .target
+                                                                                .value
+                                                                        ) >=
+                                                                            item.whole_stock
+                                                                            ? item.whole_price
+                                                                            : item.original_price) *
                                                                         parseFloat(
                                                                             e
                                                                                 .target
@@ -317,7 +358,10 @@ const CreateCart = ({
                                                         label="Price"
                                                         id={index}
                                                         value={item.price.toString()}
-                                                        readonly={user.role !== "admin"}
+                                                        readonly={
+                                                            user.role !==
+                                                            "admin"
+                                                        }
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 index,
@@ -353,7 +397,7 @@ const CreateCart = ({
                     </div>
 
                     <div className="">
-                        <div className="flex justify-between items-center gap-2 pt-4">
+                        <div className="flex justify-between items-center gap-2 py-3 px-2 bg-white dark:bg-gray-800">
                             <h2 className="text-lg font-bold">
                                 Total{" "}
                                 <NumberFlow
@@ -366,17 +410,17 @@ const CreateCart = ({
                                 />
                             </h2>
                             <div className="flex items-center gap-2">
-                                {/* <Button type="button" variant={'destructive'} size={'icon'} onClick={() => setItems([])}>
-                                    <Trash2 className="size-6" />
-                                </Button> */}
                                 <Button type="submit" disabled={isProcessing}>
-                                    {isProcessing ? "Processing..." : "Sell produts"}
+                                    <ShoppingCart />
+                                    {isProcessing
+                                        ? "Processing..."
+                                        : "Sell produts"}
                                 </Button>
                             </div>
                         </div>
                     </div>
                 </form>
-            </section>
+            </div>
         </>
     );
 };

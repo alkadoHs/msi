@@ -50,7 +50,7 @@ createInertiaApp({
             <>
                 <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
                     <App {...props} />
-                    <Toaster richColors />
+                    <Toaster richColors closeButton expand  />
                 </ThemeProvider>
             </>
         );

@@ -30,7 +30,9 @@ export function SwitchBranch() {
                             router.post(route("switch-branch", branch.id),{}, {
                                 onSuccess: () => {
                                     toast.success(`Switched to ${branch.name}`);
-                                }
+                                },
+                                preserveScroll: true,
+                                preserveState: true,
                             })
                         }
                     >

@@ -16,7 +16,10 @@ class PaymentMethodController extends Controller
     public function index(): Response
     {
         return Inertia::render('PaymentMethods/Index', [
-            'paymentMethods' => Inertia::defer(fn () => PaymentMethod::with('company')->get()),
+            'paymentMethods' => Inertia::defer(fn () => 
+                                                PaymentMethod::with('company')
+                                                                ->withSum('accounts', 'amount')
+                                                                ->get()),
         ]);
     }
 

@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\CompanyScope;
 use App\Observers\PaymentMethodObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ObservedBy(PaymentMethodObserver::class)]
+#[ScopedBy(CompanyScope::class)]
 class PaymentMethod extends Model
 {
     protected $fillable = [
@@ -35,6 +38,11 @@ class PaymentMethod extends Model
     public function expenses(): HasMany
     {
         return $this->hasMany(Expense::class);
+    }
+
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class);
     }
 
     public function purchaseOrders(): HasMany

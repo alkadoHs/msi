@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Product;
 use App\Models\PurchaseOrder;
+use App\Models\Scopes\BranchScope;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -44,7 +45,7 @@ class PurchaseOrderController extends Controller
             }),
             'reference' => Random::letters(8),
             'products' => Inertia::defer(function () use($branch_id) {
-                return Product::where('branch_id', $branch_id)->get();
+                return Product::withoutGlobalScope(BranchScope::class)->where('branch_id', $branch_id)->get();
             }),
         ]);
     }
