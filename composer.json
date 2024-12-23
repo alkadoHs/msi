@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "erag/laravel-pwa": "^1.0",
+        "flowframe/laravel-trend": "^0.3.0",
         "inertiajs/inertia-laravel": "2.x-dev",
         "lacodix/laravel-model-filter": "^3.2",
         "laravel/framework": "^11.31",

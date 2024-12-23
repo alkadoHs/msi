@@ -1,12 +1,45 @@
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import FileUpload from "@/fileUpload";
+import StatsCardSkeleton from "@/components/skeletons/StatsCartSkeleton";
+import StatsCard, { StatsCardProps } from "@/components/StatsCard";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, usePage } from "@inertiajs/react";
+import { Deferred, Head } from "@inertiajs/react";
+import { Globe, Link, Store, Tag } from "lucide-react";
 
-export default function Dashboard() {
-    const filePath = usePage().props;
-    console.log(filePath);
-    
+const cards = [
+    {
+        title: "Sales",
+        amount: "70,820,000",
+        net: "5k net",
+        icon: <Store className="text-gray-500" />,
+        isPositive: true,
+    },
+    {
+        title: "Profit",
+        amount: "985,937",
+        net: "21k net",
+        icon: <Globe className="text-gray-500" />,
+        isPositive: true,
+    },
+    {
+        title: "Expenses",
+        amount: "15,503,000",
+        net: "6k net",
+        icon: <Tag className="text-gray-500" />,
+        isPositive: true,
+    },
+    {
+        title: "Credit payments",
+        amount: "30,982,000",
+        net: "2.4 net",
+        icon: <Link className="text-gray-500" />,
+        isPositive: false,
+    },
+];
+
+export default function Dashboard({
+    statsData,
+}: {
+    statsData: StatsCardProps[];
+}) {
     return (
         <AuthenticatedLayout
             header={
@@ -17,108 +50,20 @@ export default function Dashboard() {
         >
             <Head title="Dashboard" />
 
-            <div className="py-12">
-                <div className="mx-auto max-w-full sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <FileUpload />
-
-                            <br />
-                            <br />
-
-                            <Table>
-                                <TableHeader>
-                                    <TableRow>
-                                        <TableHead>Column 1</TableHead>
-                                        <TableHead>Column 2</TableHead>
-                                        <TableHead>Column 3</TableHead>
-                                        <TableHead>Column 4</TableHead>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                    <TableRow>
-                                        <TableCell>Product 1</TableCell>
-                                        <TableCell>7,000</TableCell>
-                                        <TableCell>7,800</TableCell>
-                                        <TableCell>890,000</TableCell>
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-                        </div>
+            <div className="py-6 px-4">
+                {/* <div className="mx-auto max-w-full sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"></div>
+                </div> */}
+                <Deferred
+                    data={"statsData"}
+                    fallback={<StatsCardSkeleton columns={4} />}
+                >
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        {statsData?.map((card, index) => (
+                            <StatsCard key={index} {...card} />
+                        ))}
                     </div>
-                </div>
+                </Deferred>
             </div>
         </AuthenticatedLayout>
     );
