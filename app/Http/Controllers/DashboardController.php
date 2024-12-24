@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreditOrderPayment;
 use App\Models\Expense;
 use App\Models\OrderItem;
+use Flowframe\Trend\Trend;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -35,9 +36,43 @@ class DashboardController extends Controller
                                     ->where('branch_id', auth()->user()->branch_id)
                                     ->sum('amount');
 
+        // total sales per each month
+        $monthlySales = Trend::query(OrderItem::query()->whereRelation('order', 'status', 'paid')
+                                  ->whereRelation('order', 'branch_id', auth()->user()->branch_id))
+                                  ->between(
+                                        start: now()->startOfYear(),
+                                        end: now()->endOfYear(),
+                                    )
+                                    ->perMonth()
+                                    ->sum('total');
+
+        $monthlyProfit = Trend::query(OrderItem::query()->whereRelation('order', 'status', 'paid')
+                                                  ->whereRelation('order', 'branch_id', auth()->user()->branch_id))
+                                         ->between(
+                                            start: now()->startOfYear(),
+                                            end: now()->endOfYear(),
+                                        )
+                                        ->perMonth()
+                                        ->sum('profit');
+
+        $monthlyExpenses = Trend::query(Expense::query()->where('branch_id', auth()->user()->branch_id))
+                                    ->between(
+                                            start: now()->startOfYear(),
+                                            end: now()->endOfYear(),
+                                        )
+                                        ->perMonth()
+                                        ->sum('cost');
+        
+        // dd($monthlySales);
+
                        
         
         return Inertia::render('Dashboard', [
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+            'monthlySales' =>  Inertia::defer(fn () => $monthlySales),
+            'monthlyProfit' => Inertia::defer(fn () => $monthlyProfit),
+            'monthlyExpenses' => Inertia::defer(fn () => $monthlyExpenses),
             'statsData' => Inertia::defer(fn () => [
                  [
                     'title' => 'Expenses',
@@ -63,8 +98,6 @@ class DashboardController extends Controller
                     'net' => "______",
                     'isPositive' => true,
                 ]
-                // 'startDate' => $startDate,
-                // 'endDate' => $endDate,
             ]),
         ]);
     }

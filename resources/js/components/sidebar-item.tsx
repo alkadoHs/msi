@@ -1,4 +1,7 @@
+import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
+import clsx from 'clsx';
+import { log } from 'console';
 import React from 'react';
 
 type SidebarItemProps = {
@@ -8,10 +11,15 @@ type SidebarItemProps = {
 };
 
 const SidebarItem: React.FC<SidebarItemProps> = ({ icon, label, href = "#" }) => {
+  // Check if the current URL matches the href
+  const isActive =  window.location.href.startsWith(href);
   return (
     <li>
       <Link
-        className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+        className={clsx(
+          'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700',
+          isActive ? 'bg-gray-200 dark:bg-gray-700 text-cyan-500' : 'text-zinc-600 dark:text-zinc-400'
+        )}
         href={href}
       >
         <span className="icon">{icon}</span>

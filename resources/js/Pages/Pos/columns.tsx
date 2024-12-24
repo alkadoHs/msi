@@ -7,7 +7,7 @@ export const invoiceItemColumns: ColumnDef<OrderItem>[] = [
         accessorKey: "product",
         header: "Product",
         cell: ({ row }) => {
-            return <span>{row.original.product.name}</span>;
+            return <span>{row.original?.product?.name}</span>;
         },
     },
     {

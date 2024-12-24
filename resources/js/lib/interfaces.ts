@@ -237,6 +237,7 @@ export interface Orders {
 export interface OrderItem {
     id: number;
     order_id: number;
+    order: Order;
     product_id: number;
     product: Product;
     qty: number;

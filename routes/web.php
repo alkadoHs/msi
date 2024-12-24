@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reports\OrderItemReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
 use Illuminate\Foundation\Application;
@@ -24,6 +25,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('reports', function () {
+    return Inertia::render('Reports');
+})->middleware(['auth', 'verified'])->name('reports');
 
 Route::post('/upload', [FileUploadController::class, 'avatar'])
     ->middleware(['auth', 'verified']);
@@ -121,3 +126,8 @@ Route::resource('suppliers', \App\Http\Controllers\SupplierController::class)
 Route::resource('purchases', \App\Http\Controllers\PurchaseOrderController::class)
     ->middleware(['auth', 'verified', RemoveCommaFromInput::class])
     ->only(['index', 'create', 'show', 'store', 'update', 'destroy']);
+
+
+Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('order-items', [OrderItemReportController::class, 'index'])->name('reports.order-items');
+});

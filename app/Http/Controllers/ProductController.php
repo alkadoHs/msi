@@ -20,7 +20,10 @@ class ProductController extends Controller
         
         return Inertia::render('Products/Index', [
             'products' => Inertia::defer(fn () =>
-                                     Product::where('name', 'LIKE', "%{$search}%")->latest()->paginate(25)),
+                                     Product::where('name', 'LIKE', "%{$search}%")
+                                                   ->where('branch_id', auth()->user()->branch_id)
+                                                    ->latest()
+                                                    ->paginate(25)),
         ]);
     }
 

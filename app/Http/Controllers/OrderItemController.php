@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderItem;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class OrderItemController extends Controller
@@ -17,4 +18,12 @@ class OrderItemController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(OrderItem $orderItem): RedirectResponse
+    {
+        $orderItem->delete();
+
+        return redirect()->back();
+    }
 }
+
