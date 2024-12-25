@@ -148,6 +148,9 @@ export interface Product {
     expire_date: string;
     whole_price: number;
     whole_stock: number;
+    order_items_sum_total: number;
+    order_items_sum_profit: number;
+    order_items_sum_qty: number;
     created_at: string;
     updated_at: string;
 }

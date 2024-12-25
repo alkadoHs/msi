@@ -23,7 +23,7 @@ const KdTextInput = ({
     id = "-ID"
 }: Props) => {
     return (
-        <div className="max-w-sm">
+        <div className="max-w-sm w-full">
             <label
                 htmlFor={label}
                 className="block text-sm font-medium mb-2 dark:text-white"

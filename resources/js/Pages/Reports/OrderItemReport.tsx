@@ -29,7 +29,7 @@ const OrderItemReport = ({ orderItems }: { orderItems: OrderItem[] }) => {
                             <div className="inline-flex gap-x-2">..</div>
                         </div>
                     </div>
-                    <TableTopHeader url={route("products.index")} />
+                    <TableTopHeader url={route("reports.order-items")} />
                     <Deferred
                         data={"orderItems"}
                         fallback={<TableSkeleton columns={4} rows={8} />}

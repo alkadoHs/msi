@@ -17,9 +17,9 @@ export default function Reports() {
                         description="Detailed report of products sold"
                     />
                     <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
+                        link={route("reports.sales-by-product")}
+                        title="Sales by product"
+                        description="Sales of each product"
                     />
                     <ReportsCard
                         link="#"

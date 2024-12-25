@@ -5,6 +5,7 @@ import {
 } from "@/components/dashboard/charts/SalesChart";
 import { SalesExpenses } from "@/components/dashboard/charts/SalesExpenses";
 import MetricsList from "@/components/dashboard/MetricsList";
+import { DateRangePicker } from "@/components/DatePicker";
 import { ChartSkeleton } from "@/components/skeletons/ChartSkeleton";
 import StatsCardSkeleton from "@/components/skeletons/StatsCartSkeleton";
 import Spinner from "@/components/Spinner";
@@ -16,15 +17,22 @@ export default function Dashboard({
     statsData,
     monthlySales,
     monthlyProfit,
+    startDate,
+    endDate,
 }: {
     statsData: StatsCardProps[];
     monthlySales: chartData[];
     monthlyProfit: chartData[];
+    startDate: string;
+    endDate: string;
 }) {
     return (
         <AuthenticatedLayout header={<h2 className="page-head">Dashboard</h2>}>
             <Head title="Dashboard" />
 
+            <div className="px-4 ">
+                <DateRangePicker from={startDate} to={endDate} url="/dashboard" />
+            </div>
             <div className="py-6 space-y-6 px-4">
                 <Deferred
                     data={"statsData"}
@@ -34,14 +42,19 @@ export default function Dashboard({
                 </Deferred>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Deferred data={"monthlySales"} fallback={<ChartSkeleton />}>
+                    <Deferred
+                        data={"monthlySales"}
+                        fallback={<ChartSkeleton />}
+                    >
                         <SalesChart chartData={monthlySales} />
                     </Deferred>
 
-                    <Deferred data={"monthlyProfit"} fallback={<ChartSkeleton />}>
+                    <Deferred
+                        data={"monthlyProfit"}
+                        fallback={<ChartSkeleton />}
+                    >
                         <ProfitChart chartData={monthlyProfit} />
                     </Deferred>
-
                 </div>
             </div>
         </AuthenticatedLayout>

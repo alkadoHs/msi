@@ -9,6 +9,7 @@ use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Reports\OrderItemReportController;
+use App\Http\Controllers\Reports\SalesByProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
 use Illuminate\Foundation\Application;
@@ -130,4 +131,7 @@ Route::resource('purchases', \App\Http\Controllers\PurchaseOrderController::clas
 
 Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
     Route::get('order-items', [OrderItemReportController::class, 'index'])->name('reports.order-items');
+    Route::get('sales-by-product', [SalesByProductController::class, 'index'])->name('reports.sales-by-product');
+    Route::get('sales-by-product/export-excel', [SalesByProductController::class, 'exportExcel'])->name('reports.sales-by-product.export-excel');
+    Route::get('sales-by-product/export-pdf', [SalesByProductController::class, 'exportPdf'])->name('reports.sales-by-product.export-pdf');
 });

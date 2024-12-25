@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CreditOrderPayment;
 use App\Models\Expense;
 use App\Models\OrderItem;
+use Carbon\Carbon;
 use Flowframe\Trend\Trend;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,8 +15,7 @@ class DashboardController extends Controller
 {
     public function index(): Response
     {
-        $startDate = request()->startDate ?? now()->startOfMonth();
-        $endDate = request()->endDate ?? now()->endOfMonth();
+        [$startDate, $endDate] = $this->getDates();
 
         $expenseTotal = Expense::whereBetween('created_at', [$startDate, $endDate])
                                    ->where('branch_id', auth()->user()->branch_id)
@@ -68,8 +68,8 @@ class DashboardController extends Controller
                        
         
         return Inertia::render('Dashboard', [
-            'startDate' => $startDate,
-            'endDate' => $endDate,
+            'startDate' => $startDate->format('Y-m-d'),
+            'endDate' => $endDate->format('Y-m-d'),
             'monthlySales' =>  Inertia::defer(fn () => $monthlySales),
             'monthlyProfit' => Inertia::defer(fn () => $monthlyProfit),
             'monthlyExpenses' => Inertia::defer(fn () => $monthlyExpenses),
@@ -100,6 +100,21 @@ class DashboardController extends Controller
                 ]
             ]),
         ]);
+    }
+
+
+
+    protected function getDates(): array
+    {
+        $validated = request()->validate([
+            'startDate' => 'nullable|date',
+            'endDate' => 'nullable|date|after_or_equal:startDate',
+        ]);
+
+        $startDate = Carbon::parse($validated['startDate'] ?? now()->startOfMonth())->startOfDay();
+        $endDate = Carbon::parse($validated['endDate'] ?? now()->endOfMonth())->endOfDay();
+
+        return [$startDate, $endDate];
     }
 
 

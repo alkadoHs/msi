@@ -53,7 +53,7 @@ export const orderItemColumns: ColumnDef<OrderItem>[] = [
         header: "Branch",
         cell: ({ row }) => {
             return (
-                <div className="text-xs text-muted-foreground">
+                <div className="text-sm text-muted-foreground">
                     {row.original.order.branch?.name}
                 </div>
             );
@@ -96,7 +96,7 @@ export const orderItemColumns: ColumnDef<OrderItem>[] = [
         header: "Seller",
         cell: ({ row }) => {
             return (
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs">
                     {row.original.order.user?.name}
                 </div>
             );

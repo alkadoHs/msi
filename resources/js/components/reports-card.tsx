@@ -16,7 +16,7 @@ const ReportsCard = ({ title, description, link }: ReportsCardProps) => {
             <div className="p-4 md:p-5">
                 <div className="flex justify-between items-center gap-x-3">
                     <div className="grow flex items-center gap-1">
-                        <FileSpreadsheet className="size-6 text-gray-400 dark:text-gray-500" />
+                        <FileSpreadsheet className="size-10 text-gray-400 dark:text-gray-500" />
                         <div>
                             <h3 className="group-hover:text-cyan-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
                                 {title}

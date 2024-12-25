@@ -2,7 +2,7 @@ import React from "react";
 
 const SuccessBadge = ({ label }: { label: string }) => {
     return (
-        <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full dark:bg-teal-500/10 dark:text-teal-500">
+        <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-500/10 dark:text-green-500">
             <svg
                 className="size-2.5"
                 xmlns="http://www.w3.org/2000/svg"
