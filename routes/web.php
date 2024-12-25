@@ -12,6 +12,7 @@ use App\Http\Controllers\Reports\BranchSalesReportController;
 use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Reports\OrderItemReportController;
 use App\Http\Controllers\Reports\SalesByProductController;
+use App\Http\Controllers\Reports\UserSalesReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
 use Illuminate\Foundation\Application;
@@ -144,4 +145,9 @@ Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
     Route::get('branch-sales', [BranchSalesReportController::class, 'index'])->name('reports.branch-sales');
     Route::get('branch-sales/export-excel', [BranchSalesReportController::class, 'exportExcel'])->name('reports.branch-sales.export-excel');
     Route::get('branch-sales/export-pdf', [BranchSalesReportController::class, 'exportPdf'])->name('reports.branch-sales.export-pdf');
+
+    // user-sales
+    Route::get('user-sales', [UserSalesReportController::class, 'index'])->name('reports.user-sales');
+    Route::get('user-sales/export-excel', [UserSalesReportController::class, 'exportExcel'])->name('reports.user-sales.export-excel');
+    Route::get('user-sales/export-pdf', [UserSalesReportController::class, 'exportPdf'])->name('reports.user-sales.export-pdf');
 });

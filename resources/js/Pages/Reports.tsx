@@ -32,9 +32,9 @@ export default function Reports() {
                         description="Sales & expenses per branch"
                     />
                     <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
+                        link={route("reports.user-sales")}
+                        title="User Sales"
+                        description="Revenues & expenses per user"
                     />
                     <ReportsCard
                         link="#"
