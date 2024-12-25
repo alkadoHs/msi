@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Reports\OrderItemReportController;
 use App\Http\Controllers\Reports\SalesByProductController;
 use App\Http\Controllers\UserController;
@@ -134,4 +135,8 @@ Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
     Route::get('sales-by-product', [SalesByProductController::class, 'index'])->name('reports.sales-by-product');
     Route::get('sales-by-product/export-excel', [SalesByProductController::class, 'exportExcel'])->name('reports.sales-by-product.export-excel');
     Route::get('sales-by-product/export-pdf', [SalesByProductController::class, 'exportPdf'])->name('reports.sales-by-product.export-pdf');
+
+    Route::get('daily-sales', [DailySalesController::class, 'index'])->name('reports.daily-sales');
+    Route::get('daily-sales/export-excel', [DailySalesController::class, 'exportExcel'])->name('reports.daily-sales.export-excel');
+    Route::get('daily-sales/export-pdf', [DailySalesController::class, 'exportPdf'])->name('reports.daily-sales.export-pdf');
 });

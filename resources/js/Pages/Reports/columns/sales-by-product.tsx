@@ -20,7 +20,7 @@ export const salesByProuctColumns: ColumnDef<Product>[] = [
     },
     {
         accessorKey: "order_items_sum_total",
-        header: "Total",
+        header: "Total sales",
         cell: ({ row }) => {
             return (
                 <span className="">

@@ -24,6 +24,8 @@ class ProductController extends Controller
                                                    ->where('branch_id', auth()->user()->branch_id)
                                                     ->latest()
                                                     ->paginate(25)),
+            'capital' => Inertia::defer(fn () => Product::where('branch_id', auth()->user()->branch_id)->sum('capital')),
+            'sales' => Inertia::defer(fn () => Product::where('branch_id', auth()->user()->branch_id)->sum('sales')),
         ]);
     }
 

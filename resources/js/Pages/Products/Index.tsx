@@ -8,8 +8,18 @@ import TableWrapper from "@/components/table-wrapper";
 import Pagination from "@/components/pagination";
 import CreateProduct from "./actions/create-product";
 import TableTopHeader from "@/components/TableTopHeader";
+import { TableCell, TableHead } from "@/components/ui/table";
+import { numberFormat } from "@/lib/utils";
 
-export default function Index({ products }: { products: Products }) {
+export default function Index({
+    products,
+    capital,
+    sales,
+}: {
+    products: Products;
+    capital: number;
+    sales: number;
+}) {
     const currentBranch = usePage().props.auth.user.branch;
     return (
         <Authenticated
@@ -44,13 +54,26 @@ export default function Index({ products }: { products: Products }) {
                     </div>
                     <TableTopHeader url={route("products.index")} />
                     <Deferred
-                        data={"products"}
+                        data={["products", "capital", "sales"]}
                         fallback={<TableSkeleton columns={4} rows={8} />}
                     >
                         <>
                             <DataTable
                                 columns={productColumns}
                                 data={products?.data}
+                                footer={
+                                    <>
+                                        <TableHead>Totals</TableHead>
+                                        <TableCell></TableCell>
+                                        <TableCell></TableCell>
+                                        <TableCell className="text-right text-green-500">
+                                            {numberFormat(capital)}
+                                        </TableCell>
+                                        <TableCell className="text-right text-green-500">
+                                            {numberFormat(sales)}
+                                        </TableCell>
+                                    </>
+                                }
                             />
                             <Pagination data={products} />
                         </>

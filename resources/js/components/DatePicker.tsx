@@ -67,9 +67,13 @@ export function DateRangePicker({
                     <Button
                         variant={"outline"}
                         type="button"
+                        title="downlad excel"
                         asChild
                     >
-                        <a href={`${downloadExcelUrl}?startDate=${from}&endDate=${to}`} className="flex items-center gap-1">
+                        <a
+                            href={`${downloadExcelUrl}?startDate=${from}&endDate=${to}`}
+                            className="flex items-center gap-1"
+                        >
                             <Download className="size-4" />
                             Excel
                         </a>
@@ -79,9 +83,14 @@ export function DateRangePicker({
                 {downloadPdfUrl && (
                     <Button
                         variant={"outline"}
+                        title="downlad pdf"
                         type="button"
+                        asChild
                     >
-                        <a href={`${downloadPdfUrl}?startDate=${from}&endDate=${to}`} className="flex items-center gap-1">
+                        <a
+                            href={`${downloadPdfUrl}?startDate=${from}&endDate=${to}`}
+                            className="flex items-center gap-1"
+                        >
                             <Printer className="size-4" />
                             PDF
                         </a>

@@ -80,6 +80,7 @@ class SalesByProductController extends Controller
     protected function getQuery(Carbon $startDate, Carbon $endDate)
     {
         return Product::has('orderItems')
+            ->where('branch_id', auth()->user()->branch_id)
             ->whereRelation('orderItems', 'created_at', '>=', $startDate)
             ->whereRelation('orderItems', 'created_at', '<=', $endDate)
             ->withSum('orderItems', 'total')
