@@ -12,7 +12,7 @@ export default function Authenticated({
 
     return (
         <div className="flex overflow-hidden">
-            <aside className="min-w-[250px] print:hidden bg-white border-r border-r-gray-200 w-[280px] h-dvh sticky top-0 dark:border-r-gray-700 dark:bg-gray-800 hidden md:block">
+            <aside className="min-w-[240px] print:hidden overflow-hidden bg-white border-r border-r-gray-200 w-[280px] h-dvh sticky top-0 dark:border-r-gray-700 dark:bg-gray-800 hidden md:block">
                 <SidebarItems />
             </aside>
             <div className="overflow-auto w-full h-dvh scroll-bar bg-gray-100 dark:bg-gray-900">

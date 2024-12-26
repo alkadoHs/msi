@@ -7,14 +7,30 @@ import { Orders } from "@/lib/interfaces";
 import { Deferred, Head } from "@inertiajs/react";
 import { creditOrderColumns } from "./columns";
 import Pagination from "@/components/pagination";
+import UserTab from "@/components/user-tab";
+import { ListFilter, BookmarkX, ListCollapse } from "lucide-react";
 
 export default function Index({ orders }: { orders: Orders }) {
     return (
         <Authenticated
             header={
-                <h2 className="page-head">
-                    Credit Orders
-                </h2>
+                <nav className="flex items-center gap-3 overflow-x-auto scroll-bar whitespace-nowrap">
+                    <UserTab
+                        href={route("orders.index")}
+                        label="All Orders"
+                        icon={<ListFilter className="size-4" />}
+                    />
+                    <UserTab
+                        href={route("orders.pendingOrders")}
+                        label="Pending"
+                        icon={<BookmarkX className="size-4" />}
+                    />
+                    <UserTab
+                        href={route("orders.creditOrders")}
+                        label="Credits"
+                        icon={<ListCollapse className="size-4" />}
+                    />
+                </nav>
             }
         >
             <Head title="Credit Orders" />

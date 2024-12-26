@@ -107,6 +107,7 @@ const CreateUser = ({ branches }: { branches: Branch[] }) => {
                         <div className="p-4 overflow-y-auto scroll-bar grid grid-cols-2 lg:grid-cols-3 gap-4">
                             <KdTextInput
                                 label="Full name"
+                                id={'Full name'}
                                 value={data.name}
                                 onChange={(e) =>
                                     setData("name", e.target.value)
@@ -115,6 +116,7 @@ const CreateUser = ({ branches }: { branches: Branch[] }) => {
                             />
                             <KdTextInput
                                 label="Email"
+                                id={'email'}
                                 type="email"
                                 value={data.email}
                                 onChange={(e) =>
@@ -123,6 +125,7 @@ const CreateUser = ({ branches }: { branches: Branch[] }) => {
                             />
                             <KdTextInput
                                 label="Phone number"
+                                id={'Phone number'}
                                 type="number"
                                 value={data.phone}
                                 onChange={(e) =>
@@ -132,6 +135,7 @@ const CreateUser = ({ branches }: { branches: Branch[] }) => {
                             />
                             <KdSelectInput
                                 label="Position"
+                                id={'position'}
                                 value={data.role}
                                 onChange={(e) =>
                                     setData("role", e.target.value)
@@ -140,6 +144,7 @@ const CreateUser = ({ branches }: { branches: Branch[] }) => {
                             />
                             <KdSelectInput
                                 label="Gender"
+                                id={'gender'}
                                 value={data.gender}
                                 onChange={(e) =>
                                     setData("gender", e.target.value)

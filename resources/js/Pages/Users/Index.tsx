@@ -8,6 +8,8 @@ import { Branch } from "@/types";
 import DangerBadge from "@/components/badges/danger-badge";
 import SuccessBadge from "@/components/badges/success-badge";
 import Pagination from "@/components/pagination";
+import DeleteAction from "@/components/actions/DeleteAction";
+import UserCard from "@/components/user-profile";
 
 const Index = ({ users, branches }: { users: Users; branches: Branch[] }) => {
     return (
@@ -50,205 +52,34 @@ const Index = ({ users, branches }: { users: Users; branches: Branch[] }) => {
                                     </div>
                                 </div>
                             </div>
-                            {/* <!-- End Header --> */}
 
                             {/* <!-- Table --> */}
-                            <div className="w-full overflow-auto scroll-bar">
+                            <div className="w-full overflow-auto scroll-bar py-4 bg-white dark:bg-gray-900">
                                 <Deferred
                                     data={"users"}
                                     fallback={<TableSkeleton />}
                                 >
-                                    <>
-                                        <table className="max-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                            <thead className="bg-gray-50 dark:bg-gray-800">
-                                                <tr>
-                                                    <th
-                                                        scope="col"
-                                                        className="ps-6 py-3 text-start"
-                                                    >
-                                                        <label
-                                                            htmlFor="hs-at-with-checkboxes-main"
-                                                            className="flex"
-                                                        >
-                                                            <input
-                                                                type="checkbox"
-                                                                className="shrink-0 border-gray-300 rounded text-cyan-600 focus:ring-cyan-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-600 dark:checked:bg-cyan-500 dark:checked:border-cyan-500 dark:focus:ring-offset-gray-800"
-                                                                id="hs-at-with-checkboxes-main"
-                                                            />
-                                                            <span className="sr-only">
-                                                                Checkbox
-                                                            </span>
-                                                        </label>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start"
-                                                    >
-                                                        <div className="flex items-center gap-x-2">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Name
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-3 text-start"
-                                                    >
-                                                        <div className="flex items-center gap-x-2">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Position
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-3 text-start"
-                                                    >
-                                                        <div className="flex items-center gap-x-2">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Status
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-3 text-start"
-                                                    >
-                                                        <div className="flex items-center gap-x-2">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Branch
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="py-3 text-start"
-                                                    >
-                                                        <div className="">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Gender
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-3 text-start"
-                                                    >
-                                                        <div className="flex items-center gap-x-2">
-                                                            <span className="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-gray-200">
-                                                                Created
-                                                            </span>
-                                                        </div>
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        className="px-6 py-3 text-end"
-                                                    ></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
-                                                {users?.data?.map((user) => (
-                                                    <tr key={user.name}>
-                                                        <td className="size-px whitespace-nowrap">
-                                                            <div className="ps-6 py-3">
-                                                                <label
-                                                                    htmlFor="hs-at-with-checkboxes-1"
-                                                                    className="flex"
-                                                                >
-                                                                    <input
-                                                                        type="checkbox"
-                                                                        className="shrink-0 border-gray-300 rounded text-cyan-600 focus:ring-cyan-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-600 dark:checked:bg-cyan-500 dark:checked:border-cyan-500 dark:focus:ring-offset-gray-800"
-                                                                        id="hs-at-with-checkboxes-1"
-                                                                    />
-                                                                    <span className="sr-only">
-                                                                        Checkbox
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </td>
-                                                        <td className="size-px whitespace-nowrap">
-                                                            <div className="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
-                                                                <div className="flex items-center gap-x-3">
-                                                                    <img
-                                                                        className="inline-block size-[38px] rounded-full"
-                                                                        src={
-                                                                            user.avatar ??
-                                                                            "/images/avatar_placeholder.jpg"
-                                                                        }
-                                                                        alt="Avatar"
-                                                                    />
-                                                                    <div className="grow">
-                                                                        <span className="block text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                                                            {
-                                                                                user.name
-                                                                            }
-                                                                        </span>
-                                                                        <span className="block text-sm text-gray-500 dark:text-gray-500">
-                                                                            {
-                                                                                user.email
-                                                                            }
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td className="h-px w-72 whitespace-nowrap">
-                                                            <div className="px-6 py-3">
-                                                                <span className="block text-sm text-gray-800 dark:text-gray-200">
-                                                                    {user.role}
-                                                                </span>
-                                                            </div>
-                                                        </td>
-
-                                                        <td className="size-px whitespace-nowrap">
-                                                            <div className="px-6 py-3">
-                                                                {user.isActive ? (
-                                                                    <SuccessBadge label="Active" />
-                                                                ) : (
-                                                                    <DangerBadge label="Blocked" />
-                                                                )}
-                                                            </div>
-                                                        </td>
-                                                        <td className="h-px w-72 whitespace-nowrap">
-                                                            <div className="px-6 py-3">
-                                                                <span className="block text-sm text-gray-800 dark:text-gray-200">
-                                                                    {
-                                                                        user
-                                                                            .branch
-                                                                            ?.name
-                                                                    }
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td className="size-px whitespace-nowrap">
-                                                            {user.gender}
-                                                        </td>
-                                                        <td className="size-px whitespace-nowrap">
-                                                            <div className="px-6 py-3">
-                                                                <span className="text-sm text-gray-500 dark:text-gray-500">
-                                                                    {dayjs(
-                                                                        user.created_at
-                                                                    ).fromNow()}
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td className="size-px whitespace-nowrap">
-                                                            <div className="px-6 py-1.5">
-                                                                <a
-                                                                    className="inline-flex items-center gap-x-1 text-sm text-cyan-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-cyan-500"
-                                                                    href="#"
-                                                                >
-                                                                    Edit
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                        {/* <!-- End Table --> */}
-                                        <Pagination data={users} />
-                                    </>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        {users?.data.map((user) => (
+                                            <UserCard
+                                                key={user.id}
+                                                id={user.id}
+                                                name={user.name}
+                                                phone={user.phone}
+                                                email={user.email}
+                                                branch={user.branch?.name}
+                                                role={user.role}
+                                                isActive={user.isActive}
+                                                blockUser={true}
+                                                sales_url={route('users.transactions', user.id)}
+                                                tags={[
+                                                    "expenses",
+                                                    "seles",
+                                                    "purchases",
+                                                ]}
+                                            />
+                                        ))}
+                                    </div>
                                 </Deferred>
                             </div>
                         </div>

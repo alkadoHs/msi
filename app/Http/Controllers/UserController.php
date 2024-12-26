@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class UserController extends Controller
 {
@@ -96,6 +97,13 @@ class UserController extends Controller
      */
     public function destroy(User $user): RedirectResponse
     {
+        $user->delete();
+
+        return back();
+    }
+
+    public function block(User $user): RedirectResponse
+    {
         if ($user->isActive)
             $user->update(['isActive' => false]);
         else
@@ -104,9 +112,77 @@ class UserController extends Controller
         return back();
     }
 
+
     public function switchBranch(Branch $branch): RedirectResponse
     {
         auth()->user()->update(['branch_id' => $branch->id]);
         return back();
+    }
+
+    
+    public function transactions(User $user): Response
+    {
+        return Inertia::render('Users/Transactions', [
+            'transactions' => Inertia::defer(fn () => 
+                                     $user->accountTransactions()->with(['account' => ['paymentMethod', 'branch']])
+                                          ->latest()
+                                          ->paginate(25)),
+            'user' => $user,
+        ]);
+    }
+
+    public function orders(User $user): Response
+    {
+        return Inertia::render('Users/Orders', [
+            'orders' => Inertia::defer(fn () => 
+                            $user->orders()->with(['branch', 'user', 'paymentMethod', 'customer'])
+                                ->withSum('orderItems', 'total')
+                                // ->where('status', OrderStatusesEnum::CREDIT)
+                                // ->where(function ($query) use ($search) {
+                                //     $query->where('invoice_no', 'LIKE', "%$search%")
+                                //         ->orWhereHas('customer', function ($query) use ($search) {
+                                //             $query->where('name', 'LIKE', "%$search%");
+                                //         });
+                                // })
+                                ->latest()
+                                ->paginate(50)
+                        ),
+            'user' => $user,
+        ]);
+    }
+
+
+    public function expenses(User $user): Response
+    {
+        return Inertia::render('Users/Expenses', [
+            'user' => $user,
+            'expenses' => Inertia::defer( fn () =>
+                $user->expenses()
+                     ->with(['branch', 'paymentMethod', 'user'])
+                     ->latest()
+                     ->paginate(25)
+            ),
+        ]);
+    }
+
+    public function creditCollections(User $user): Response
+    {
+        return Inertia::render('Users/CreditCollections', [
+            'creditCollections' => Inertia::defer( fn () =>
+                $user->creditOrderPayments()
+                     ->with(['user', 'branch', 'paymentMethod', 'order.customer'])
+                     ->latest()
+                     ->paginate(25)
+            ),
+            'user' => $user,
+        ]);
+    }
+
+
+    public function purchases(User $user): Response
+    {
+        return Inertia::render('Users/Purchases', [
+            'user' => $user,
+        ]);
     }
 }

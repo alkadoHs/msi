@@ -1,10 +1,11 @@
 import SidebarItem from "@/components/sidebar-item";
-import { Link, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import {
     AlignCenterHorizontal,
     ChartBarDecreasing,
     GitBranchPlus,
     LayoutList,
+    ListCheckIcon,
     NotebookText,
     PieChart,
     ShoppingBag,
@@ -18,7 +19,7 @@ const SidebarItems = () => {
     const user = usePage().props.auth.user;
 
     return (
-        <div>
+        <div className="h-full">
             <div className="px-6">
                 <a
                     className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80 dark:text-white"
@@ -29,17 +30,22 @@ const SidebarItems = () => {
                 </a>
             </div>
             <nav
-                className="hs-accordion-group p-6 w-full flex flex-col flex-wrap"
+                className="hs-accordion-group p-6 w-full h-full overflow-auto scroll-bar"
                 data-hs-accordion-always-open
             >
                 <ul className="space-y-1">
                     <SidebarItem
-                      label="Dashboard"
-                      icon={<PieChart className="size-4" />}
-                      href={route("dashboard")}
-                      />
+                        label="Dashboard"
+                        icon={<PieChart className="size-4" />}
+                        href={route("dashboard")}
+                    />
 
-                      
+                    <SidebarItem
+                        label="Reports"
+                        href={route("reports")}
+                        icon={<PieChart className="size-4" />}
+                    />
+
                     <SidebarItem
                         label="Accounts"
                         icon={<WalletMinimal className="size-4" />}
@@ -75,20 +81,8 @@ const SidebarItems = () => {
                     />
 
                     <SidebarItem
-                        label="All Orders"
+                        label="Orders"
                         href={route("orders.index")}
-                        icon={<AlignCenterHorizontal className="size-4" />}
-                    />
-
-                    <SidebarItem
-                        label="Pending Orders"
-                        href={route("orders.pendingOrders")}
-                        icon={<NotebookText className="size-4" />}
-                    />
-
-                    <SidebarItem
-                        label="Credit Orders"
-                        href={route("orders.creditOrders")}
                         icon={<AlignCenterHorizontal className="size-4" />}
                     />
 
@@ -108,13 +102,7 @@ const SidebarItems = () => {
                     <SidebarItem
                         label="Purchases"
                         href={route("purchases.index")}
-                        icon={<ShoppingCart className="size-4" />}
-                    />
-
-                    <SidebarItem
-                        label="Reports"
-                        href={route("reports")}
-                        icon={<PieChart className="size-4" />}
+                        icon={<ListCheckIcon className="size-4" />}
                     />
                 </ul>
             </nav>

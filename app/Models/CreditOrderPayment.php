@@ -13,6 +13,7 @@ class CreditOrderPayment extends Model
     protected $fillable = [
         'branch_id',
         'order_id',
+        'user_id',
         'payment_method_id',
         'amount',
     ];
@@ -26,6 +27,11 @@ class CreditOrderPayment extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function paymentMethod(): BelongsTo

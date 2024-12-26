@@ -63,14 +63,25 @@ Route::get('congratulations', function () {
     return Inertia::render('congraturation');
 })->middleware(['auth', 'verified'])->name('congratulations');
 
-
 Route::resource('users', UserController::class)
     ->middleware(['auth', 'verified'])
     ->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-Route::post('switch-branch/{branch}', [UserController::class, 'switchBranch'])
-    ->middleware(['auth', 'verified'])
-    ->name('switch-branch');
+Route::prefix('users')->controller(UserController::class)->middleware(['verified', 'auth'])->group(function () {
+    Route::post('{user}/block', 'block')
+        ->name('users.block');
+
+    Route::post('switch-branch/{branch}', 'switchBranch')
+        ->name('switch-branch');
+
+    Route::get('{user}/transactions', 'transactions')->name('users.transactions');
+    Route::get('{user}/orders', 'orders')->name('users.orders');
+    Route::get('{user}/expenses', 'expenses')->name('users.expenses');
+    Route::get('{user}/creditCollections', 'creditCollections')->name('users.creditCollections');
+    Route::get('{user}/purchases', 'purchases')->name('users.purchases');
+});
+
+
 
 Route::resource('paymentMethods', \App\Http\Controllers\PaymentMethodController::class)
     ->middleware(['auth', 'verified'])

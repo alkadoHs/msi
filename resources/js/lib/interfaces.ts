@@ -84,6 +84,7 @@ export interface Account {
     payment_method_id: number;
     payment_method: PaymentMethod;
     amount: number;
+    branch: Branch;
     abbreviation: string;
     created_at: string;
     updated_at: string;
@@ -364,6 +365,32 @@ export interface PurchaseOrderItem {
 
 export interface PurchaseOrderItems {
     data: PurchaseOrderItem[];
+    links: PaginationLink[];
+    current_page: number;
+    last_page: number;
+    first_page_url: string;
+    last_page_url: string;
+    prev_page_url: string;
+    next_page_url: string;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
+    path: string;
+}
+
+export interface CreditCollection {
+    id: number;
+    order: Order;
+    payment_method: PaymentMethod;
+    branch: Branch;
+    user: User;
+    amount: number;
+    created_at: string;
+}
+
+export interface CreditCollections {
+    data: CreditCollection[];
     links: PaginationLink[];
     current_page: number;
     last_page: number;

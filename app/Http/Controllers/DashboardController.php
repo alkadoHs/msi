@@ -93,7 +93,7 @@ class DashboardController extends Controller
                     'isPositive' => true,
                 ],
                  [
-                    'title' => 'Credit Payments',
+                    'title' => 'Credit Collections',
                     'amount' => $creditPaymentsTotal,
                     'net' => "______",
                     'isPositive' => true,

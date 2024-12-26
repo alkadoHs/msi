@@ -1,3 +1,4 @@
+import DeleteAction from "@/components/actions/DeleteAction";
 import DangerBadge from "@/components/badges/danger-badge";
 import ErrorBadge from "@/components/badges/ErrorBadge";
 import PendingBadge from "@/components/badges/PendingBadge";
@@ -105,7 +106,7 @@ export const orderColumns: ColumnDef<Order>[] = [
             const order = row.original;
             return (
                 <div className="flex gap-x-2">
-                    actions
+                    <DeleteAction url="orders.destroy" item={row.original} label={`order #${order.invoice_no}`} />
                     {/* <PayCreditOrder order={row.original} /> */}
                 </div>);
         }

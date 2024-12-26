@@ -48,9 +48,6 @@ const Create = ({
     const [items, setItems] = useState<Item[]>([initialItem]);
     const [isProcessing, setIsProcessing] = useState(false);
 
-    console.log("reference", reference);
-    
-
     const { data, setData, errors, post, processing, reset } = useForm({
         supplier_id: "",
         payment_method_id: "",
@@ -93,7 +90,7 @@ const Create = ({
     return (
         <Authenticated header={<h2 className="page-head">Create purchase </h2>}>
             <Head title="Make purchase" />
-            <section className="space-y-6 mb-16">
+            <section className="space-y-6 mb-16 mt-4">
                 <Deferred
                     data={["products", "suppliers", "reference", "branches"]}
                     fallback={<Spinner />}
@@ -209,7 +206,7 @@ const Create = ({
                                                                             selectedProduct.buy_price,
                                                                         sell_price: selectedProduct.sell_price,
                                                                         total:
-                                                                            selectedProduct.sell_price *
+                                                                            selectedProduct.buy_price *
                                                                             item.qty,
                                                                     }
                                                                 );

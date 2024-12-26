@@ -119,7 +119,7 @@ class PosController extends Controller
                 'type' => 'deposit',
                 'description' => "Order #$order->invoice_no",
                 'amount' => $request->status == 'paid' ? $order->orderItems()->sum('total') : 0,
-                'balance' => $request->status == 'paid' ? $account->amount + $order->orderItems()->sum('total') : $account->amount,
+                'balance' => $account->amount,
               ]);
         }, 5);
 

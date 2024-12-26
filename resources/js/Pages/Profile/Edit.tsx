@@ -1,10 +1,10 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { PageProps } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
-import DeleteUserForm from './Partials/DeleteUserForm';
-import UpdatePasswordForm from './Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
-import UserCard from '@/components/user-profile';
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { PageProps } from "@/types";
+import { Head, usePage } from "@inertiajs/react";
+import DeleteUserForm from "./Partials/DeleteUserForm";
+import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
+import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
+import UserCard from "@/components/user-profile";
 
 export default function Edit({
     mustVerifyEmail,
@@ -22,7 +22,16 @@ export default function Edit({
             <Head title="Profile" />
 
             <div className="space-y-6">
-                <UserCard name={user.name} role={user.role} phone={user.phone} email={user.email} branch={user.branch?.name} tags={['Selling', 'Expenses', 'Purchases']} />
+                <UserCard
+                    id={user.id}
+                    name={user.name}
+                    role={user.role}
+                    phone={user.phone}
+                    email={user.email}
+                    isActive={user.isActive}
+                    branch={user.branch?.name}
+                    tags={["Selling", "Expenses", "Purchases"]}
+                />
                 <div className="mx-auto max-w-full space-y-6 sm:px-6 lg:px-8">
                     <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
                         <UpdateProfileInformationForm
@@ -36,9 +45,9 @@ export default function Edit({
                         <UpdatePasswordForm className="max-w-xl" />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
+                    {/* <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8 dark:bg-gray-800">
                         <DeleteUserForm className="max-w-xl" />
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </AuthenticatedLayout>

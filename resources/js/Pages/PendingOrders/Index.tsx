@@ -7,14 +7,30 @@ import { pendingOrderColumns } from "./columns";
 import Pagination from "@/components/pagination";
 import TableWrapper from "@/components/table-wrapper";
 import { Orders } from "@/lib/interfaces";
+import UserTab from "@/components/user-tab";
+import { BookmarkX, ListCollapse, ListFilter } from "lucide-react";
 
 export default function Index({ orders }: { orders: Orders }) {
     return (
         <Authenticated
             header={
-                <h2 className="page-head">
-                    Pending Orders
-                </h2>
+                <nav className="flex items-center gap-3 overflow-x-auto scroll-bar whitespace-nowrap">
+                    <UserTab
+                        href={route("orders.index")}
+                        label="All Orders"
+                        icon={<ListFilter className="size-4" />}
+                    />
+                    <UserTab
+                        href={route("orders.pendingOrders")}
+                        label="Pending"
+                        icon={<BookmarkX className="size-4" />}
+                    />
+                    <UserTab
+                        href={route("orders.creditOrders")}
+                        label="Credits"
+                        icon={<ListCollapse className="size-4" />}
+                    />
+                </nav>
             }
         >
             <Head title="Pending Orders" />

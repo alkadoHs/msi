@@ -19,6 +19,7 @@ class CreditOrderPaymentController extends Controller
         ]);
 
         $validated['branch_id'] = auth()->user()->branch_id;
+        $validated['user_id'] = auth()->id();
 
         DB::transaction(function () use ($creditOrder, $validated) {
             $credit = Order::where('id', $creditOrder->id)
@@ -54,7 +55,7 @@ class CreditOrderPaymentController extends Controller
                 'type' => 'deposit',
                 'description' => "Received credit order #$creditOrder->invoice_no",
                 'amount' => $validated['amount'],
-                'balance' => $account->amount + $validated['amount'],
+                'balance' => $account->amount,
               ]);
         }, 5);
 

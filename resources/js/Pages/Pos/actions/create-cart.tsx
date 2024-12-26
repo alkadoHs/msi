@@ -321,6 +321,8 @@ const CreateCart = ({
                                                                                 .target
                                                                                 .value
                                                                         ) > 0 &&
+                                                                        item.whole_stock >
+                                                                            0 &&
                                                                         parseFloat(
                                                                             e
                                                                                 .target
@@ -335,6 +337,8 @@ const CreateCart = ({
                                                                                 .target
                                                                                 .value
                                                                         ) > 0 &&
+                                                                        item.whole_stock >
+                                                                            0 &&
                                                                         parseFloat(
                                                                             e
                                                                                 .target
