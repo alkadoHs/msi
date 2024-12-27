@@ -39,8 +39,8 @@
                 <th>BRANCH</th>
                 <th>ACCOUNT</th>
                 <th>STATUS</th>
-                <th>AMOUNT</th>
                 <th>DESCRIPTION</th>
+                <th>AMOUNT</th>
                 <th>A.BALANCE</th>
             </tr>
         </thead>
@@ -52,8 +52,8 @@
                     <td>{{ $transaction->account?->branch?->name }}</td>
                     <td>{{ $transaction->account?->paymentMethod?->name }}</td>
                     <td>{{ $transaction->type }}</td>
-                    <td>{{ number_format($transaction->amount, 2) }}</td>
                     <td>{{ $transaction->description }}</td>
+                    <td>{{ number_format($transaction->amount, 2) }}</td>
                     <td>{{ number_format($transaction->balance, 2) }}</td>
                 </tr>
             @endforeach

@@ -28,18 +28,6 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
         },
     },
     {
-        accessorKey: "type",
-        header: "Status",
-        cell: ({ row }) => {
-            const transaction = row.original;
-            if (transaction.type === "deposit") {
-                return <SuccessBadge label={transaction.type} />;
-            } else {
-                return <ErrorBadge label={transaction.type} />;
-            }
-        },
-    },
-    {
         accessorKey: "branch.name",
         header: "Branch",
         cell: ({ row }) => {
@@ -55,6 +43,25 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
         header: "Account",
         cell: ({ row }) => {
             return <span>{row.original.account?.payment_method?.name}</span>;
+        },
+    },
+    {
+        accessorKey: "type",
+        header: "Status",
+        cell: ({ row }) => {
+            const transaction = row.original;
+            if (transaction.type === "deposit") {
+                return <SuccessBadge label={transaction.type} />;
+            } else {
+                return <ErrorBadge label={transaction.type} />;
+            }
+        },
+    },
+    {
+        accessorKey: "description",
+        header: "Description",
+        cell: ({ row }) => {
+            return <span className="text-sm">{row.original.description}</span>;
         },
     },
     {
@@ -76,14 +83,6 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
                 );
         },
     },
-    {
-        accessorKey: "description",
-        header: "Description",
-        cell: ({ row }) => {
-            return <span className="text-sm">{row.original.description}</span>;
-        },
-    },
-
     {
         accessorKey: "balance",
         header: "A.Balance",
