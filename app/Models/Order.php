@@ -3,15 +3,12 @@
 namespace App\Models;
 
 use App\Models\Scopes\BranchCompanyScope;
-use App\Observers\OrderObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[ScopedBy(BranchCompanyScope::class)]
-// #[ObservedBy(OrderObserver::class)]
 class Order extends Model
 {
     protected $fillable = [

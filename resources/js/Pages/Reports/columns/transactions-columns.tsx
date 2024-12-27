@@ -2,6 +2,7 @@ import ErrorBadge from "@/components/badges/ErrorBadge";
 import SuccessBadge from "@/components/badges/success-badge";
 import { Transaction } from "@/lib/interfaces";
 import { dateTimeFormat, numberFormat } from "@/lib/utils";
+import { Link, usePage } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
@@ -20,10 +21,19 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
         accessorKey: "user.name",
         header: "User",
         cell: ({ row }) => {
+            const startDate = usePage().props.startDate;
+            const endDate = usePage().props.endDate;
             return (
-                <span className="text-sm">
+                <Link
+                    href={route("users.transactions", {
+                        user: row.original.user?.id,
+                        startDate: startDate,
+                        endDate: endDate
+                    })}
+                    className="text-cyan-500 text-sm hover:underline hover:underline-offset-4 hover:text-cyan-400"
+                >
                     {row.original.user?.name}
-                </span>
+                </Link>
             );
         },
     },
