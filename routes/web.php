@@ -113,6 +113,7 @@ Route::prefix('pos')->middleware(['auth', 'verified', RemoveCommaFromInput::clas
 // ordders Routes
 Route::controller(OrderController::class)->prefix('orders')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', 'index')->name('orders.index');
+    Route::delete('{order}', 'destroy')->name('orders.destroy');
     Route::get('credit-orders', 'creditOrders')->name('orders.creditOrders');
     Route::get('pending-orders', 'pendingOrders')->name('orders.pendingOrders');
     Route::get('pending-orders/{order}', 'editPendingOrder')->name('orders.pendingOrders.edit');

@@ -38,7 +38,7 @@ class OrderItemObserver
           $account->accountTransactions()->create([
             'user_id' => auth()->id(),
             'type' => 'withdraw',
-            'description' => "Deleted orderItem #{$orderItem->product->name}",
+            'description' => "Deleted orderItem #{$orderItem->product->name}~order{$orderItem->order->invoice_no}",
             'amount' => $amount,
             'balance' => $account->amount,
           ]);

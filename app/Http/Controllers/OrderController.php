@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Enums\OrderStatusesEnum;
+use App\Models\Account;
 use App\Models\Order;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -129,6 +130,37 @@ class OrderController extends Controller
         ]);
 
         return redirect()->route('orders.pendingOrders');
+    }
+
+
+    public function destroy(Order $order): RedirectResponse
+    {
+        $items = $order->orderItems()->get();
+
+        foreach ($items as $item) {
+            $item->product->increment('stock', $item->qty);
+        }
+
+        // alter account balance
+        $account = Account::firstOrCreate([
+            'branch_id' => auth()->user()->branch_id,
+            'payment_method_id' => $order->payment_method_id,
+          ]);
+
+
+          $account->decrement('amount', $order->orderItems()->sum('total'));
+
+          $account->accountTransactions()->create([
+            'user_id' => auth()->id(),
+            'type' => 'withdraw',
+            'description' => "Deleted order #{$order->invoice_no}",
+            'amount' => $order->orderItems()->sum('total'),
+            'balance' => $account->amount,
+          ]);
+
+        $order->delete();
+
+        return back();
     }
 
 }
