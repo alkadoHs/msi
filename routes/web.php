@@ -8,10 +8,12 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Reports\BalanceSheetReportController;
 use App\Http\Controllers\Reports\BranchSalesReportController;
 use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Reports\OrderItemReportController;
 use App\Http\Controllers\Reports\SalesByProductController;
+use App\Http\Controllers\Reports\TransactionsReportController;
 use App\Http\Controllers\Reports\UserSalesReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
@@ -161,4 +163,12 @@ Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
     Route::get('user-sales', [UserSalesReportController::class, 'index'])->name('reports.user-sales');
     Route::get('user-sales/export-excel', [UserSalesReportController::class, 'exportExcel'])->name('reports.user-sales.export-excel');
     Route::get('user-sales/export-pdf', [UserSalesReportController::class, 'exportPdf'])->name('reports.user-sales.export-pdf');
+
+    Route::get('balance-sheet', [BalanceSheetReportController::class, 'index'])->name('reports.balance-sheet');
+    Route::get('balance-sheet/export-excel', [BalanceSheetReportController::class, 'exportExcel'])->name('reports.balance-sheet.export-excel');
+    Route::get('balance-sheet/export-pdf', [BalanceSheetReportController::class, 'exportPdf'])->name('reports.balance-sheet.export-pdf');
+
+    Route::get('transactions', [TransactionsReportController::class, 'index'])->name('reports.transactions');
+    Route::get('transactions/export-excel', [TransactionsReportController::class, 'exportExcel'])->name('reports.transactions.export-excel');
+    Route::get('transactions/export-pdf', [TransactionsReportController::class, 'exportPdf'])->name('reports.transactions.export-pdf');
 });

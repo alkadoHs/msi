@@ -1,7 +1,7 @@
 import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, ReactNode, useState } from "react";
 import NavigationBar from "@/Utils/NavigationBar";
-import SidebarItems from "@/Utils/SidebarItems";
+import SidebarItems from "@/Utils/app-sidebar";
 import { ArrowLeftCircle } from "lucide-react";
 
 export default function Authenticated({

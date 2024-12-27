@@ -37,14 +37,14 @@ export default function Reports() {
                         description="Revenues & expenses per user"
                     />
                     <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
+                        link={route("reports.balance-sheet")}
+                        title="Balance Sheet"
+                        description="Account balances"
                     />
                     <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
+                        link={route('reports.transactions')}
+                        title="Accounts transactions"
+                        description="all account transactions"
                     />
                     <ReportsCard
                         link="#"

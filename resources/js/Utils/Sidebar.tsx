@@ -8,7 +8,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-import SidebarItems from "./SidebarItems";
+import SidebarItems from "./app-sidebar";
 
 const Sidebar = () => {
     return (
@@ -21,7 +21,7 @@ const Sidebar = () => {
             <SheetContent aria-describedby="sidebar" side={"left"}>
                 <SheetHeader>
                     <SheetTitle>Mauzodata </SheetTitle>
-                    <SheetDescription>{''}</SheetDescription>
+                    <SheetDescription>{""}</SheetDescription>
                     <SidebarItems />
                 </SheetHeader>
             </SheetContent>
