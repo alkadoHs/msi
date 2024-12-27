@@ -23,7 +23,10 @@ class PosController extends Controller
 
         return Inertia::render('Pos/Index', [
             'products' => Inertia::defer(fn () => 
-                                Product::where('name', 'LIKE', "%$search%")->latest()->limit(1000)->get(),
+                                Product::where('name', 'LIKE', "%$search%")
+                                            ->where('branch_id',auth()->user()->branch_id)
+                                            ->latest()
+                                            ->get(),
                          ),
             'paymentMethods' => Inertia::defer(fn () => PaymentMethod::get()),
             'customers' => Inertia::defer(fn () => Customer::get(['id', 'name'])),
