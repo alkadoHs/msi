@@ -8,6 +8,7 @@ import TextInput from "@/Components/TextInput";
 import { Button } from "@/components/ui/button";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { LoaderIcon } from "lucide-react";
 import { FormEventHandler } from "react";
 
 export default function Login({
@@ -32,10 +33,10 @@ export default function Login({
     };
 
     return (
-        <div className="h-dvh grid items-center justify-center bg-gray-100 dark:bg-gray-900">
+        <div className="h-dvh flex items-center justify-center bg-gray-100 dark:bg-gray-900">
             <Head title="Log in" />
 
-            <div className="w-full space-y-6 max-w-md">
+            <div className="w-full space-y-6 max-w-xs md:max-w-sm">
                 <div className="grid items-center justify-center">
                     <Link href="/" className="block">
                         <ApplicationLogo className="size-16" />
@@ -43,7 +44,7 @@ export default function Login({
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-6 rounded">
                     <div className="bg-cyan-700/50 -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
-                        Login page
+                        Login
                     </div>
                     {status && (
                         <div className="mb-4 text-sm font-medium text-green-600">
@@ -67,25 +68,33 @@ export default function Login({
                             type="password"
                             label="Password"
                             value={data.password}
-                            onChange={(e) => setData("password", e.target.value)}
+                            onChange={(e) =>
+                                setData("password", e.target.value)
+                            }
                         />
-                        <InputError message={errors.password} className="mt-2" />
-                        <div className="mt-4 flex items-center justify-end">
+                        <InputError
+                            message={errors.password}
+                            className="mt-2"
+                        />
+                        <div className="w-full mt-4 flex flex-col items-center gap-4 justify-center">
+                            <Button
+                                type="submit"
+                                className="ms-4 w-full"
+                                disabled={processing}
+                            >
+                                {processing ? <span className="flex items-center">
+                                    <LoaderIcon className="size-4 mr-1 animate-spin" />
+                                    logging in...
+                                </span>: "Login"}
+                            </Button>
                             {canResetPassword && (
                                 <Link
                                     href={route("password.request")}
-                                    className="rounded-md text-sm text-gray-600 underline underline-offset-4 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                                    className="rounded-md text-sm text-center text-gray-600 underline underline-offset-4 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
                                 >
                                     Forgot your password?
                                 </Link>
                             )}
-                            <Button
-                                type="submit"
-                                className="ms-4"
-                                disabled={processing}
-                            >
-                                Log in
-                            </Button>
                         </div>
                     </form>
                 </div>

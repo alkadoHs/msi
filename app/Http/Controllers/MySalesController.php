@@ -31,6 +31,7 @@ class MySalesController extends Controller
             'items' => Inertia::defer(fn () =>
                            auth()->user()
                                  ->orderItems()
+                                 ->whereDate('order_items.created_at', now())
                                  ->with(['order' => ['customer', 'paymentMethod'], 'product'])
                                  ->latest()
                                  ->paginate(50)
