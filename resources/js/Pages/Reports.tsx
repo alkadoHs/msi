@@ -13,8 +13,8 @@ export default function Reports() {
                 <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     <ReportsCard
                         link={route("reports.order-items")}
-                        title="Order Items Report"
-                        description="Detailed report of products sold"
+                        title="Sold Items"
+                        description="Indetails"
                     />
                     <ReportsCard
                         link={route("reports.sales-by-product")}

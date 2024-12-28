@@ -8,7 +8,7 @@ import TextInput from "@/Components/TextInput";
 import { Button } from "@/components/ui/button";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { LoaderIcon } from "lucide-react";
+import { LoaderIcon, Lock } from "lucide-react";
 import { FormEventHandler } from "react";
 
 export default function Login({
@@ -43,8 +43,8 @@ export default function Login({
                     </Link>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-6 rounded">
-                    <div className="bg-cyan-700/50 -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
-                        Login
+                    <div className="bg-cyan-700/50 flex items-center -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
+                       <Lock className="mr-2"/> Login
                     </div>
                     {status && (
                         <div className="mb-4 text-sm font-medium text-green-600">
@@ -62,6 +62,7 @@ export default function Login({
                             value={data.email}
                             autoFocus
                             onChange={(e) => setData("email", e.target.value)}
+                            required
                         />
                         <InputError message={errors.email} className="mt-2" />
                         <KdTextInput
@@ -71,6 +72,7 @@ export default function Login({
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
+                            required
                         />
                         <InputError
                             message={errors.password}
