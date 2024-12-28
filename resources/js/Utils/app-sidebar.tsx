@@ -2,8 +2,11 @@ import SidebarItem from "@/components/sidebar-item";
 import { usePage } from "@inertiajs/react";
 import {
     AlignCenterHorizontal,
+    ChartBarBig,
     ChartBarDecreasing,
+    FileSpreadsheet,
     GitBranchPlus,
+    Home,
     LayoutList,
     ListCheckIcon,
     NotebookText,
@@ -36,14 +39,20 @@ const SidebarItems = () => {
                 <ul className="space-y-1">
                     <SidebarItem
                         label="Dashboard"
-                        icon={<PieChart className="size-4" />}
+                        icon={<Home className="size-4" />}
                         href={route("dashboard")}
+                    />
+
+                    <SidebarItem
+                        label="My-Sales"
+                        icon={<PieChart className="size-4" />}
+                        href={route("my-sales")}
                     />
 
                     <SidebarItem
                         label="Reports"
                         href={route("reports")}
-                        icon={<PieChart className="size-4" />}
+                        icon={<FileSpreadsheet className="size-4" />}
                     />
 
                     <SidebarItem

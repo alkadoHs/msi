@@ -8,7 +8,7 @@ import { dateFormat, dateTimeFormat, numberFormat } from "@/lib/utils";
 import { Link } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const orderItemColumns: ColumnDef<OrderItem>[] = [
+export const userOrderItemColumns: ColumnDef<OrderItem>[] = [
     {
         accessorKey: "created_at",
         header: "Date",
@@ -48,17 +48,6 @@ export const orderItemColumns: ColumnDef<OrderItem>[] = [
             return <div>{numberFormat(row.original.total)}</div>;
         },
     },
-    {
-        accessorKey: "branch.name",
-        header: "Branch",
-        cell: ({ row }) => {
-            return (
-                <div className="text-sm text-muted-foreground">
-                    {row.original.order.branch?.name}
-                </div>
-            );
-        },
-    },
     //invoice no
     {
         accessorKey: "invoice.invoice_number",
@@ -90,18 +79,6 @@ export const orderItemColumns: ColumnDef<OrderItem>[] = [
             }
         },
     },
-    // seller(user)
-    {
-        accessorKey: "order.user.name",
-        header: "Seller",
-        cell: ({ row }) => {
-            return (
-                <div className="text-sm">
-                    {row.original.order.user?.name}
-                </div>
-            );
-        },
-    },
     // customer
     {
         accessorKey: "order.customer.name",
@@ -121,21 +98,6 @@ export const orderItemColumns: ColumnDef<OrderItem>[] = [
             return (
                 <div className="text-sm text-muted-foreground">
                     {row.original.order.customer?.contact ?? "--##--"}
-                </div>
-            );
-        },
-    },
-    //action
-    {
-        id: "actions",
-        cell: ({ row }) => {
-            return (
-                <div className="flex justify-center items-center">
-                    <DeleteAction
-                        url="orderItems.destroy"
-                        item={row.original}
-                        label={row.original.product?.name}
-                    />
                 </div>
             );
         },

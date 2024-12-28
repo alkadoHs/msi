@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CreditOrderPaymentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\MySalesController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosController;
 use App\Http\Controllers\ProductController;
@@ -36,6 +37,10 @@ Route::get('/', function () {
 Route::get('reports', function () {
     return Inertia::render('Reports');
 })->middleware(['auth', 'verified'])->name('reports');
+
+Route::get('my-sales', [MySalesController::class, 'index'])
+     ->middleware(['auth', 'verified'])
+     ->name('my-sales');
 
 Route::post('/upload', [FileUploadController::class, 'avatar'])
     ->middleware(['auth', 'verified']);
