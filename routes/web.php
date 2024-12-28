@@ -14,6 +14,7 @@ use App\Http\Controllers\Reports\DailySalesController;
 use App\Http\Controllers\Reports\OrderItemReportController;
 use App\Http\Controllers\Reports\SalesByProductController;
 use App\Http\Controllers\Reports\TransactionsReportController;
+use App\Http\Controllers\Reports\UserSalesByAccountReportController;
 use App\Http\Controllers\Reports\UserSalesReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
@@ -172,4 +173,8 @@ Route::prefix('reports')->middleware(['auth', 'verified'])->group(function () {
     Route::get('transactions', [TransactionsReportController::class, 'index'])->name('reports.transactions');
     Route::get('transactions/export-excel', [TransactionsReportController::class, 'exportExcel'])->name('reports.transactions.export-excel');
     Route::get('transactions/export-pdf', [TransactionsReportController::class, 'exportPdf'])->name('reports.transactions.export-pdf');
+
+    Route::get('account-user-sales', [UserSalesByAccountReportController::class, 'index'])->name('reports.account-user-sales');
+    Route::get('account-user-sales/export-excel', [UserSalesByAccountReportController::class, 'exportExcel'])->name('reports.account-user-sales.export-excel');
+    Route::get('account-user-sales/export-pdf', [UserSalesByAccountReportController::class, 'exportPdf'])->name('reports.account-user-sales.export-pdf');
 });

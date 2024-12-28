@@ -10,7 +10,7 @@ type UserTabProps = {
 
 const UserTab: React.FC<UserTabProps> = ({ icon, label, href = "#" }) => {
     // Check if the current URL matches the href
-    const isActive = window.location.href === href;
+    const isActive = window.location.href.startsWith(href)
     return (
         <Link
             className={clsx(

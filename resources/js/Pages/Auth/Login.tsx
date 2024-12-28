@@ -1,3 +1,4 @@
+import ApplicationLogo from "@/Components/ApplicationLogo";
 import Checkbox from "@/Components/Checkbox";
 import KdTextInput from "@/components/form/kd-text-input";
 import InputError from "@/Components/InputError";
@@ -31,53 +32,64 @@ export default function Login({
     };
 
     return (
-        <GuestLayout>
+        <div className="h-dvh grid items-center justify-center bg-gray-100 dark:bg-gray-900">
             <Head title="Log in" />
 
-            {status && (
-                <div className="mb-4 text-sm font-medium text-green-600">
-                    {status}
+            <div className="w-full space-y-6 max-w-md">
+                <div className="grid items-center justify-center">
+                    <Link href="/" className="block">
+                        <ApplicationLogo className="size-16" />
+                    </Link>
                 </div>
-            )}
-
-            <form onSubmit={submit} className="grid gap-2" autoComplete="off">
-                <KdTextInput
-                    type="email"
-                    label="Email Address"
-                    value={data.email}
-                    autoFocus
-                    onChange={(e) => setData("email", e.target.value)}
-                />
-                <InputError message={errors.email} className="mt-2" />
-
-                <KdTextInput
-                    type="password"
-                    label="Password"
-                    value={data.password}
-                    onChange={(e) => setData("password", e.target.value)}
-                />
-
-                <InputError message={errors.password} className="mt-2" />
-
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route("password.request")}
-                            className="rounded-md text-sm text-gray-600 underline underline-offset-4 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded">
+                    <div className="bg-cyan-700/50 -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
+                        Login page
+                    </div>
+                    {status && (
+                        <div className="mb-4 text-sm font-medium text-green-600">
+                            {status}
+                        </div>
                     )}
-
-                    <Button
-                        type="submit"
-                        className="ms-4"
-                        disabled={processing}
+                    <form
+                        onSubmit={submit}
+                        className="grid gap-2 w-full"
+                        autoComplete="off"
                     >
-                        Log in
-                    </Button>
+                        <KdTextInput
+                            type="email"
+                            label="Email Address"
+                            value={data.email}
+                            autoFocus
+                            onChange={(e) => setData("email", e.target.value)}
+                        />
+                        <InputError message={errors.email} className="mt-2" />
+                        <KdTextInput
+                            type="password"
+                            label="Password"
+                            value={data.password}
+                            onChange={(e) => setData("password", e.target.value)}
+                        />
+                        <InputError message={errors.password} className="mt-2" />
+                        <div className="mt-4 flex items-center justify-end">
+                            {canResetPassword && (
+                                <Link
+                                    href={route("password.request")}
+                                    className="rounded-md text-sm text-gray-600 underline underline-offset-4 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                                >
+                                    Forgot your password?
+                                </Link>
+                            )}
+                            <Button
+                                type="submit"
+                                className="ms-4"
+                                disabled={processing}
+                            >
+                                Log in
+                            </Button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </GuestLayout>
+            </div>
+        </div>
     );
 }

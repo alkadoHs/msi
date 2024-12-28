@@ -36,20 +36,22 @@ export default function Reports() {
                         title="User Sales"
                         description="Revenues & expenses per user"
                     />
+
+                    <ReportsCard
+                        link={route("reports.account-user-sales")}
+                        title="User Sales by Account"
+                        description="total user sales per account"
+                    />
+
                     <ReportsCard
                         link={route("reports.balance-sheet")}
                         title="Balance Sheet"
                         description="Account balances"
                     />
                     <ReportsCard
-                        link={route('reports.transactions')}
+                        link={route("reports.transactions")}
                         title="Accounts transactions"
                         description="all account transactions"
-                    />
-                    <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
                     />
                     <ReportsCard
                         link="#"

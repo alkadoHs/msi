@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
+use App\Models\Account;
 use App\Models\Branch;
+use App\Models\PaymentMethod;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,6 +41,15 @@ class BranchController extends Controller
         $validated['company_id'] = auth()->user()->company_id;
 
         $branch = Branch::create($validated);
+
+        $payments = PaymentMethod::where('company_id', auth()->user()->company_id)->get();
+
+        foreach($payments as $payment) {
+            Account::firstOrCreate([
+                'branch_id' => $branch->id,
+                'payment_method_id' => $payment->id,
+            ]);
+        }
 
         if($request->registering) {
             auth()->user()->update(['branch_id' => $branch->id]);
