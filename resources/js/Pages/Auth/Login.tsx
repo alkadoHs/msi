@@ -3,6 +3,7 @@ import Checkbox from "@/Components/Checkbox";
 import KdTextInput from "@/components/form/kd-text-input";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
+import { ModeToggle } from "@/components/mode-toggle";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Button } from "@/components/ui/button";
@@ -43,8 +44,12 @@ export default function Login({
                     </Link>
                 </div>
                 <div className="bg-white dark:bg-gray-800 p-6 rounded">
-                    <div className="bg-cyan-700/50 flex items-center -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
-                       <Lock className="mr-2"/> Login
+                    <div className="bg-cyan-700/50 flex items-center justify-between -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
+                       <div className="flex items-center">
+                           <Lock className="mr-2"/> Login
+                       </div>
+
+                       <ModeToggle />
                     </div>
                     {status && (
                         <div className="mb-4 text-sm font-medium text-green-600">

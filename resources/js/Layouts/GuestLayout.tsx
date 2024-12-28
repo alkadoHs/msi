@@ -7,10 +7,7 @@ export default function Guest({ children }: PropsWithChildren) {
         <div className="flex min-h-screen overflow-y-auto bg-reg-pattern2 flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0 dark:bg-gray-900">
             <div className="grid items-center justify-center">
                 <Link href="/" className="block">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500 ml-[38%]" />
-                    <h3 className="text-xl font-semibold text-center text-primary">
-                        Mauzodata Sales Innovation
-                    </h3>
+                    <ApplicationLogo className="size-16" />
                 </Link>
             </div>
 
