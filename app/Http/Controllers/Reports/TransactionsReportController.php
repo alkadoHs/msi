@@ -80,6 +80,7 @@ class TransactionsReportController extends Controller
     {
         return AccountTransaction::with(['user', 'account' => ['branch', 'paymentMethod']])
                                     ->whereBetween('created_at', [$startDate, $endDate])
+                                    ->whereRelation('user', 'company_id', auth()->user()->company_id)
                                     ->orderBy('user_id')
                                     ->limit(1000)
                                     ->get();
