@@ -88,8 +88,13 @@ class PurchaseOrderController extends Controller
                     'buy_price' => $item['buy_price'],
                     'sell_price' => $item['sell_price'],
                 ]);
+                $product = Product::find($item->product_id);
 
-               Product::find($item->product_id)->increment('stock', $item->stock);
+                $product->increment('stock', $item->stock);
+                $product->update([
+                    'buy_price' => $item->buy_price,
+                    'sell_price' => $item->sell_price,
+                ]);
             }
 
             // alter account balance
