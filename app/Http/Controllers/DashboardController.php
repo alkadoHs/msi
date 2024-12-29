@@ -7,14 +7,18 @@ use App\Models\Expense;
 use App\Models\OrderItem;
 use Carbon\Carbon;
 use Flowframe\Trend\Trend;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class DashboardController extends Controller
 {
-    public function index(): Response
+    public function index(): Response|RedirectResponse
     {
+        if (auth()->user()->role !== 'admin')
+              return redirect()->route('my-sales');
+
         [$startDate, $endDate] = $this->getDates();
 
         $expenseTotal = Expense::whereBetween('created_at', [$startDate, $endDate])

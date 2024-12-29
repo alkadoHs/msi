@@ -5,7 +5,7 @@ import PendingBadge from "@/components/badges/PendingBadge";
 import SuccessBadge from "@/components/badges/success-badge";
 import { Order } from "@/lib/interfaces";
 import { dateFormatFilter, dateTimeFormat, numberFormat } from "@/lib/utils";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const orderColumns: ColumnDef<Order>[] = [
@@ -35,41 +35,37 @@ export const orderColumns: ColumnDef<Order>[] = [
         accessorKey: "customer_name",
         header: "Customer",
         cell: ({ row }) => (
-            <div className="font-medium bg-gray">{row.original.customer?.name ?? "--##--"}</div>
+            <div className="font-medium bg-gray">
+                {row.original.customer?.name ?? "--##--"}
+            </div>
         ),
     },
     {
-        accessorKey: 'status',
-        header: 'Status',
+        accessorKey: "status",
+        header: "Status",
         cell: ({ row }) => {
             const order = row.original;
-            if (order.status === 'pending') {
-                return (
-                    <PendingBadge label={order.status} />
-                );
-            } else if (order.status === 'paid') {
-                return (
-                    <SuccessBadge label={order.status} />
-                );
-            } else if (order.status === 'credit') {
-                return (
-                    <DangerBadge label={order.status} />
-                );
+            if (order.status === "pending") {
+                return <PendingBadge label={order.status} />;
+            } else if (order.status === "paid") {
+                return <SuccessBadge label={order.status} />;
+            } else if (order.status === "credit") {
+                return <DangerBadge label={order.status} />;
             } else {
-                return (
-                    <ErrorBadge label={order.status} />
-                );
+                return <ErrorBadge label={order.status} />;
             }
-        }
+        },
     },
 
     //user
     {
-        accessorKey:  "user.name",
+        accessorKey: "user.name",
         header: "Seller",
         cell: ({ row }) => (
-            <div className="text-muted-foreground text-sm">{row.original.user?.name}</div>
-        )
+            <div className="text-muted-foreground text-sm">
+                {row.original.user?.name}
+            </div>
+        ),
     },
 
     {
@@ -88,27 +84,30 @@ export const orderColumns: ColumnDef<Order>[] = [
             <div className="text-muted-foreground text-sm">
                 {row.original.payment_method?.name}
             </div>
-        )
+        ),
     },
     {
         accessorKey: "branch.name",
         header: "Branch",
-        cell: ({ row }) => (
-            <div className="">
-                {row.original.branch?.name}
-            </div>
-        )
+        cell: ({ row }) => <div className="">{row.original.branch?.name}</div>,
     },
     {
-        accessorKey: 'actions',
-        header: 'Actions',
+        accessorKey: "actions",
+        header: "Actions",
         cell: ({ row }) => {
             const order = row.original;
+            const user = usePage().props.auth.user;
             return (
                 <div className="flex gap-x-2">
-                    <DeleteAction url="orders.destroy" item={row.original} label={`order #${order.invoice_no}`} />
-                    {/* <PayCreditOrder order={row.original} /> */}
-                </div>);
-        }
-    }
+                    {user.role == "admin" && (
+                        <DeleteAction
+                            url="orders.destroy"
+                            item={row.original}
+                            label={`order #${order.invoice_no}`}
+                        />
+                    )}
+                </div>
+            );
+        },
+    },
 ];

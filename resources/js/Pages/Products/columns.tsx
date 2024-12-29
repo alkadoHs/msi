@@ -5,6 +5,7 @@ import { numberFormat } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import EditProduct from "./actions/edit-product";
 import DeleteAction from "@/components/actions/DeleteAction";
+import { usePage } from "@inertiajs/react";
 
 export const productColumns: ColumnDef<Product>[] = [
     {
@@ -77,14 +78,19 @@ export const productColumns: ColumnDef<Product>[] = [
         accessorKey: "actions",
         header: "Actions",
         cell: ({ row }) => {
+            const user = usePage().props.auth.user;
             return (
                 <div className="flex items-center gap-2">
-                    <EditProduct product={row.original} />
-                    <DeleteAction
-                        url="products.destroy"
-                        item={row.original}
-                        label={row.original.name}
-                    />
+                    {user.role == "admin" && (
+                        <>
+                            <EditProduct product={row.original} />
+                            <DeleteAction
+                                url="products.destroy"
+                                item={row.original}
+                                label={row.original.name}
+                            />
+                        </>
+                    )}
                 </div>
             );
         },

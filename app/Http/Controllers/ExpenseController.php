@@ -16,7 +16,6 @@ class ExpenseController extends Controller
                                          Expense::with(['paymentMethod', 'user'])
                                                 ->whereDate('created_at', today())
                                                 ->where('branch_id', auth()->user()->branch_id)
-                                                ->when(auth()->user()->role !== 'admin', fn ($query) => $query->where('user_id', auth()->id()))
                                                 ->orderBy('user_id')
                                                 ->orderBy('created_at')
                                                 ->get()),

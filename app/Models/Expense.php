@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\Scopes\BranchCompanyScope;
+use App\Models\Scopes\UserScope;
 use App\Observers\ExpenseObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Model;
 
 #[ObservedBy(ExpenseObserver::class)]
-#[ScopedBy(BranchCompanyScope::class)]
+#[ScopedBy([BranchCompanyScope::class, UserScope::class])]
 class Expense extends Model
 {
     protected $fillable = [

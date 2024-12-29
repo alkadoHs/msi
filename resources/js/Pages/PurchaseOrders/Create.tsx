@@ -14,6 +14,7 @@ import CreateSupplier from "../Suppliers/actions/create-supplier";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Branch } from "@/types";
 import Spinner from "@/components/Spinner";
+import { Loader } from "lucide-react";
 
 interface Item {
     product_id?: number;
@@ -231,7 +232,7 @@ const Create = ({
                                                                                 .value
                                                                         ),
                                                                         total:
-                                                                            item.sell_price *
+                                                                            item.buy_price *
                                                                             parseFloat(
                                                                                 e
                                                                                     .target
@@ -300,12 +301,12 @@ const Create = ({
                                 <h2 className="text-lg font-bold">
                                     Total{" "}
                                     <NumberFlow
-                                        value={items.reduce(
+                                        value={Number(items.reduce(
                                             (acc, item) =>
                                                 acc +
-                                                item.buy_price * item.qty,
+                                                Number(item.buy_price) * Number(item.qty),
                                             0
-                                        )}
+                                        ))}
                                         className="text-lg text-green-500 font-bold"
                                     />
                                 </h2>
@@ -318,7 +319,10 @@ const Create = ({
                                         disabled={isProcessing}
                                     >
                                         {isProcessing
-                                            ? "Processing..."
+                                            ? <span className="flex items-center">
+                                                <Loader className="size-4 mr-2 animate-spin" />
+                                                Processing...
+                                            </span>
                                             : "Create Purchase"}
                                     </Button>
                                 </div>

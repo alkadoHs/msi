@@ -49,4 +49,14 @@ class Company extends Model
     {
         return $this->hasMany(PurchaseOrder::class);
     }
+
+    public function roles(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    public function permissions(): HasMany
+    {
+        return $this->hasMany(Permission::class);
+    }
 }

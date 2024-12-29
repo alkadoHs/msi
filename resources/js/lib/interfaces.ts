@@ -420,3 +420,12 @@ export interface CreditCollections {
     per_page: number;
     path: string;
 }
+
+export interface Can {
+    view: boolean;
+    create: boolean;
+    update: boolean;
+    delete: boolean;
+    export: boolean;
+    import: boolean;
+}
