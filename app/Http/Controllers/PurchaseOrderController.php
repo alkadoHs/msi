@@ -82,12 +82,14 @@ class PurchaseOrderController extends Controller
             ...$request->only('branch_id', 'supplier_id', 'payment_method_id', 'reference')]);
 
             foreach ($request->items as $item) {
-                $purchaseOrder->items()->create([
+                $item = $purchaseOrder->items()->create([
                     'product_id' => $item['product_id'],
                     'stock' => $item['qty'],
                     'buy_price' => $item['buy_price'],
                     'sell_price' => $item['sell_price'],
                 ]);
+
+               Product::find($item->product_id)->increment('stock', $item->stock);
             }
 
             // alter account balance
