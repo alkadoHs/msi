@@ -22,6 +22,9 @@ export const productColumns: ColumnDef<Product>[] = [
     {
         accessorKey: "name",
         header: "Name",
+        cell: ({ row }) => {
+            return <span>{row.original?.name}</span>;
+        },
     },
     {
         accessorKey: "stock",
