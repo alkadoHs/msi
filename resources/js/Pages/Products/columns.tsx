@@ -9,12 +9,12 @@ import { usePage } from "@inertiajs/react";
 
 export const productColumns: ColumnDef<Product>[] = [
     {
-        accessorKey: "abbreviation",
+        accessorKey: "#",
         header: "#",
         cell: ({ row }) => {
             return (
                 <span className="bg-gray-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-2">
-                    {row.original.name[0]}
+                    {row.original?.name[0]}
                 </span>
             );
         },
