@@ -39,7 +39,7 @@ class CompanyController extends Controller
 
         auth()->user()->update(['company_id' => $company->id]);
 
-        return redirect()->intended(route('branches.create', absolute: false));
+        return redirect()->route('branches.create');
     }
 
     /**
