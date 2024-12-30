@@ -37,6 +37,13 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(route('companies.create', absolute: false));
         }
 
+        if(!auth()->user()->branch_id) {
+            return redirect()->intended(route('companies.create', absolute: false));
+        }
+
+        if (auth()->user()->role != 'admin')
+            return redirect()->intended(route('my-sales', absolute: false));
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
