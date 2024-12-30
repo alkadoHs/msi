@@ -53,21 +53,6 @@ export default function Reports() {
                         title="Accounts transactions"
                         description="all account transactions"
                     />
-                    <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
-                    />
-                    <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
-                    />
-                    <ReportsCard
-                        link="#"
-                        title="Sales Report"
-                        description="10 sales today"
-                    />
                 </div>
             </section>
         </Authenticated>
