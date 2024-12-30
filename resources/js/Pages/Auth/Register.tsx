@@ -1,5 +1,8 @@
+import ApplicationLogo from "@/Components/ApplicationLogo";
+import { ModeToggle } from "@/components/mode-toggle";
 import Registration from "@/Layouts/RegistrationLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { Lock } from "lucide-react";
 import { FormEventHandler } from "react";
 
 export default function Register() {
@@ -23,11 +26,23 @@ export default function Register() {
     };
 
     return (
-        <Registration>
-            <Head title="Account Registration" />
+        <div className="h-dvh overflow-y-auto scroll-bar flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+            <Head title="Log in" />
 
-            <div>
-                <div className="max-w-4xl pt-4 rounded-xl shadow bg-white/80 dark:bg-gray-800/80 px-4 pb-10 sm:px-6 lg:px-8 mx-auto">
+            <div className="w-full space-y-6 max-w-sm md:max-w-4xl">
+                <div className="grid items-center justify-center">
+                    <Link href="/" className="block">
+                        <ApplicationLogo className="size-16" />
+                    </Link>
+                </div>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded">
+                    <div className="bg-cyan-700/50 flex items-center justify-between -mx-6 -mt-6 mb-6 p-2 text-white text-xl font-medium">
+                        <div className="flex items-center">
+                            <Lock className="mr-2" /> Registration
+                        </div>
+
+                        <ModeToggle />
+                    </div>
                     <div className="">
                         <div className="mb-8">
                             <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">
@@ -90,56 +105,6 @@ export default function Register() {
 
                         <form onSubmit={submit}>
                             <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                                <div className="sm:col-span-3">
-                                    <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
-                                        Profile photo
-                                    </label>
-                                    <span className="text-sm text-gray-400 dark:text-gray-600">
-                                        (optional)
-                                    </span>
-                                </div>
-
-                                <div className="sm:col-span-9">
-                                    <div className="flex items-center gap-5">
-                                        <img
-                                            className="inline-block size-16 rounded-full ring-2 ring-white dark:ring-gray-900"
-                                            src="/images/avatar_placeholder.jpg"
-                                            alt="Avatar"
-                                        />
-                                        <div className="flex gap-x-2">
-                                            <div>
-                                                <button
-                                                    type="button"
-                                                    className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                                                >
-                                                    <svg
-                                                        className="shrink-0 size-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth="2"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    >
-                                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                                        <polyline points="17 8 12 3 7 8" />
-                                                        <line
-                                                            x1="12"
-                                                            x2="12"
-                                                            y1="3"
-                                                            y2="15"
-                                                        />
-                                                    </svg>
-                                                    Upload photo
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div className="sm:col-span-3">
                                     <label
                                         htmlFor="af-account-full-name"
@@ -214,7 +179,7 @@ export default function Register() {
                                     <div className="space-y-2">
                                         <input
                                             id="af-account-password"
-                                            type="text"
+                                            type="password"
                                             value={data.password}
                                             onChange={(e) =>
                                                 setData(
@@ -335,8 +300,11 @@ export default function Register() {
                             </div>
 
                             <div className="mt-5 flex justify-end gap-x-2">
-                                <Link href={route('login')} className="inline-flex items-center text-sm font-medium  text-green-700 hover:underline hover:underline-offset-4 focus:outline-none  disabled:opacity-50">
-                                Have account already? Login
+                                <Link
+                                    href={route("login")}
+                                    className="inline-flex items-center text-sm font-medium  text-green-700 hover:underline hover:underline-offset-4 focus:outline-none  disabled:opacity-50"
+                                >
+                                    Have account already? Login
                                 </Link>
                                 <button
                                     type="submit"
@@ -352,6 +320,6 @@ export default function Register() {
                     </div>
                 </div>
             </div>
-        </Registration>
+        </div>
     );
 }

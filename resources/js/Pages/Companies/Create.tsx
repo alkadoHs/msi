@@ -17,7 +17,8 @@ export default function CreateCompany() {
         e.preventDefault();
 
         post(route("companies.store"), {
-            onSuccess: () => toast.success("Your company was created successfully"),
+            onSuccess: () =>
+                toast.success("Your company was created successfully"),
         });
     };
 
@@ -33,7 +34,8 @@ export default function CreateCompany() {
                                 Company Registration
                             </h2>
                             <p className="text-sm text-gray-600 dark:text-gray-400">
-                                All your branches will be created under this company.
+                                All your branches will be created under this
+                                company.
                             </p>
                         </div>
 
@@ -88,56 +90,6 @@ export default function CreateCompany() {
 
                         <form onSubmit={submit}>
                             <div className="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                                <div className="sm:col-span-3">
-                                    <label className="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
-                                        Company Logo
-                                    </label>
-                                    <span className="text-sm text-gray-400 dark:text-gray-600">
-                                        (optional)
-                                    </span>
-                                </div>
-
-                                <div className="sm:col-span-9">
-                                    <div className="flex items-center gap-5">
-                                        <img
-                                            className="inline-block size-16 rounded-full ring-2 ring-white dark:ring-gray-900"
-                                            src="/images/avatar_placeholder.jpg"
-                                            alt="Avatar"
-                                        />
-                                        <div className="flex gap-x-2">
-                                            <div>
-                                                <button
-                                                    type="button"
-                                                    className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                                                >
-                                                    <svg
-                                                        className="shrink-0 size-4"
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        strokeWidth="2"
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                    >
-                                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                                        <polyline points="17 8 12 3 7 8" />
-                                                        <line
-                                                            x1="12"
-                                                            x2="12"
-                                                            y1="3"
-                                                            y2="15"
-                                                        />
-                                                    </svg>
-                                                    Upload logo
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <div className="sm:col-span-3">
                                     <label
                                         htmlFor="company_name"
@@ -210,10 +162,7 @@ export default function CreateCompany() {
                                             type="text"
                                             value={data.city}
                                             onChange={(e) =>
-                                                setData(
-                                                    "city",
-                                                    e.target.value
-                                                )
+                                                setData("city", e.target.value)
                                             }
                                             className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-cyan-500 focus:ring-cyan-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600"
                                             placeholder="Region"
@@ -242,7 +191,10 @@ export default function CreateCompany() {
                                             type="text"
                                             value={data.phones}
                                             onChange={(e) =>
-                                                setData("phones", e.target.value)
+                                                setData(
+                                                    "phones",
+                                                    e.target.value
+                                                )
                                             }
                                             className="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-cyan-500 focus:ring-cyan-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600"
                                             placeholder="(+xxx) xxx xxx xxx"
