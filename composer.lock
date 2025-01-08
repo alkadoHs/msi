@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3352d2b5335cbd226c49178df7b1cde8",
+    "content-hash": "8d0c6d08720e14e0a8fd886b5ba62e92",
     "packages": [
         {
             "name": "arokettu/random-polyfill",
@@ -924,72 +924,6 @@
             "time": "2023-10-06T06:47:41+00:00"
         },
         {
-            "name": "erag/laravel-pwa",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/eramitgupta/laravel-pwa.git",
-                "reference": "d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/eramitgupta/laravel-pwa/zipball/d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0",
-                "reference": "d7dffdad935aa82dad5f6a731fa5d0adaa78b1a0",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "^8.12|^9.0|^10.0|^11.0",
-                "illuminate/support": "^8.12|^9.0|^10.0|^11.0",
-                "php": ">=8.0.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Pwa": "EragLaravelPwa\\Facades\\Pwa"
-                    },
-                    "providers": [
-                        "EragLaravelPwa\\EragLaravelPwaServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Pwahelpers.php"
-                ],
-                "psr-4": {
-                    "EragLaravelPwa\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Er Amiit Gupta",
-                    "email": "info.eramitgupta@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple and easy-to-use PWA (Progressive Web App) package for Laravel applications.",
-            "keywords": [
-                "Progressive Web App",
-                "laravel",
-                "laravel package",
-                "laravel pwa",
-                "manifest",
-                "offline",
-                "pwa",
-                "service worker"
-            ],
-            "support": {
-                "issues": "https://github.com/eramitgupta/laravel-pwa/issues",
-                "source": "https://github.com/eramitgupta/laravel-pwa/tree/v1.0.0"
-            },
-            "time": "2024-09-19T16:10:59+00:00"
-        },
-        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.18.0",
             "source": {
@@ -1742,94 +1676,6 @@
                 }
             ],
             "time": "2024-12-13T02:48:29+00:00"
-        },
-        {
-            "name": "lacodix/laravel-model-filter",
-            "version": "v3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lacodix/laravel-model-filter.git",
-                "reference": "276f932a242b9fc6334e86f51ca941a0bd8950f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lacodix/laravel-model-filter/zipball/276f932a242b9fc6334e86f51ca941a0bd8950f5",
-                "reference": "276f932a242b9fc6334e86f51ca941a0bd8950f5",
-                "shasum": ""
-            },
-            "require": {
-                "ext-intl": "*",
-                "illuminate/contracts": "^9.0|^10.0|^11.0",
-                "php": "^8.1",
-                "spatie/laravel-package-tools": "^1.13.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.13",
-                "illuminate/database": "^10.0|^11.0",
-                "illuminate/support": "^10.0|^11.0",
-                "laravel/pint": "^1.0",
-                "laravel/prompts": "^0.1.16",
-                "nunomaduro/collision": "^7.0|^8.0",
-                "nunomaduro/larastan": "^2.0.1",
-                "nunomaduro/phpinsights": "^2.6",
-                "orchestra/testbench": "^8.0|^9.0",
-                "pestphp/pest": "^2.21",
-                "pestphp/pest-plugin-faker": "^2.0",
-                "pestphp/pest-plugin-laravel": "^2.1",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^10.0",
-                "rector/rector": "^1.0",
-                "spatie/pest-plugin-test-time": "^2.0"
-            },
-            "type": "laravel-package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lacodix\\LaravelModelFilter\\LaravelModelFilterServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lacodix\\LaravelModelFilter\\": "src",
-                    "Lacodix\\LaravelModelFilter\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dominik Müller",
-                    "email": "dominik@lacodix.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Laravel package to filter, search and sort models with ease while fetching from database.",
-            "homepage": "https://github.com/lacodix/laravel-model-filter",
-            "keywords": [
-                "eloquent",
-                "filter",
-                "filters",
-                "lacodix",
-                "laravel",
-                "model",
-                "search"
-            ],
-            "support": {
-                "issues": "https://github.com/lacodix/laravel-model-filter/issues",
-                "source": "https://github.com/lacodix/laravel-model-filter/tree/v3.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/lacodix",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-10-23T16:27:10+00:00"
         },
         {
             "name": "laravel/framework",
