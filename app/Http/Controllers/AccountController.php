@@ -17,7 +17,7 @@ class AccountController extends Controller
     public function index(): Response
     {
         return Inertia::render('Accounts/Index', [
-            'accounts' => Inertia::defer(function () {
+            'branches' => Inertia::defer(function () {
                 return Branch::with('accounts.paymentMethod')->withSum('accounts', 'amount')->get();
             }),
             'totalBalance' => Inertia::defer(function () {

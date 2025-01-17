@@ -1,4 +1,4 @@
-import { Link, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import React from "react";
 import { Button } from "./ui/button";
 import { Edit } from "lucide-react";
@@ -30,6 +30,8 @@ const UserCard: React.FC<UserCardProps> = ({
     profileColor = "bg-pink-700",
     blockUser = false,
 }) => {
+    const loggedInUser = usePage().props.auth.user;
+
     return (
         <div className="max-w-full bg-gray-800 text-gray-200 rounded-s-0 shadow-lg overflow-hidden">
             {/* Header Section */}
@@ -88,7 +90,7 @@ const UserCard: React.FC<UserCardProps> = ({
                             )}
                         </span>
                     </button>
-                     <Button disabled={role !== 'admin'} size={"icon"} variant={"outline"}>
+                     <Button disabled={loggedInUser.role !== 'admin'} size={"icon"} variant={"outline"}>
                         <Link href={route("users.edit", id)}>
                             <Edit />
                         </Link>

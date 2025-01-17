@@ -34,6 +34,11 @@ class Branch extends Model
         return $this->hasMany(Account::class);
     }
 
+    public function transactions(): HasManyThrough
+    {
+        return $this->hasManyThrough(AccountTransaction::class, Account::class);
+    }
+
     public function products(): HasMany
     {
         return $this->hasMany(Product::class);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CreditOrderPaymentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FileUploadController;
@@ -20,7 +21,6 @@ use App\Http\Controllers\Reports\UserSalesReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\RemoveCommaFromInput;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -61,6 +61,10 @@ Route::resource('companies', \App\Http\Controllers\CompanyController::class)
 Route::resource('branches', \App\Http\Controllers\BranchController::class)
      ->middleware(['auth', 'verified'])
      ->only(['index', 'create', 'store', 'update', 'destroy']);
+
+Route::get('branches/{branch}/transactions', [BranchController::class, 'transactions'])
+    ->middleware(['auth', 'verified'])
+    ->name('branches.transactions');
 
 Route::get('congratulations', function () {
     return Inertia::render('congraturation');

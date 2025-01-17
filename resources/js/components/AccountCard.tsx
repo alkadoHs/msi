@@ -5,12 +5,13 @@ import React from "react";
 
 interface Props {
     branch: string;
+    branch_id: number;
     total: number;
     accounts: Account[];
     totalBalance: number;
 }
 
-const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts, totalBalance }) => {
+const CostBreakdownCard: React.FC<Props> = ({ branch, total, branch_id, accounts, totalBalance }) => {
     const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value); // Example: Handle slider change
     };
@@ -81,7 +82,7 @@ const CostBreakdownCard: React.FC<Props> = ({ branch, total, accounts, totalBala
             {/* View All Costs */}
             <div className="text-center mt-4">
                 <Link
-                    href="#"
+                    href={route('branches.transactions', branch_id)}
                     className="text-green-600 dark:text-green-400 text-sm font-medium hover:underline"
                 >
                     View all transactions &rarr;

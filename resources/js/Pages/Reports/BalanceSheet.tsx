@@ -50,12 +50,12 @@ const BalanceSheetPage = ({ accounts }: { accounts: Branch[] }) => {
                         </a>
                     </Button>
                 </div>
-                <TableWrapper>
+                <>
                     <Deferred
                         data="accounts"
                         fallback={<TableSkeleton columns={3} rows={7} />}
                     >
-                        <div className="container mx-auto p-4">
+                        <div className="container mx-auto p-4 bg-white dark:bg-transparent">
                             <table className="table-auto border-collapse border border-gray-300 w-full dark:border-gray-700">
                                 <thead>
                                     <tr>
@@ -133,7 +133,7 @@ const BalanceSheetPage = ({ accounts }: { accounts: Branch[] }) => {
                             </table>
                         </div>
                     </Deferred>
-                </TableWrapper>
+                </>
             </section>
         </Authenticated>
     );

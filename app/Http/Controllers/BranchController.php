@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
 use App\Models\Account;
+use App\Models\AccountTransaction;
 use App\Models\Branch;
 use App\Models\PaymentMethod;
 use Inertia\Inertia;
@@ -99,5 +100,14 @@ class BranchController extends Controller
         $branch->delete();
 
         return back();
+    }
+
+
+    public function transactions(Branch $branch): Response
+    {
+        return Inertia::render('Branches/Transactions', [
+            'transactions' => Inertia::defer(fn () => $branch->transactions()->with(['user', 'account.paymentMethod'])->latest()->paginate(50)),
+            'branch' => fn () => $branch,
+        ]);
     }
 }
