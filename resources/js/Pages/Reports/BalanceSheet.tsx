@@ -1,16 +1,21 @@
-import { DataTable } from "@/components/data-table";
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Deferred, Head } from "@inertiajs/react";
 import TableWrapper from "@/components/table-wrapper";
 import TableSkeleton from "@/components/skeletons/TableSkeleton";
-import { Account } from "@/lib/interfaces";
-import { balanceSheetColumns } from "./columns/balance-sheet-columns";
 import { Download, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Branch } from "@/types";
 import React from "react";
 import { numberFormat } from "@/lib/utils";
 import dayjs from "dayjs";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
 
 const BalanceSheetPage = ({ accounts }: { accounts: Branch[] }) => {
     console.log(accounts);
@@ -50,90 +55,87 @@ const BalanceSheetPage = ({ accounts }: { accounts: Branch[] }) => {
                         </a>
                     </Button>
                 </div>
-                <>
+                <TableWrapper>
                     <Deferred
                         data="accounts"
                         fallback={<TableSkeleton columns={3} rows={7} />}
                     >
-                        <div className="container mx-auto p-4 bg-white dark:bg-transparent">
-                            <table className="table-auto border-collapse border border-gray-300 w-full dark:border-gray-700">
-                                <thead>
-                                    <tr>
-                                        <th className="border border-gray-300 px-4 py-2 text-left dark:border-gray-700 dark:text-white">
-                                            Branch Name
-                                        </th>
-                                        <th className="border border-gray-300 px-4 py-2 text-left dark:border-gray-700 dark:text-white">
-                                            Account Name
-                                        </th>
-                                        <th className="border border-gray-300 px-4 py-2 text-right dark:border-gray-700 dark:text-white">
+                        <>
+                            <Table>
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead>Branch Name</TableHead>
+                                        <TableHead>Account Name</TableHead>
+                                        <TableHead className="text-right">
                                             Balance
-                                        </th>
-                                        <th className="border border-gray-300 px-4 py-2 text-left dark:border-gray-700 dark:text-white">
-                                            Last Used
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                                        </TableHead>
+                                        <TableHead>Last Used</TableHead>
+                                    </TableRow>
+                                </TableHeader>
+                                <TableBody>
                                     {accounts?.map((branch, branchIndex) => (
                                         <React.Fragment key={branchIndex}>
-                                            <tr className="bg-gray-100 dark:bg-gray-800">
-                                                <td
-                                                    className="border border-gray-300 px-4 py-2 dark:border-gray-700 dark:text-white"
+                                            <TableRow>
+                                                <TableCell
                                                     rowSpan={
                                                         branch.accounts.length
                                                     }
                                                 >
                                                     {branch.name}
-                                                </td>
-                                                <td className="border border-gray-300 px-4 py-2 dark:border-gray-700 dark:text-white">
+                                                </TableCell>
+                                                <TableCell>
                                                     {
                                                         branch.accounts[0]
                                                             .payment_method.name
                                                     }
-                                                </td>
-                                                <td className="border border-gray-300 px-4 py-2 text-right dark:border-gray-700 dark:text-white">
-                                                    {numberFormat(branch.accounts[0].amount)}
-                                                </td>
-                                                <td className="border border-gray-300 px-4 py-2 dark:border-gray-700 dark:text-white">
-                                                    {
-                                                        dayjs(branch.accounts[0]
-                                                            .updated_at).fromNow()
-                                                    }
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                                <TableCell className="text-right">
+                                                    {numberFormat(
+                                                        branch.accounts[0]
+                                                            .amount
+                                                    )}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {dayjs(
+                                                        branch.accounts[0]
+                                                            .updated_at
+                                                    ).fromNow()}
+                                                </TableCell>
+                                            </TableRow>
                                             {branch.accounts
                                                 .slice(1)
                                                 .map(
                                                     (account, accountIndex) => (
-                                                        <tr
+                                                        <TableRow
                                                             key={accountIndex}
-                                                            className="dark:bg-gray-900"
                                                         >
-                                                            <td className="border border-gray-300 px-4 py-2 dark:border-gray-700 dark:text-white">
+                                                            <TableCell>
                                                                 {
                                                                     account
                                                                         .payment_method
                                                                         .name
                                                                 }
-                                                            </td>
-                                                            <td className="border border-gray-300 px-4 py-2 text-right dark:border-gray-700 dark:text-white">
-                                                                {numberFormat(account.amount)}
-                                                            </td>
-                                                            <td className="border border-gray-300 px-4 py-2 dark:border-gray-700 dark:text-white">
-                                                                {
-                                                                    dayjs(account.updated_at).fromNow()
-                                                                }
-                                                            </td>
-                                                        </tr>
+                                                            </TableCell>
+                                                            <TableCell className="text-right">
+                                                                {numberFormat(
+                                                                    account.amount
+                                                                )}
+                                                            </TableCell>
+                                                            <TableCell>
+                                                                {dayjs(
+                                                                    account.updated_at
+                                                                ).fromNow()}
+                                                            </TableCell>
+                                                        </TableRow>
                                                     )
                                                 )}
                                         </React.Fragment>
                                     ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                </TableBody>
+                            </Table>
+                        </>
                     </Deferred>
-                </>
+                </TableWrapper>
             </section>
         </Authenticated>
     );
