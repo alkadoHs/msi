@@ -1,62 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Branch Sales Report</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance sheet pdf report</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            margin: 20px;
-        }
+        /* Table styling */
         table {
             width: 100%;
             border-collapse: collapse;
+            border: 1px solid #e0e0e0;
         }
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: right;
-        }
-        td:first-child, th:first-child {
+            border: 1px solid #e0e0e0;
+            padding: 8px 12px;
             text-align: left;
         }
-
         th {
-            background-color: #f2f2f2;
+            background-color: #f7f7f7;
+            font-weight: bold;
         }
-        h1, h2 {
-            text-align: center;
+        .text-right {
+            text-align: right;
         }
     </style>
 </head>
 <body>
-    <h1> {{ auth()->user()->company->name }}</h1>
-    <h2>Balance Sheet</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Branch</th>
-                <th>Account</th>
-                <th>Balance</th>
-                <th>Last Used</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if ($accounts->isEmpty())
+    <h1>{{ auth()->user()->company->name }}</h1>
+    <h2> Balance sheet per each branch</h2>
+    <div class="container">
+        <table>
+            <thead>
                 <tr>
-                    <td colspan="4" style="text-align: center;">No data available for the selected date range.</td>
+                    <th>Branch Name</th>
+                    <th>Account Name</th>
+                    <th class="text-right">Balance</th>
+                    <th>Last Used</th>
                 </tr>
-            @else
-                @foreach ($accounts as $account)
-                    <tr>
-                        <td>{{ $account->branch?->name }}</td>
-                        <td>{{$account->paymentMethod?->name }}</td>
-                        <td>{{ number_format($account->amount, 2) }}</td>
-                        <td>{{ $account->updated_at->diffForHumans() }}</td>
-                    </tr>
+            </thead>
+            <tbody>
+                @foreach ($accounts as $branch)
+                    @foreach ($branch->accounts as $account)
+                        <tr>
+                            @if ($loop->first)
+                                <td rowspan="{{ $branch->accounts->count() }}">
+                                    {{ $branch->name }}
+                                </td>
+                            @endif
+                            <td>{{ $account->paymentMethod->name }}</td>
+                            <td class="text-right">{{ number_format($account->amount, 2) }}</td>
+                            <td>{{ $account->updated_at->format('d-M-Y H:m') }}</td>
+                        </tr>
+                    @endforeach
                 @endforeach
-            @endif
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

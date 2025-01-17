@@ -9,6 +9,7 @@ import { toast } from "sonner";
 const CreateProduct = () => {
     const { data, post, setData, processing, errors, reset } = useForm({
         name: "",
+        unit: "",
         buy_price: "",
         sell_price: "",
         stock: "",
@@ -44,6 +45,12 @@ const CreateProduct = () => {
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         placeholder="Product name"
+                    />
+                    <KdTextInput
+                        label="Unit"
+                        value={data.unit}
+                        onChange={(e) => setData("unit", e.target.value)}
+                        placeholder="unit"
                     />
                     <KdNumericInput
                         label="Buying price"

@@ -18,11 +18,11 @@ export default {
             fontFamily: {
                 sans: ["Inter", ...defaultTheme.fontFamily.sans],
             },
-            backgroundImage: {
-                "reg-pattern": "url('/images/reg_bg.svg')",
-				"reg-pattern1": "url('/images/reg_bg1.svg')",
-				"reg-pattern2": "url('/images/reg_bg2.svg')",
-            },
+            // backgroundImage: {
+            //     "reg-pattern": "url('/images/reg_bg.svg')",
+			// 	"reg-pattern1": "url('/images/reg_bg1.svg')",
+			// 	"reg-pattern2": "url('/images/reg_bg2.svg')",
+            // },
             borderRadius: {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Branch;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -59,8 +60,8 @@ class BalanceSheetReportController extends Controller
 
     protected function getQuery()
     {
-        return Account::with(['branch', 'paymentMethod'])
-                         ->orderBy('branch_id')
+        return Branch::with(['accounts.paymentMethod'])
+                         ->orderBy('id')
                          ->get();
     }
 }

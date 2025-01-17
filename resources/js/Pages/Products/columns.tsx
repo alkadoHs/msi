@@ -27,6 +27,13 @@ export const productColumns: ColumnDef<Product>[] = [
         },
     },
     {
+        accessorKey: "unit",
+        header: "Unit",
+        cell: ({ row }) => {
+            return (<span className="text-cyan-500">{ row.original.unit}</span>)
+        }
+    },
+    {
         accessorKey: "stock",
         header: () => <div className="text-right">Stock</div>,
         cell: ({ row }) => {

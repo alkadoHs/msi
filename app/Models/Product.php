@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Scopes\BranchCompanyScope;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,7 +13,7 @@ use Spatie\Permission\Traits\HasPermissions;
 #[ScopedBy(BranchCompanyScope::class)]
 class Product extends Model
 {
-    use HasPermissions;
+    use HasPermissions, HasFactory;
     
     protected $fillable = [
         'branch_id',

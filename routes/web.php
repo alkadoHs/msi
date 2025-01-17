@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return to_route('login');
-    // Mail::to('alkadosichone@gmail.com')->send(new WelcomeMail() );
+    // return to_route('login');
+    return Inertia::render('Welcome');
 });
 
 Route::get('reports', function () {
