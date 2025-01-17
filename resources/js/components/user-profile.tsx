@@ -88,7 +88,7 @@ const UserCard: React.FC<UserCardProps> = ({
                             )}
                         </span>
                     </button>
-                    <Button size={"icon"} variant={"outline"}>
+                     <Button disabled={role !== 'admin'} size={"icon"} variant={"outline"}>
                         <Link href={route("users.edit", id)}>
                             <Edit />
                         </Link>
