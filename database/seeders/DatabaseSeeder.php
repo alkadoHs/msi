@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
         //     'password' => 'password',
         // ])->assignRole(RolesEnum::VENDOR->value);
 
-        // $this->call(ProductSeeder::class);
+        $this->call(ProductSeeder::class);
         $this->call(HardwareProductSeeder::class);
         $this->call(SupermarketProductSeeder::class);
         $this->call(PharmacyProductSeeder::class);
