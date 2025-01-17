@@ -29,6 +29,8 @@ class OrderController extends Controller
                                         });
                                 })
                                 ->when($branch_id, fn ($query) => $query->where('branch_id', $branch_id))
+                                ->when(auth()->user()->role !== 'admin' || auth()->user()->role !== 'manager',
+                                 fn ($query) => $query->where('user_id', auth()->id()))
                                 ->latest()
                                 ->paginate(50)
             )
@@ -54,6 +56,8 @@ class OrderController extends Controller
                                                        });
                                              })
                                              ->when($branch_id, fn ($query) => $query->where('branch_id', $branch_id))
+                                             ->when(auth()->user()->role !== 'admin' || auth()->user()->role !== 'manager',
+                                      fn ($query) => $query->where('user_id', auth()->id()))
                                              ->latest()
                                              ->paginate(20)
                        ),
@@ -79,6 +83,8 @@ class OrderController extends Controller
                                                        });
                                              })
                                              ->when($branch_id, fn ($query) => $query->where('branch_id', $branch_id))
+                                             ->when(auth()->user()->role !== 'admin' || auth()->user()->role !== 'manager',
+                                 fn ($query) => $query->where('user_id', auth()->id()))
                                              ->latest()
                                              ->paginate(20)
                        ),
