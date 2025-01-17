@@ -1,19 +1,24 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import KdSelectInput from "@/components/form/kd-select-input";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { Button } from "@/components/ui/button";
+import { Branch } from "@/types";
+import { Transition } from "@headlessui/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
+import { FormEventHandler } from "react";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
-    className = '',
+    className = "",
+    branches,
 }: {
     mustVerifyEmail: boolean;
     status?: string;
     className?: string;
+    branches?: Branch[];
 }) {
     const user = usePage().props.auth.user;
 
@@ -21,12 +26,13 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            branch_id: user.branch_id,
         });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route("profile.update"));
     };
 
     return (
@@ -37,7 +43,7 @@ export default function UpdateProfileInformation({
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
+                    Update account's profile information and email address.
                 </p>
             </header>
 
@@ -49,7 +55,7 @@ export default function UpdateProfileInformation({
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={(e) => setData("name", e.target.value)}
                         required
                         autoComplete="name"
                     />
@@ -65,7 +71,7 @@ export default function UpdateProfileInformation({
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={(e) => setData("email", e.target.value)}
                         required
                         autoComplete="username"
                     />
@@ -73,12 +79,21 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
+                <KdSelectInput
+                    label="Branch"
+                    value={data.branch_id.toString()}
+                    onChange={(e) =>
+                        setData("branch_id", e.target.value as any)
+                    }
+                    data={ branches as Branch[] }
+                />
+
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800 dark:text-gray-200">
                             Your email address is unverified.
                             <Link
-                                href={route('verification.send')}
+                                href={route("verification.send")}
                                 method="post"
                                 as="button"
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
@@ -87,7 +102,7 @@ export default function UpdateProfileInformation({
                             </Link>
                         </p>
 
-                        {status === 'verification-link-sent' && (
+                        {status === "verification-link-sent" && (
                             <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
                                 A new verification link has been sent to your
                                 email address.
@@ -97,7 +112,7 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button disabled={processing}>Save</Button>
 
                     <Transition
                         show={recentlySuccessful}

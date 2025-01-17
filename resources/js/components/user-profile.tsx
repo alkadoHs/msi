@@ -1,5 +1,7 @@
 import { Link, router } from "@inertiajs/react";
 import React from "react";
+import { Button } from "./ui/button";
+import { Edit } from "lucide-react";
 
 interface UserCardProps {
     id: number | string;
@@ -86,7 +88,15 @@ const UserCard: React.FC<UserCardProps> = ({
                             )}
                         </span>
                     </button>
-                    <Link href={sales_url as string} className="flex items-center gap-2 bg-teal-600 text-gray-100 px-4 py-2 rounded-md hover:bg-teal-700">
+                    <Button size={"icon"} variant={"outline"}>
+                        <Link href={route("users.edit", id)}>
+                            <Edit />
+                        </Link>
+                    </Button>
+                    <Link
+                        href={sales_url as string}
+                        className="flex items-center gap-2 bg-teal-600 text-gray-100 px-4 py-2 rounded-md hover:bg-teal-700"
+                    >
                         <span>View sales</span>
                         <span>↗</span>
                     </Link>
