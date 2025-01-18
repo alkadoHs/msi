@@ -39,7 +39,7 @@ class BalanceSheetReportController extends Controller
             public function view(): \Illuminate\Contracts\View\View
             {
                 return View::make('reports.balance_sheet_excel', [
-                    'accounts' => $this->reportData
+                    'branches' => $this->reportData
                 ]);
             }
         }, $fileName);
@@ -52,7 +52,7 @@ class BalanceSheetReportController extends Controller
         $fileName = "balance_sheet_report". date('Ymd_Hmi') .".pdf";
 
         $pdf = Pdf::loadView('pdf.balance-sheet-report', [
-            'accounts' => $reportData,
+            'branches' => $reportData,
         ]);
 
         return $pdf->download($fileName);
