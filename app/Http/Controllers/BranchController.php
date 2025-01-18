@@ -106,7 +106,11 @@ class BranchController extends Controller
     public function transactions(Branch $branch): Response
     {
         return Inertia::render('Branches/Transactions', [
-            'transactions' => Inertia::defer(fn () => $branch->transactions()->with(['user', 'account.paymentMethod'])->latest()->paginate(50)),
+            'transactions' => Inertia::defer(fn () => 
+                                $branch->transactions()
+                                       ->with(['user', 'account.paymentMethod'])
+                                       ->latest()
+                                       ->paginate(50)),
             'branch' => fn () => $branch,
         ]);
     }

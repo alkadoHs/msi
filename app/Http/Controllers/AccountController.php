@@ -18,10 +18,12 @@ class AccountController extends Controller
     {
         return Inertia::render('Accounts/Index', [
             'branches' => Inertia::defer(function () {
-                return Branch::with('accounts.paymentMethod')->withSum('accounts', 'amount')->get();
+                return Branch::with('accounts.paymentMethod')->withSum(['accounts'=> function ($query) {
+                    return $query->where('amount', '>=', 0);
+                }], 'amount')->get();
             }),
             'totalBalance' => Inertia::defer(function () {
-                return Account::sum('amount');
+                return Account::where('amount', '>=', 0)->sum('amount');
             })
         ]);
     }

@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($accounts as $branch)
+                @foreach ($branches as $branch)
                     @foreach ($branch->accounts as $account)
                         <tr>
                             @if ($loop->first)
