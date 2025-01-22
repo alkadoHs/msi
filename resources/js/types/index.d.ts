@@ -4,6 +4,7 @@ export interface Branch {
     id: number;
     name: string;
     phones: string;
+    address: string;
     accounts: Account[];
     accounts_sum_amount: number;
     created_at: string;

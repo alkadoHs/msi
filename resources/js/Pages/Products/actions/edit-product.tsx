@@ -8,7 +8,15 @@ import { toast } from "sonner";
 
 const EditProduct = ({ product }: { product: Product }) => {
     const { data, patch, setData, processing, errors, reset } = useForm({
-        ...product
+        name: product.name,
+        unit: product.unit,
+        buy_price: product.buy_price,
+        sell_price: product.sell_price,
+        stock: product.stock,
+        stock_alert: product.stock_alert,
+        expire_date: product.expire_date,
+        whole_price: product.whole_price,
+        whole_stock: product.whole_stock,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -38,6 +46,12 @@ const EditProduct = ({ product }: { product: Product }) => {
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         placeholder="Product name"
+                    />
+                    <KdTextInput
+                        label="Unit"
+                        value={data.unit}
+                        onChange={(e) => setData("unit", e.target.value)}
+                        placeholder="Piece, Box, etc"
                     />
                     <KdNumericInput
                         label="Buying price"

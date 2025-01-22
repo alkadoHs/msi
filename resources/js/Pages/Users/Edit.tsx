@@ -30,7 +30,6 @@ export default function Edit({
                     email={user.email}
                     isActive={user.isActive}
                     branch={user.branch?.name}
-                    edit={false}
                     tags={["Selling", "Expenses", "Purchases"]}
                     profileColor="bg-blue-600"
                 />

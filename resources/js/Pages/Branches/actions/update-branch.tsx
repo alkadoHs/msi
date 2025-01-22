@@ -7,7 +7,9 @@ import { toast } from "sonner";
 
 const UpdateBranchAction = ({ branch }: { branch: Branch }) => {
     const { data, setData, errors, patch, processing } = useForm({
-        ...branch,
+        name: branch.name,
+        address: branch.address,
+        phones: branch.phones,
     });
     const submit = (e: FormEvent) => {
         e.preventDefault();
