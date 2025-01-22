@@ -22,7 +22,6 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'branch_id' => ['required', 'exists:branches,id'],
             'name' => ['required', 'string', 'max:255'],
             'unit' => ['nullable', 'string', 'max:20'],
             'buy_price' => ['required', 'integer', 'max:9999999999'],
