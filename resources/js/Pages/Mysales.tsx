@@ -18,8 +18,6 @@ interface Props {
 }
 
 const Mysales = ({ sales, items }: { sales: Props; items: OrderItems }) => {
-    console.log(items);
-
     return (
         <Authenticated header={<h2 className="page-haed">My sales today</h2>}>
             <Head title="My dashboard" />
@@ -65,9 +63,15 @@ const Mysales = ({ sales, items }: { sales: Props; items: OrderItems }) => {
                     </div>
                 </Deferred>
 
-                <Deferred data={"items"} fallback={<TableSkeleton columns={4} rows={10} />}>
+                <Deferred
+                    data={"items"}
+                    fallback={<TableSkeleton columns={4} rows={10} />}
+                >
                     <>
-                        <DataTable columns={userOrderItemColumns} data={items?.data} />
+                        <DataTable
+                            columns={userOrderItemColumns}
+                            data={items?.data}
+                        />
                         <Pagination data={items} />
                     </>
                 </Deferred>
